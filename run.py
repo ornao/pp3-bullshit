@@ -19,3 +19,7 @@ print("For example, a single Queen or three Queens")
 print("The bluff happens when the player decides to lie about what cards they have put down")
 print("Play bullshit and test your bluffing skills!")
 
+input("Press Enter to begin...")
+
+input("Now...what is your name?")
+
