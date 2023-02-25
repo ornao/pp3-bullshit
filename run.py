@@ -66,11 +66,17 @@ def validate_username_data(username):
     return username.isalpha()
 
 def get_random_card():
+    """
+    generate a random card selection from a deck
+    """
     card_points =['A','K','Q','J','2','3','4','5','6','7','8','9','10']
     card_suits =['Heart','CLUB','DIAMOND','SPADE']
     random_point = random.choice(card_points) 
     random_suit = random.choice(card_suits)
     random_card = random_suit,random_point
-    print(random_card)
+    return random_card
 
-get_random_card()
+def display_5_random_cards():
+    print([(get_random_card()) for i in range(5)])
+
+display_5_random_cards()
