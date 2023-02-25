@@ -33,17 +33,24 @@ print("Play bullshit and test your bluffing skills!\n")
 
 input("Press Enter to begin...\n")
 
+
 def get_username():
     """
     get username input from the user 
     """
-    username = input("Now...what is your name?\n")
-    if validate_username_data(username):
-        print(f"Hello {username}! Let the game begin!")
-    else:
-        print("You forgot to enter your username silly!")
+    while True:
+            try:
+                username = input("Now...what is your name?\n")
+                if validate_username_data(username):
+                    print(f"Hello {username}! Let the game begin!")
+                    break 
+                else:
+                    print("You forgot to enter your username silly!\n")
+            except ValueError:
+                print("Huh?")
 
 def validate_username_data(username):
     return len(username) > 1
-    
+
 get_username()
+
