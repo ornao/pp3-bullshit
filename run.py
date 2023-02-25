@@ -45,12 +45,12 @@ def get_username():
                     print(f"Hello {username}! Let the game begin!")
                     break 
                 else:
-                    print("You forgot to enter your username silly!\n")
+                    print("Psst...is your name made up of only letters\n")
             except ValueError:
                 print("Huh?")
 
 def validate_username_data(username):
-    return len(username) > 1
+    return username.isalpha()
 
 get_username()
 
