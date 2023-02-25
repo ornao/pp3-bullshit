@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import random
 
 # Below code taken from Code Institute's Love Sandwiches Walkthrough Project:
 # Getting Set Up (Creating the Google Sheets API)
@@ -15,24 +16,36 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('bullshit')
 
-print("██████╗░██╗░░░██╗██╗░░░░░██╗░░░░░░██████╗██╗░░██╗██╗████████╗░░░░░░░░░███ ")
-print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░██╔════╝██║░░██║██║╚══██╔══╝░░░░░░░░░███ ")
-print("██████╦╝██║░░░██║██║░░░░░██║░░░░░╚█████╗░███████║██║░░░██║░░░░░░░░░░░░███  ")
-print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░░╚═══██╗██╔══██║██║░░░██║░░░░░▄█████▄█▀▀ ")
-print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░▀█████  ")
-print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░▄████▄ ")
-print("                                                Developed by Orna Reynolds")
+def main():
+    title()
+    game_rules()
+    get_username()
 
-print("This is a game of bluff. ")
-print("The games begins with each player having 5 cards")
-print("The aim of the game is to be the first to get rid of all your cards")
-print("Players can put down a single card or multiple matching cards")
-print("For example, a single Queen or three Queens")
-print("The bluff happens when the player decides to lie about what cards they have put down")
-print("Play bullshit and test your bluffing skills!\n")
+def title():
+    """
+    displays title of game and name of developer
+    """
+    print("██████╗░██╗░░░██╗██╗░░░░░██╗░░░░░░██████╗██╗░░██╗██╗████████╗░░░░░░░░░███ ")
+    print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░██╔════╝██║░░██║██║╚══██╔══╝░░░░░░░░░███ ")
+    print("██████╦╝██║░░░██║██║░░░░░██║░░░░░╚█████╗░███████║██║░░░██║░░░░░░░░░░░░███  ")
+    print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░░╚═══██╗██╔══██║██║░░░██║░░░░░▄█████▄█▀▀ ")
+    print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░▀█████  ")
+    print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░▄████▄ \n")
+    print("                                                Developed by Orna Reynolds")
+
+def game_rules():
+    """
+    displays rules of game 
+    """
+    print("* This is a game of bluff. ")
+    print("* The games begins with each player having 5 cards")
+    print("* The aim of the game is to be the first to get rid of all your cards")
+    print("* Players can put down a single card or multiple matching cards")
+    print("* For example, a single Queen or three Queens")
+    print("* The bluff happens when the player decides to lie about what cards they have put down")
+    print("* Play bullshit and test your bluffing skills!\n")
 
 input("Press Enter to begin...\n")
-
 
 def get_username():
     """
@@ -52,5 +65,12 @@ def get_username():
 def validate_username_data(username):
     return username.isalpha()
 
-get_username()
+def get_random_card():
+    card_points =['A','K','Q','J','2','3','4','5','6','7','8','9','10']
+    card_suits =['Heart','CLUB','DIAMOND','SPADE']
+    random_point = random.choice(card_points) 
+    random_suit = random.choice(card_suits)
+    random_card = random_suit,random_point
+    print(random_card)
 
+get_random_card()
