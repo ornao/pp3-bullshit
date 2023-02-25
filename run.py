@@ -43,6 +43,12 @@ def get_username():
     get username input from the user 
     """
     username = input("Now...what is your name?\n")
-    print(f"Hello {username}! Let the game begin!")
+    if validate_username_data(username):
+        print(f"Hello {username}! Let the game begin!")
+    else:
+        print("You forgot to enter your username silly!")
 
+def validate_username_data(username):
+    return len(username) > 1
+    
 get_username()
