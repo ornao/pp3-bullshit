@@ -15,11 +15,6 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('bullshit')
 
-username = SHEET.worksheet('username')
-data = username.get_all_values()
-print(data)
-
-
 print("██████╗░██╗░░░██╗██╗░░░░░██╗░░░░░░██████╗██╗░░██╗██╗████████╗░░░░░░░░░███ ")
 print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░██╔════╝██║░░██║██║╚══██╔══╝░░░░░░░░░███ ")
 print("██████╦╝██║░░░██║██║░░░░░██║░░░░░╚█████╗░███████║██║░░░██║░░░░░░░░░░░░███  ")
@@ -39,9 +34,15 @@ print("The aim of the game is to get rid of all your cards the quickest")
 print("Players can put down a single card or multiple matching cards")
 print("For example, a single Queen or three Queens")
 print("The bluff happens when the player decides to lie about what cards they have put down")
-print("Play bullshit and test your bluffing skills!")
+print("Play bullshit and test your bluffing skills!\n")
 
-input("Press Enter to begin...")
+input("Press Enter to begin...\n")
 
-input("Now...what is your name?")
+def get_username():
+    """
+    get username input from the user 
+    """
+    username = input("Now...what is your name?\n")
+    print(f"Hello {username}! Let the game begin!")
 
+get_username()
