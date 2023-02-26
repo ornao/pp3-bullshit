@@ -20,6 +20,8 @@ def main():
     title()
     game_rules()
     get_username()
+    display_5_random_cards()
+    # display_picture_cards()
 
 def title():
     """
@@ -44,8 +46,7 @@ def game_rules():
     print("* For example, a single Queen or three Queens")
     print("* The bluff happens when the player decides to lie about what cards they have put down")
     print("* Play bullshit and test your bluffing skills!\n")
-
-input("Press Enter to begin...\n")
+    input("Press Enter to begin...\n")
 
 def get_username():
     """
@@ -54,16 +55,22 @@ def get_username():
     while True:
             try:
                 username = input("Now...what is your name?\n")
+                username_validated = username.capitalize()
                 if validate_username_data(username):
-                    print(f"Hello {username}! Let the game begin!")
+                    print(f"{username_validated}, lets get started!")
                     break 
                 else:
                     print("Psst...is your name made up of only letters\n")
             except ValueError:
-                print("Huh?")
+                print("Huh?")          
+    return(username_validated)
 
 def validate_username_data(username):
+    """ 
+    validate username so that can only accept alphabetical letters 
+    """
     return username.isalpha()
+
 
 def get_random_card():
     """
@@ -77,6 +84,27 @@ def get_random_card():
     return random_card
 
 def display_5_random_cards():
+    """
+    displays 5 random cards in a list
+    """
+    print("These are your cards:")
     print([(get_random_card()) for i in range(5)])
 
-display_5_random_cards()
+# def display_picture_cards():
+#     rows = ['', '', '', '', '']  
+    
+#     rows[0] += ' ___  ' 
+#     rows[1] += '|## | '
+#     rows[2] += '|###| '
+#     rows[3] += '|_##| '
+    
+#     rows[0] += ' ___  ' 
+#     rows[1] += '|{} | '
+#     rows[2] += '| {} | '
+#     rows[3] += '|_{}| '
+
+#     for row in rows:
+#         print(row)
+
+main()
+
