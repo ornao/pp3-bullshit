@@ -16,12 +16,17 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('bullshit')
 
+HEART = chr(9829) # Character 9829 is '♥'.
+DIAMOND = chr(9830) # Character 9830 is '♦'.
+SPADE = chr(9824) # Character 9824 is '♠'.
+CLUB = chr(9827) # Character 9827 is '♣'.
+
 def main():
     title()
     game_rules()
     get_username()
     display_5_random_cards()
-    # display_picture_cards()
+    display_picture_cards()
 
 def title():
     """
@@ -77,7 +82,7 @@ def get_random_card():
     generate a random card selection from a deck
     """
     card_points =['A','K','Q','J','2','3','4','5','6','7','8','9','10']
-    card_suits =['Heart','CLUB','DIAMOND','SPADE']
+    card_suits =[HEART,CLUB,DIAMOND,SPADE]
     random_point = random.choice(card_points) 
     random_suit = random.choice(card_suits)
     random_card = random_suit,random_point
@@ -87,24 +92,24 @@ def display_5_random_cards():
     """
     displays 5 random cards in a list
     """
-    print("These are your cards:")
+    print("These are your cards:\n")
     print([(get_random_card()) for i in range(5)])
 
-# def display_picture_cards():
-#     rows = ['', '', '', '', '']  
+def display_picture_cards():
+    rows = ['', '', '', '', '']  
     
-#     rows[0] += ' ___  ' 
-#     rows[1] += '|## | '
-#     rows[2] += '|###| '
-#     rows[3] += '|_##| '
+    rows[0] += ' ___  ' 
+    rows[1] += '|## | '
+    rows[2] += '|###| '
+    rows[3] += '|_##| '
     
-#     rows[0] += ' ___  ' 
-#     rows[1] += '|{} | '
-#     rows[2] += '| {} | '
-#     rows[3] += '|_{}| '
+    rows[0] += ' ___  ' 
+    rows[1] += '|{} | '.format(get_random_card())
+    rows[2] += '| {} | '.format(get_random_card())
+    rows[3] += '|_{}| '.format(get_random_card())
 
-#     for row in rows:
-#         print(row)
+    for row in rows:
+        print(row)
 
 main()
 
