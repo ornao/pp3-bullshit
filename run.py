@@ -1,21 +1,17 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import random
-
 # Below code taken from Code Institute's Love Sandwiches Walkthrough Project:
 # Getting Set Up (Creating the Google Sheets API)
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
     ]
-
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('bullshit')
-
 # Code from Blackjack, by Al Sweigart al@inventwithpython.com
 HEART = chr(9829) # Character 9829 is '♥'.
 DIAMOND = chr(9830) # Character 9830 is '♦'.
@@ -35,7 +31,6 @@ def main():
     # print("Opponent2 cards:")
     # for _ in range(5):
     #     display_hidden_cards()
-    get_deck()
     deal_cards()
 
 def title():
@@ -109,58 +104,25 @@ def deal_cards():
     print(player2)
     print(player3)
 
-# def get_random_suit():
-#     """
-#     generate a random suit selection from a deck
-#     """
-#     card_suits = [HEART,CLUB,DIAMOND,SPADE]
-#     random_suit = random.choice(card_suits)
-#     return random_suit
+# def display_picture_cards():
+#     rows = ['', '', '', '', ''] 
+#     x = get_random_point()
+#     rows[0] += ' ___ ' 
+#     rows[1] += '|{}  |'.format(x)
+#     rows[2] += '| {} |'.format(get_random_suit())
+#     rows[3] += '|__{}|'.format(x)
+#     for row in rows: 
+#         print(row)
 
-# def get_random_point():
-#     """
-#     generate a random level of card selection from a deck
-#     """
-#     card_points =['A','K','Q','J','2','3','4','5','6','7','8','9','10']
-#     random_point = random.choice(card_points) 
-#     return random_point
-   
-# def get_random_card():
-#     """
-#     generate a random card selection from a deck
-#     """
-#     random_card = random_point, random_suit
-#     return random_card
-
-# def display_5_random_cards():
-#     """
-#     displays 5 random cards in a list
-#     """
-#     print("These are your cards:\n")
-#     # print(display_picture_cards() for i in range(5))
-#     print(display_picture_cards())
-
-def display_picture_cards():
-    rows = ['', '', '', '', ''] 
-    x = get_random_point()
-    rows[0] += ' ___ ' 
-    rows[1] += '|{}  |'.format(x)
-    rows[2] += '| {} |'.format(get_random_suit())
-    rows[3] += '|__{}|'.format(x)
-
-    for row in rows: 
-        print(row)
-
-def display_hidden_cards():
-    rows = ['', '', '', '', '']
-
-    rows[0] += ' ___ ' 
-    rows[1] += '|## | '
-    rows[2] += '|###| '
-    rows[3] += '|_##| '
-
-    for row in rows: 
-         print(row)
+# def display_hidden_cards():
+#     rows = ['', '', '', '', '']
+#     rows[0] += ' ___ ' 
+#     rows[1] += '|## | '
+#     rows[2] += '|###| '
+#     rows[3] += '|_##| '
+#     for row in rows: 
+#          print(row)
 
 main()
+
 
