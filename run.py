@@ -16,6 +16,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('bullshit')
 
+# Code from Blackjack, by Al Sweigart al@inventwithpython.com
 HEART = chr(9829) # Character 9829 is '♥'.
 DIAMOND = chr(9830) # Character 9830 is '♦'.
 SPADE = chr(9824) # Character 9824 is '♠'.
@@ -76,16 +77,27 @@ def validate_username_data(username):
     """
     return username.isalpha()
 
+def get_random_suit():
+    """
+    generate a random suit selection from a deck
+    """
+    card_suits = [HEART,CLUB,DIAMOND,SPADE]
+    random_suit = random.choice(card_suits)
+    return random_suit
 
+def get_random_point():
+    """
+    generate a random level of card selection from a deck
+    """
+    card_points =['A','K','Q','J','2','3','4','5','6','7','8','9','10']
+    random_point = random.choice(card_points) 
+    return random_point
+   
 def get_random_card():
     """
     generate a random card selection from a deck
     """
-    card_points =['A','K','Q','J','2','3','4','5','6','7','8','9','10']
-    card_suits =[HEART,CLUB,DIAMOND,SPADE]
-    random_point = random.choice(card_points) 
-    random_suit = random.choice(card_suits)
-    random_card = random_suit,random_point
+    random_card = get_random_suit(),get_random_point()
     return random_card
 
 def display_5_random_cards():
@@ -104,9 +116,9 @@ def display_picture_cards():
     rows[3] += '|_##| '
     
     rows[0] += ' ___  ' 
-    rows[1] += '|{} | '.format(get_random_card())
-    rows[2] += '| {} | '.format(get_random_card())
-    rows[3] += '|_{}| '.format(get_random_card())
+    rows[1] += '|{} | '.format(get_random_point())
+    rows[2] += '| {} | '.format(get_random_suit())
+    rows[3] += '|_{}| '
 
     for row in rows:
         print(row)
