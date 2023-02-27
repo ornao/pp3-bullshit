@@ -26,8 +26,9 @@ def main():
     title()
     game_rules()
     get_username()
-    # display_5_random_cards()
-    display_picture_cards()
+    display_5_random_cards()
+    # display_picture_cards()
+    display_hidden_cards()
 
 def title():
     """
@@ -77,11 +78,24 @@ def validate_username_data(username):
     """
     return username.isalpha()
 
+def get_deck():
+    deck = []
+    for suit in [HEART,CLUB,DIAMOND,SPADE]:
+        for point in ['A','K','Q','J','2','3','4','5','6','7','8','9','10']:
+            deck.append(suit+point)
+
+    for card in deck:
+        print(card, end=" ")
+
+get_deck()
+
+
 def get_random_suit():
     """
     generate a random suit selection from a deck
     """
     card_suits = [HEART,CLUB,DIAMOND,SPADE]
+    global random_suit
     random_suit = random.choice(card_suits)
     return random_suit
 
@@ -97,11 +111,8 @@ def get_random_point():
 #     """
 #     generate a random card selection from a deck
 #     """
-#     random_card = get_random_suit(),get_random_point()
+#     random_card = random_point, random_suit
 #     return random_card
-#     print(random_card)
-
-# random_card = get_random_card()
 
 def display_5_random_cards():
     """
@@ -120,16 +131,18 @@ def display_picture_cards():
     rows[3] += '|__{}|'.format(x)
 
     for row in rows: 
-         print([row for rows in range(5)])
+        return row
 
-    
-      
 def display_hidden_cards():
-    print(' ___  ') 
-    print('|## | ')
-    print('|###| ')
-    print('|_##| ')
+    rows = ['', '', '', '', '']
 
-    
-main()
+    rows[0] += ' ___ ' 
+    rows[1] += '|## | '
+    rows[2] += '|###| '
+    rows[3] += '|_##| '
+
+    for row in rows: 
+         return row
+
+# main()
 
