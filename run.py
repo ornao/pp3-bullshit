@@ -26,15 +26,17 @@ def main():
     title()
     game_rules()
     get_username()
-    print("Your cards:")
-    zip(for _ in range(5)):
-        display_picture_cards()
-    print("Opponent1 cards:")
-    for _ in range(5):
-        display_hidden_cards()
-    print("Opponent2 cards:")
-    for _ in range(5):
-        display_hidden_cards()
+    # print("Your cards:")
+    # for _ in range(5):
+    #     display_picture_cards()
+    # print("Opponent1 cards:")
+    # for _ in range(5):
+    #     display_hidden_cards()
+    # print("Opponent2 cards:")
+    # for _ in range(5):
+    #     display_hidden_cards()
+    get_deck()
+    deal_cards()
 
 def title():
     """
@@ -84,36 +86,44 @@ def validate_username_data(username):
     """
     return username.isalpha()
 
-# def get_deck():
-#     """get shuffled deck everytime"""
-#     deck = []
-#     for suit in [HEART,CLUB,DIAMOND,SPADE]:
-#         for point in ['A','K','Q','J','2','3','4','5','6','7','8','9','10']:
-#             deck.append(suit+point)
+def get_deck():
+    """get shuffled deck everytime"""
+    deck = []
+    for suit in [HEART,CLUB,DIAMOND,SPADE]:
+        for point in ['A','K','Q','J','2','3','4','5','6','7','8','9','10']:
+            deck.append(suit+point)
 
-#     random.shuffle(deck)
+    random.shuffle(deck)
+    return deck
 
-#     for card in deck:
-#         print(card)
+def deal_cards():
+    player1 = []
+    player2 = []
+    player3 = []
+    for i in range(5):
+        player1.append(get_deck().pop())
+        player2.append(get_deck().pop())
+        player3.append(get_deck().pop())
 
-# get_deck()
+    print(player1)
+    print(player2)
+    print(player3)
 
-def get_random_suit():
-    """
-    generate a random suit selection from a deck
-    """
-    card_suits = [HEART,CLUB,DIAMOND,SPADE]
-    global random_suit
-    random_suit = random.choice(card_suits)
-    return random_suit
+# def get_random_suit():
+#     """
+#     generate a random suit selection from a deck
+#     """
+#     card_suits = [HEART,CLUB,DIAMOND,SPADE]
+#     random_suit = random.choice(card_suits)
+#     return random_suit
 
-def get_random_point():
-    """
-    generate a random level of card selection from a deck
-    """
-    card_points =['A','K','Q','J','2','3','4','5','6','7','8','9','10']
-    random_point = random.choice(card_points) 
-    return random_point
+# def get_random_point():
+#     """
+#     generate a random level of card selection from a deck
+#     """
+#     card_points =['A','K','Q','J','2','3','4','5','6','7','8','9','10']
+#     random_point = random.choice(card_points) 
+#     return random_point
    
 # def get_random_card():
 #     """
@@ -122,13 +132,13 @@ def get_random_point():
 #     random_card = random_point, random_suit
 #     return random_card
 
-def display_5_random_cards():
-    """
-    displays 5 random cards in a list
-    """
-    print("These are your cards:\n")
-    # print(display_picture_cards() for i in range(5))
-    print(display_picture_cards())
+# def display_5_random_cards():
+#     """
+#     displays 5 random cards in a list
+#     """
+#     print("These are your cards:\n")
+#     # print(display_picture_cards() for i in range(5))
+#     print(display_picture_cards())
 
 def display_picture_cards():
     rows = ['', '', '', '', ''] 
