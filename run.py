@@ -52,7 +52,7 @@ def game_rules():
     print("* For example, a single Queen or three Queens")
     print("* The bluff happens when the player decides to lie about what cards they have put down")
     print("* Play bullshit and test your bluffing skills!\n")
-    input("Press Enter to begin...\n")
+    input("Press enter to begin...\n")
 
 def get_username():
     """
@@ -99,13 +99,16 @@ def get_random_card():
     """
     random_card = get_random_suit(),get_random_point()
     return random_card
+    print(random_card)
+
+random_card = get_random_card()
 
 def display_5_random_cards():
     """
     displays 5 random cards in a list
     """
     print("These are your cards:\n")
-    print([(get_random_card()) for i in range(5)])
+    print([(display_picture_cards()) for i in range(5)])
 
 def display_picture_cards():
     rows = ['', '', '', '', '']  
@@ -114,11 +117,11 @@ def display_picture_cards():
     rows[1] += '|## | '
     rows[2] += '|###| '
     rows[3] += '|_##| '
-    
-    rows[0] += ' ___  ' 
-    rows[1] += '|{} | '.format(get_random_point())
+    x = get_random_point()
+    rows[0] += ' ___ ' 
+    rows[1] += '|{}  | '.format(x)
     rows[2] += '| {} | '.format(get_random_suit())
-    rows[3] += '|_{}| '
+    rows[3] += '|__{}| '.format(x)
 
     for row in rows:
         print(row)
