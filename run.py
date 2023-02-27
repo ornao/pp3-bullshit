@@ -26,7 +26,7 @@ def main():
     title()
     game_rules()
     get_username()
-    display_5_random_cards()
+    # display_5_random_cards()
     display_picture_cards()
 
 def title():
@@ -93,38 +93,43 @@ def get_random_point():
     random_point = random.choice(card_points) 
     return random_point
    
-def get_random_card():
-    """
-    generate a random card selection from a deck
-    """
-    random_card = get_random_suit(),get_random_point()
-    return random_card
-    print(random_card)
+# def get_random_card():
+#     """
+#     generate a random card selection from a deck
+#     """
+#     random_card = get_random_suit(),get_random_point()
+#     return random_card
+#     print(random_card)
 
-random_card = get_random_card()
+# random_card = get_random_card()
 
 def display_5_random_cards():
     """
     displays 5 random cards in a list
     """
     print("These are your cards:\n")
-    print([(display_picture_cards()) for i in range(5)])
+    # print(display_picture_cards() for i in range(5))
+    print(display_picture_cards())
 
 def display_picture_cards():
-    rows = ['', '', '', '', '']  
-    
-    rows[0] += ' ___  ' 
-    rows[1] += '|## | '
-    rows[2] += '|###| '
-    rows[3] += '|_##| '
+    rows = ['', '', '', '', ''] 
     x = get_random_point()
     rows[0] += ' ___ ' 
-    rows[1] += '|{}  | '.format(x)
-    rows[2] += '| {} | '.format(get_random_suit())
-    rows[3] += '|__{}| '.format(x)
+    rows[1] += '|{}  |'.format(x)
+    rows[2] += '| {} |'.format(get_random_suit())
+    rows[3] += '|__{}|'.format(x)
 
-    for row in rows:
-        print(row)
+    for row in rows: 
+         print([row for rows in range(5)])
 
+    
+      
+def display_hidden_cards():
+    print(' ___  ') 
+    print('|## | ')
+    print('|###| ')
+    print('|_##| ')
+
+    
 main()
 
