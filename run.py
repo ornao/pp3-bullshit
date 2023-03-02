@@ -31,6 +31,9 @@ def main():
 
     print("Communal pile:", communal_pile)
     print("Player", current_player + 1, "has", len(hands[current_player]), "cards:", hands[current_player])
+    for count, option in enumerate(['1st card', '2nd card', '3rd card', '4th card', '5th card']):
+                print(f"{count+1}. {option}")
+    card_option = int(input("Select a card to discard: "))
 
 
 
