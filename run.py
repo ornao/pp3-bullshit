@@ -1,6 +1,8 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import random
+import os
+
 # Below code taken from Code Institute's Love Sandwiches Walkthrough Project:
 # Getting Set Up (Creating the Google Sheets API)
 SCOPE = [
@@ -22,16 +24,15 @@ def main():
     title()
     game_rules()
     get_username()
-    # print("Your cards:")
-    # for _ in range(5):
-    #     display_picture_cards()
-    # print("Opponent1 cards:")
-    # for _ in range(5):
-    #     display_hidden_cards()
-    # print("Opponent2 cards:")
-    # for _ in range(5):
-    #     display_hidden_cards()
-    deal_cards()
+
+    hands = deal_cards()
+    communal_pile = 0
+    current_player = 0
+
+    print("Communal pile:", communal_pile)
+    print("Player", current_player + 1, "has", len(hands[current_player]), "cards:", hands[current_player])
+
+
 
 def title():
     """
@@ -50,12 +51,14 @@ def game_rules():
     displays rules of game 
     """
     print("* This is a game of bluff. ")
-    print("* The games begins with each player having 5 cards")
+    print("* The game begins with 52 deck cards being split evenly between players")
     print("* The aim of the game is to be the first to get rid of all your cards")
-    print("* Players can put down a single card or multiple matching cards")
-    print("* For example, a single Queen or three Queens")
+    print("* The player begins the game by playing an ace")
+    print("* The game then continues with the next player discarding any 2s they have")
+    print("* Then the next player discards any 3s they have and so on")
+    print("* Player can put down all multiples of the card they have")
     print("* The bluff happens when the player decides to lie about what cards they have put down")
-    print("* Play bullshit and test your bluffing skills!\n")
+    print("* Call bullshit if you sense your opponents bluff, but fear getting all the cards in commual pile!\n")
     input("Press enter to begin...\n")
 
 def get_username():
@@ -67,7 +70,7 @@ def get_username():
                 username = input("Now...what is your name?\n")
                 username_validated = username.capitalize()
                 if validate_username_data(username):
-                    print(f"{username_validated}, lets get started!")
+                    print(f"{username_validated}? Hello there, lets get started!{os.linesep}")
                     break 
                 else:
                     print("Psst...is your name made up of only letters\n")
@@ -85,8 +88,8 @@ def get_deck():
     """get shuffled deck everytime"""
     deck = []
     for suit in [HEART,CLUB,DIAMOND,SPADE]:
-        for point in ['A','K','Q','J','2','3','4','5','6','7','8','9','10']:
-            deck.append(suit+point)
+        for number in ['A','K','Q','J','2','3','4','5','6','7','8','9','10']:
+            deck.append(number+suit)
 
     random.shuffle(deck)
     return deck
@@ -99,10 +102,7 @@ def deal_cards():
         player1.append(get_deck().pop())
         player2.append(get_deck().pop())
         player3.append(get_deck().pop())
-
-    print(player1)
-    print(player2)
-    print(player3)
+    return player1, player2, player3
 
 # def display_picture_cards():
 #     rows = ['', '', '', '', ''] 
