@@ -32,19 +32,19 @@ def main():
 
     print("Communal pile:", communal_pile)
     print("Player", current_player + 1, "has", len(hands[current_player]), "cards:", hands[current_player])
-    for count, option in enumerate(['1st card', '2nd card', '3rd card', '4th card', '5th card']):
+    for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3], hands[current_player][4]]):
                 print(f"{count+1}. {option}")
     while True:
                 try:
                     card_option = int(input("Select a card to discard: "))
                     if card_option in [1,2,3,4,5]:
-                        print(f"You have chosen card {card_option} to discard!")
+                        print(f"You have chosen card {hands[current_player][card_option]} to discard!")
                         print(f"Communal pile: {communal_pile + 1}")
                         break
                     else: 
                         print(f"You don't have that card!")
                 except ValueError:
-                    print("Huh?")          
+                    print("Huh?")        
 
 def title():
     """
@@ -115,6 +115,7 @@ def deal_cards():
         player2.append(get_deck().pop())
         player3.append(get_deck().pop())
     return player1, player2, player3
+
 
 # def display_picture_cards():
 #     rows = ['', '', '', '', ''] 
