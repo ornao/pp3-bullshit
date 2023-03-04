@@ -31,20 +31,23 @@ def main():
     discarded_cards = []
 
     print("Communal pile:", communal_pile)
-    print("Player", current_player + 1, "has", len(hands[current_player]), "cards:", hands[current_player])
+    print("You have", len(hands[current_player]), "cards:", hands[current_player])
+    print("Player", current_player + 2, "has", len(hands[current_player]), "cards")
+    print("Player", current_player + 3, "has", len(hands[current_player]), "cards\n")
     for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3], hands[current_player][4]]):
                 print(f"{count+1}. {option}")
     while True:
                 try:
                     card_option = int(input("Select a card to discard: "))
                     if card_option in [1,2,3,4,5]:
-                        print(f"You have chosen card {hands[current_player][card_option]} to discard!")
+                        print(f"You have chosen card {hands[current_player][card_option - 1 ]} to discard!")
                         print(f"Communal pile: {communal_pile + 1}")
                         break
                     else: 
                         print(f"You don't have that card!")
                 except ValueError:
                     print("Huh?")        
+    # call_bullshit()
 
 def title():
     """
@@ -116,6 +119,12 @@ def deal_cards():
         player3.append(get_deck().pop())
     return player1, player2, player3
 
+# def call_bullshit():
+#     if input("Do you want to call bullshit? (y/n) ") == 'y':
+#         print("Player was telling the truth!")
+#     else:
+#         print("Player was lying!")
+       
 
 # def display_picture_cards():
 #     rows = ['', '', '', '', ''] 
