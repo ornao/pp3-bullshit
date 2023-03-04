@@ -37,7 +37,9 @@ def main():
     card_option = int(input("Select a card to discard: "))
     if card_option not in [1,2,3,4,5]:
         print(f"You don't have that card!")
-    
+    else: 
+        print(f"You have chosen card {card_option} to discard!")
+
 
     # hands.remove(card_option)
     # discarded_cards.append(card_option)
