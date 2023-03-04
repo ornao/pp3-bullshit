@@ -42,6 +42,7 @@ def main():
                     if card_option in [1,2,3,4,5]:
                         print(f"You have chosen card {hands[current_player][card_option - 1 ]} to discard!")
                         print(f"Communal pile: {communal_pile + 1}")
+                        discarded_cards.append(hands[current_player][card_option - 1])
                         break
                     else: 
                         print(f"You don't have that card!")
