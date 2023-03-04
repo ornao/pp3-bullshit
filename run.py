@@ -14,6 +14,7 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('bullshit')
+
 # Code from Blackjack, by Al Sweigart al@inventwithpython.com
 HEART = chr(9829) # Character 9829 is '♥'.
 DIAMOND = chr(9830) # Character 9830 is '♦'.
