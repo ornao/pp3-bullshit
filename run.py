@@ -34,16 +34,17 @@ def main():
     print("Player", current_player + 1, "has", len(hands[current_player]), "cards:", hands[current_player])
     for count, option in enumerate(['1st card', '2nd card', '3rd card', '4th card', '5th card']):
                 print(f"{count+1}. {option}")
-    card_option = int(input("Select a card to discard: "))
-    if card_option not in [1,2,3,4,5]:
-        print(f"You don't have that card!")
-    else: 
-        print(f"You have chosen card {card_option} to discard!")
-
-
-    # hands.remove(card_option)
-    # discarded_cards.append(card_option)
-    # communal_pile + 1
+    while True:
+                try:
+                    card_option = int(input("Select a card to discard: "))
+                    if card_option in [1,2,3,4,5]:
+                        print(f"You have chosen card {card_option} to discard!")
+                        print(f"Communal pile: {communal_pile + 1}")
+                        break
+                    else: 
+                        print(f"You don't have that card!")
+                except ValueError:
+                    print("Huh?")          
 
 def title():
     """
