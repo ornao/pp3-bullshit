@@ -28,10 +28,11 @@ def main():
     hands = deal_cards()
     communal_pile = 0
     current_player = 0
+    global discarded_cards
     discarded_cards = []
 
     print("Communal pile:", communal_pile)
-    print("You have", len(hands[current_player]), "cards:", hands[current_player])
+    print("You have", len(hands[current_player + 1]), "cards:", hands[current_player])
     print("Player", current_player + 2, "has", len(hands[current_player]), "cards")
     print("Player", current_player + 3, "has", len(hands[current_player]), "cards\n")
     for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3], hands[current_player][4]]):
@@ -40,15 +41,17 @@ def main():
                 try:
                     card_option = int(input("Select a card to discard: "))
                     if card_option in [1,2,3,4,5]:
-                        print(f"You have chosen card {hands[current_player][card_option - 1 ]} to discard!")
+                        global card_chosen
+                        card_chosen = hands[current_player][card_option - 1 ]
+                        print(f"You have chosen card {card_chosen} to discard!")
                         print(f"Communal pile: {communal_pile + 1}")
-                        discarded_cards.append(hands[current_player][card_option - 1])
+                        discarded_cards.append(card_chosen)
                         break
                     else: 
                         print(f"You don't have that card!")
                 except ValueError:
                     print("Huh?")        
-    # call_bullshit()
+    call_bullshit()
 
 def title():
     """
@@ -120,11 +123,12 @@ def deal_cards():
         player3.append(get_deck().pop())
     return player1, player2, player3
 
-# def call_bullshit():
-#     if input("Do you want to call bullshit? (y/n) ") == 'y':
-#         print("Player was telling the truth!")
-#     else:
-#         print("Player was lying!")
+def call_bullshit():
+    if input("Do you want to call bullshit? (y/n) ") == 'y':
+        if card_chosen == discarded_cards[0]:
+            print("Player was telling the truth!")
+    else:
+        print("Player was lying!")
        
 
 # def display_picture_cards():
