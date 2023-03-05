@@ -38,7 +38,7 @@ def main():
     print("Player", current_player + 2, "has", len(hands[current_player]), "cards")
     print("Player", current_player + 3, "has", len(hands[current_player]), "cards\n")
     
-    ask_question()
+    print(f"Discard {ask_question()}:")
     
     for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
                 print(f"{count+1}. {option}")
@@ -136,7 +136,7 @@ def ask_question():
 
 def call_bullshit():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
-        if card_chosen == discarded_cards[0]:
+        if card_chosen == ask_question():
             print("Player was telling the truth!")
         else:
             print("Player was lying!")
