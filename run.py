@@ -20,6 +20,7 @@ HEART = chr(9829) # Character 9829 is '♥'.
 # DIAMOND = chr(9830) # Character 9830 is '♦'.
 # SPADE = chr(9824) # Character 9824 is '♠'.
 # CLUB = chr(9827) # Character 9827 is '♣'.
+question_number = []
 
 def main():
     title()
@@ -36,6 +37,9 @@ def main():
     print("You have", len(hands[current_player + 1]), "cards:", hands[current_player])
     print("Player", current_player + 2, "has", len(hands[current_player]), "cards")
     print("Player", current_player + 3, "has", len(hands[current_player]), "cards\n")
+    
+    ask_question()
+    
     for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
                 print(f"{count+1}. {option}")
     while True:
@@ -123,6 +127,12 @@ def deal_cards():
         player2.append(get_deck().pop())
         player3.append(get_deck().pop())
     return player1, player2, player3
+
+def ask_question():
+    for number in ['A','2','3','4','5','6','7','8','9','10','J','Q','K']:
+        question_number.append(number[-1])
+        return question_number[-1]
+
 
 def call_bullshit():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
