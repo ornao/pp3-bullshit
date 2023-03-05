@@ -17,9 +17,9 @@ SHEET = GSPREAD_CLIENT.open('bullshit')
 
 # Code from Blackjack, by Al Sweigart al@inventwithpython.com
 HEART = chr(9829) # Character 9829 is '♥'.
-DIAMOND = chr(9830) # Character 9830 is '♦'.
-SPADE = chr(9824) # Character 9824 is '♠'.
-CLUB = chr(9827) # Character 9827 is '♣'.
+# DIAMOND = chr(9830) # Character 9830 is '♦'.
+# SPADE = chr(9824) # Character 9824 is '♠'.
+# CLUB = chr(9827) # Character 9827 is '♣'.
 
 def main():
     title()
@@ -36,7 +36,7 @@ def main():
     print("You have", len(hands[current_player + 1]), "cards:", hands[current_player])
     print("Player", current_player + 2, "has", len(hands[current_player]), "cards")
     print("Player", current_player + 3, "has", len(hands[current_player]), "cards\n")
-    for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3], hands[current_player][4]]):
+    for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
                 print(f"{count+1}. {option}")
     while True:
                 try:
@@ -107,9 +107,9 @@ def validate_username_data(username):
 def get_deck():
     """get shuffled deck everytime"""
     deck = []
-    for suit in [HEART,CLUB,DIAMOND,SPADE]:
-        for number in ['A','K','Q','J','2','3','4','5','6','7','8','9','10']:
-            deck.append(number+suit)
+    # for suit in [HEART,CLUB,DIAMOND,SPADE]:
+    for number in ['A','K','Q','J','2','3','4','5','6','7','8','9','10']:
+        deck.append(number+HEART)
 
     random.shuffle(deck)
     return deck
@@ -118,7 +118,7 @@ def deal_cards():
     player1 = []
     player2 = []
     player3 = []
-    for i in range(5):
+    for i in range(4):
         player1.append(get_deck().pop())
         player2.append(get_deck().pop())
         player3.append(get_deck().pop())
@@ -128,8 +128,8 @@ def call_bullshit():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
         if card_chosen == discarded_cards[0]:
             print("Player was telling the truth!")
-    else:
-        print("Player was lying!")
+        else:
+            print("Player was lying!")
        
 
 # def display_picture_cards():
