@@ -115,7 +115,7 @@ def deal_cards():
 def ask_question():
     for number in ['A','2','3','4','5','6','7','8','9','10','J','Q','K']:
         question_number.append(number[-1])
-        return question_number[-1]
+        return question_number[-1] + HEART
 
 def user_choice():
     for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
@@ -137,8 +137,8 @@ def user_choice():
 
 def computer_call_bullshit():
     print("Player 2 and 3 are deciding if you are lying or not...")
-    bool(random.getrandbits(1))
-    if bool() == True:
+    random.choice([True, False])
+    if True:
         print("Player called bullshit, they think you are lying!")
         if card_chosen == ask_question():
             print("Computer was wrong, you were telling the truth!")
@@ -147,8 +147,6 @@ def computer_call_bullshit():
     else:
         print("Players think you are telling the truth, no one called bullshit")
 
-        
-    
 
 def user_call_bullshit():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
