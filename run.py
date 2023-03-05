@@ -21,42 +21,26 @@ HEART = chr(9829) # Character 9829 is '♥'.
 # SPADE = chr(9824) # Character 9824 is '♠'.
 # CLUB = chr(9827) # Character 9827 is '♣'.
 question_number = []
+communal_pile = 0
+current_player = 0
+discarded_cards = []
 
 def main():
     title()
     game_rules()
     get_username()
-
+    global hands
     hands = deal_cards()
-    communal_pile = 0
-    current_player = 0
-    global discarded_cards
-    discarded_cards = []
-
+ 
     print("Communal pile:", communal_pile)
     print("You have", len(hands[current_player + 1]), "cards:", hands[current_player])
     print("Player", current_player + 2, "has", len(hands[current_player]), "cards")
     print("Player", current_player + 3, "has", len(hands[current_player]), "cards\n")
-    
     print(f"Discard {ask_question()}:")
-    
-    for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
-                print(f"{count+1}. {option}")
-    while True:
-                try:
-                    card_option = int(input("Select a card to discard: "))
-                    if card_option in [1,2,3,4,5]:
-                        global card_chosen
-                        card_chosen = hands[current_player][card_option - 1 ]
-                        print(f"You have chosen card {card_chosen} to discard!")
-                        print(f"Communal pile: {communal_pile + 1}")
-                        discarded_cards.append(card_chosen)
-                        break
-                    else: 
-                        print(f"You don't have that card!")
-                except ValueError:
-                    print("Huh?")        
-    call_bullshit()
+
+    user_choice()
+       
+    computer_call_bullshit()
 
 def title():
     """
@@ -133,8 +117,40 @@ def ask_question():
         question_number.append(number[-1])
         return question_number[-1]
 
+def user_choice():
+    for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
+                    print(f"{count+1}. {option}")
+    while True:
+                try:
+                    card_option = int(input("Select a card to discard: "))
+                    if card_option in [1,2,3,4,5]:
+                        global card_chosen
+                        card_chosen = hands[current_player][card_option - 1 ]
+                        print(f"You have chosen card {card_chosen} to discard!")
+                        print(f"Communal pile: {communal_pile + 1}")
+                        discarded_cards.append(card_chosen)
+                        break
+                    else: 
+                        print(f"You don't have that card!")
+                except ValueError:
+                    print("Huh?")  
 
-def call_bullshit():
+def computer_call_bullshit():
+    print("Player 2 and 3 are deciding if you are lying or not...")
+    bool(random.getrandbits(1))
+    if bool() == True:
+        print("Player called bullshit, they think you are lying!")
+        if card_chosen == ask_question():
+            print("Computer was wrong, you were telling the truth!")
+        else:
+            print("Computer guessed you were lying!") 
+    else:
+        print("Players think you are telling the truth, no one called bullshit")
+
+        
+    
+
+def user_call_bullshit():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
         if card_chosen == ask_question():
             print("Player was telling the truth!")
