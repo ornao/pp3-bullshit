@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import random
 import os
+from itertools import cycle
 
 # Below code taken from Code Institute's Love Sandwiches Walkthrough Project:
 # Getting Set Up (Creating the Google Sheets API)
@@ -36,13 +37,15 @@ def main():
     print("You have", len(hands[current_player]), "cards:", hands[current_player])
     print("Player 2 has", len(hands[current_player]), "cards", hands[current_player + 1])
     print("Player 3 has", len(hands[current_player]), "cards", hands[current_player + 2])
-    print(f"Discard {ask_question()}:")
+    print(f"Discard {ask_question():}")
 
     user_choice()
        
     computer_call_bullshit()
 
     computer_card_select()
+
+    user_call_bullshit()
 
 def title():
     """
@@ -115,10 +118,15 @@ def deal_cards():
         player3.append(card.pop())
     return player1, player2, player3
 
+# trying to get to loop through to next quextion
 def ask_question():
-    for number in ['A','2','3','4','5','6','7','8','9','10','J','Q','K']:
-        question_number.append(number[-1])
-        return question_number[-1] + HEART
+    numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
+    x = iter(numbers)
+    print(x)
+    # question_number.append(number)
+        
+ 
+ask_question()
 
 def user_choice():
     for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
@@ -146,7 +154,7 @@ def computer_call_bullshit():
         if card_chosen == ask_question():
             print("Computer was wrong, you were telling the truth!")
             discarded_cards.remove(card_chosen)
-            hands[current_player + 2].append(card_chosen)
+            hands[current_player + 1].append(card_chosen)
         else:
             print("Computer guessed you were lying!") 
             discarded_cards.remove(card_chosen)
@@ -157,11 +165,11 @@ def computer_call_bullshit():
 def computer_card_select():
     computer_card_option = [1,2,3,4]
     x = random.choice(computer_card_option)
-    print(x)
     computer_card_chosen = hands[current_player + 1][x - 1]
-    print(f"Computer has chosen card {computer_card_chosen} to discard!")
+    print("Next player's turn")
     print(f"Communal pile: {communal_pile + 1}")
     discarded_cards.append(computer_card_chosen)
+    print(f"Player has discarded card {ask_question()}")
 
 
 def user_call_bullshit():
@@ -191,6 +199,6 @@ def user_call_bullshit():
 #     for row in rows: 
 #          print(row)
 
-main()
+# main()
 
 
