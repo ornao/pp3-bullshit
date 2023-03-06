@@ -42,6 +42,8 @@ def main():
        
     computer_call_bullshit()
 
+    computer_card_select()
+
 def title():
     """
     displays title of game and name of developer
@@ -124,9 +126,9 @@ def user_choice():
     while True:
                 try:
                     card_option = int(input("Select a card to discard: "))
-                    if card_option in [1,2,3,4,5]:
+                    if card_option in [1,2,3,4]:
                         global card_chosen
-                        card_chosen = hands[current_player][card_option - 1 ]
+                        card_chosen = hands[current_player][card_option - 1]
                         print(f"You have chosen card {card_chosen} to discard!")
                         print(f"Communal pile: {communal_pile + 1}")
                         discarded_cards.append(card_chosen)
@@ -151,6 +153,15 @@ def computer_call_bullshit():
             hands[current_player].append(card_chosen)
     else:
         print("Players think you are telling the truth, no one called bullshit")
+
+def computer_card_select():
+    computer_card_option = [1,2,3,4]
+    x = random.choice(computer_card_option)
+    print(x)
+    computer_card_chosen = hands[current_player + 1][x - 1]
+    print(f"Computer has chosen card {computer_card_chosen} to discard!")
+    print(f"Communal pile: {communal_pile + 1}")
+    discarded_cards.append(computer_card_chosen)
 
 
 def user_call_bullshit():
