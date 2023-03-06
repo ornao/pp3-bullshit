@@ -33,9 +33,9 @@ def main():
     hands = deal_cards()
  
     print("Communal pile:", communal_pile)
-    print("You have", len(hands[current_player + 1]), "cards:", hands[current_player])
-    print("Player", current_player + 2, "has", len(hands[current_player]), "cards")
-    print("Player", current_player + 3, "has", len(hands[current_player]), "cards\n")
+    print("You have", len(hands[current_player]), "cards:", hands[current_player])
+    print("Player 2 has", len(hands[current_player]), "cards", hands[current_player + 1])
+    print("Player 3 has", len(hands[current_player]), "cards", hands[current_player + 2])
     print(f"Discard {ask_question()}:")
 
     user_choice()
@@ -106,10 +106,11 @@ def deal_cards():
     player1 = []
     player2 = []
     player3 = []
+    card = get_deck()
     for i in range(4):
-        player1.append(get_deck().pop())
-        player2.append(get_deck().pop())
-        player3.append(get_deck().pop())
+        player1.append(card.pop())
+        player2.append(card.pop())
+        player3.append(card.pop())
     return player1, player2, player3
 
 def ask_question():
@@ -142,8 +143,12 @@ def computer_call_bullshit():
         print("Player called bullshit, they think you are lying!")
         if card_chosen == ask_question():
             print("Computer was wrong, you were telling the truth!")
+            discarded_cards.remove(card_chosen)
+            hands[current_player + 2].append(card_chosen)
         else:
             print("Computer guessed you were lying!") 
+            discarded_cards.remove(card_chosen)
+            hands[current_player].append(card_chosen)
     else:
         print("Players think you are telling the truth, no one called bullshit")
 
