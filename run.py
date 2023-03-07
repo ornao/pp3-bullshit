@@ -138,7 +138,9 @@ def user_choice():
                         global card_chosen
                         card_chosen = hands[current_player][card_option - 1]
                         print(f"You have chosen card {card_chosen} to discard!")
-                        print(f"Communal pile: {communal_pile + 1}")
+                        global communal_pile
+                        communal_pile += 1
+                        print(f"Communal pile: {communal_pile}")
                         discarded_cards.append(card_chosen)
                         break
                     else: 
@@ -167,7 +169,9 @@ def computer_card_select():
     x = random.choice(computer_card_option)
     computer_card_chosen = hands[current_player + 1][x - 1]
     print("Next player's turn")
-    print(f"Communal pile: {communal_pile + 1}")
+    global communal_pile
+    communal_pile += 1
+    print(f"Communal pile: {communal_pile}")
     discarded_cards.append(computer_card_chosen)
     print(f"Player has discarded card {ask_question()}")
 
@@ -199,6 +203,6 @@ def user_call_bullshit():
 #     for row in rows: 
 #          print(row)
 
-# main()
+main()
 
 
