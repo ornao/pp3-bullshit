@@ -1,14 +1,24 @@
+**Developer: Orna Reynolds**
+
+💻 [Visit live website](https://pp3-bullshit.herokuapp.com/)
+
+## About
+
+This is a command-line version of the bluff card game Bullshit for 3 players. Many versions of this game exist and the classic game is best player in a group of people. 
+
+The classic game generally have no rules and players can discard cards to communal pile in any order with any amount of matching cards. To add order to game, I added a question to get rid of certain card number each turn. 
+
+The objective of the game is to be the first one to get rid of all your cards. 
+
 ## Table of Contents
   - [Project Goals](#project-goals)
     - [User Goals](#user-goals)
     - [Site Owner Goals](#site-owner-goals)
   - [User Experience](#user-experience)
     - [Target Audience](#target-audience)
-    - [User Requirements and Expectations](#user-requirements-and-expectations)
-    - [User Manual](#user-manual)
-  - [User Stories](#user-stories)
-    - [Users](#users)
-    - [Site Owner](#site-owner)
+    - [User Stories](#user-stories)
+      - [Users](#users)
+      - [Site Owner](#site-owner)
   - [Technical Design](#technical-design)
     - [Flowchart](#flowchart)
   - [Technologies Used](#technologies-used)
@@ -27,20 +37,23 @@
 
 ### User Goals
 
+- Enjoy a fun and straightforward card game 
+- Have the option to view over the rules of the game or play game straightaway. 
+- Possiblility log into an existing account that keeps track of results.
 
 ### Site Owner Goals
 
+- Build a game that is simple and straightforward to use.
+- Make sure players understand the goal of the game and how to achieve that 
+- Design a game that provides user input and feedback to players while they play
 
 ## User Experience
 
 ### Target Audience
 
-### User Requirements and Expectations
+Those of all ages who enjoy card games and more specifically card bluffing games. 
 
-
-[Back to Table Of Contents](#table-of-contents)
-
-## User Stories
+### User Stories
 
 [Back to Table Of Contents](#table-of-contents)
 
