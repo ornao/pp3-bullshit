@@ -66,13 +66,19 @@ def menu_select():
     start_options = "1) Play the game\n2) Have a deeper look at the rules first\n (psst...click me if this is your first time playing)\n"
     start_option_selected = input(start_options)
 
+    # Validatation for user input
+    choice = start_option_selected
+    while choice not in ["1","2"]:
+        print("Surely you know where 1 and 2 are on your keyboard.")
+        choice = input(start_options)
+
     if start_option_selected == "1":
         get_username()
 
     elif start_option_selected == "2":
         game_rules()
         get_username()
-
+            
     return start_option_selected
 
 def game_rules():
