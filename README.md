@@ -55,6 +55,13 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 ### User Stories
 
+### Users
+1. I want the name of the game clearly displayed and have an idea how to play it from first look.
+2. I want to quickly learn how to play the game before it starts.
+2. I want to be able to read the rules of the game in depth also if I need more explanation
+
+### Site Owner
+
 [Back to Table Of Contents](#table-of-contents)
 
 ## Technical Design

@@ -28,8 +28,7 @@ discarded_cards = []
 
 def main():
     title()
-    game_rules()
-    get_username()
+    menu_select()
     global hands
     hands = deal_cards()
  
@@ -58,6 +57,23 @@ def title():
     print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░▀█████  ")
     print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░▄████▄ \n")
     print("                                                Developed by Orna Reynolds")
+
+def menu_select():
+    """
+    User selects whether to start the game or look at the rules first
+    """
+    print("Which are you feeling?")
+    start_options = "1) Play the game\n2) Have a deeper look at the rules first\n (psst...click me if this is your first time playing)\n"
+    start_option_selected = input(start_options)
+
+    if start_option_selected == "1":
+        get_username()
+
+    elif start_option_selected == "2":
+        game_rules()
+        get_username()
+
+    return start_option_selected
 
 def game_rules():
     """
