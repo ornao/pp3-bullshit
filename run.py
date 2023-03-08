@@ -56,6 +56,7 @@ def title():
     print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░░╚═══██╗██╔══██║██║░░░██║░░░░░▄█████▄█▀▀ ")
     print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░▀█████  ")
     print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░▄████▄ \n")
+    print("                                                  A bluffing card game")
     print("                                                Developed by Orna Reynolds")
 
 def menu_select():
@@ -86,9 +87,10 @@ def game_rules():
     displays rules of game 
     """
     print("* This is a game of bluff. ")
-    print("* The game begins with 52 deck cards being split evenly between players")
+    print("* The game begins with each player receiving 5 cards")
     print("* The aim of the game is to be the first to get rid of all your cards")
-    print("* The player begins the game by playing an ace")
+    print("* The game begins by asking player 1 to play the first card: Ace")
+    print("* The player can play the ace card or lie and play another card instead")
     print("* The game then continues with the next player discarding any 2s they have")
     print("* Then the next player discards any 3s they have and so on")
     print("* Player can put down all multiples of the card they have")
@@ -130,6 +132,7 @@ def get_deck():
     return deck
 
 def deal_cards():
+    """return 3 seperate unique hands to players"""
     player1 = []
     player2 = []
     player3 = []
@@ -143,15 +146,19 @@ def deal_cards():
 # trying to get to loop through to next quextion
 def ask_question():
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
-    numbers.append(numbers.pop(numbers.index(numbers[-1])))
-    return numbers
-    
-    
+    running = True
+    idx = 0
+    while running:
+        for idx, elem in enumerate(numbers):
+            thiselem = elem
+            nextelem = numbers[(idx + 1) % len(numbers)]
+    print( nextelem[0] + HEART )
     # question_number.append(number)
         
 current_question = ask_question()
 
 def user_choice():
+    "allows user to discard number 1-4 card in their hands"
     for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
                     print(f"{count+1}. {option}")
     while True:
@@ -172,6 +179,7 @@ def user_choice():
                     print("Huh?")  
 
 def computer_call_bullshit():
+    """computer randomly decided if true or false - so calls bullshit"""
     print("Player 2 and 3 are deciding if you are lying or not...")
     random.choice([True, False])
     if True:
@@ -188,6 +196,7 @@ def computer_call_bullshit():
         print("Players think you are telling the truth, no one called bullshit")
 
 def computer_card_select():
+    """computer randomly decides 1-4 so what card to choose to dicard"""
     computer_card_option = [1,2,3,4]
     x = random.choice(computer_card_option)
     computer_card_chosen = hands[current_player + 1][x - 1]
@@ -226,6 +235,6 @@ def user_call_bullshit():
 #     for row in rows: 
 #          print(row)
 
-main()
+# main()
 
 
