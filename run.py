@@ -149,8 +149,8 @@ def card_hands():
     """display cards number of cards in each players hand """
     print("Communal pile:", communal_pile)
     print("You have", len(hands[current_player]), "cards:", hands[current_player])
-    print("Player 2 has", len(hands[current_player]), "cards", hands[current_player + 1])
-    print("Player 3 has", len(hands[current_player]), "cards", hands[current_player + 2])
+    print("Player 2 has", len(hands[current_player + 1]), "cards", hands[current_player + 1])
+    print("Player 3 has", len(hands[current_player + 2]), "cards", hands[current_player + 2])
     print(ask_question())
 
 # trying to get to loop through to next quextion
