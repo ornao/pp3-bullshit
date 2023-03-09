@@ -197,6 +197,7 @@ def user_choice():
                         global communal_pile
                         communal_pile += 1
                         print(f"Communal pile: {communal_pile}")
+                        hands[current_player].remove(card_chosen)
                         discarded_cards.append(card_chosen)
                         break
                     else: 
