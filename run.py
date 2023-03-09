@@ -30,20 +30,20 @@ def main():
     menu_select()
     global hands
     hands = deal_cards()
- 
-    print("Communal pile:", communal_pile)
-    print("You have", len(hands[current_player]), "cards:", hands[current_player])
-    print("Player 2 has", len(hands[current_player]), "cards", hands[current_player + 1])
-    print("Player 3 has", len(hands[current_player]), "cards", hands[current_player + 2])
-    print(ask_question())
 
+    card_hands()
+    
     user_choice()
        
     computer_call_bullshit()
 
+    card_hands()
+
     computer_card_select()
 
     user_call_bullshit()
+
+    card_hands()
 
 def title():
     """
@@ -145,6 +145,14 @@ def deal_cards():
         player3.append(card.pop())
     return player1, player2, player3
 
+def card_hands():
+    """display cards number of cards in each players hand """
+    print("Communal pile:", communal_pile)
+    print("You have", len(hands[current_player]), "cards:", hands[current_player])
+    print("Player 2 has", len(hands[current_player]), "cards", hands[current_player + 1])
+    print("Player 3 has", len(hands[current_player]), "cards", hands[current_player + 2])
+    print(ask_question())
+
 # trying to get to loop through to next quextion
 def ask_question():
     global question
@@ -181,7 +189,7 @@ def user_choice():
                     print(f"{count+1}. {option}")
     while True:
                 try:
-                    card_option = int(input("Select a card to discard: "))
+                    card_option = int(input("Select a card from 1-4 to discard: "))
                     if card_option in [1,2,3,4]:
                         global card_chosen
                         card_chosen = hands[current_player][card_option - 1]
@@ -201,17 +209,23 @@ def computer_call_bullshit():
     print("Player 2 and 3 are deciding if you are lying or not...")
     random.choice([True, False])
     if True:
-        print("Player called bullshit, they think you are lying!")
+        random_choice_players = [2,3]
+        x = random.choice(random_choice_players)
+        print(f"Player {x} called bullshit, they think you are lying!")
         if card_chosen == question + HEART:
             print("Computer was wrong, you were telling the truth!")
             discarded_cards.remove(card_chosen)
-            hands[current_player + 1].append(card_chosen)
+            if x == 2:
+                hands[current_player + 1].append(card_chosen)
+            else:
+                hands[current_player + 1].append(card_chosen)
+
         else:
-            print("Computer guessed you were lying!") 
+            print(f"Player {x} guessed you were lying!") 
             discarded_cards.remove(card_chosen)
             hands[current_player].append(card_chosen)
     else:
-        print("Players think you are telling the truth, no one called bullshit")
+        print("Player 2 and 3 think you are telling the truth, no one called bullshit")
 
 def computer_card_select():
     """computer randomly decides 1-4 so what card to choose to dicard"""
@@ -225,7 +239,7 @@ def computer_card_select():
     discarded_cards.append(computer_card_chosen)
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     y = random.choice(numbers)
-    print(f"Player has discarded card {y}")
+    print(f"Player has discarded card {y + HEART}")
     print('Do you think they are lying?')
 
 
