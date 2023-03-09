@@ -13,7 +13,7 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('bullshit')
+SHEET = GSPREAD_CLIENT.open('bullshit').worksheet('username')
 
 # Code from Blackjack, by Al Sweigart al@inventwithpython.com
 HEART = chr(9829) # Character 9829 is '♥'.
@@ -105,11 +105,14 @@ def get_username():
             try:
                 username = input("Now...what is your name?\n")
                 username_validated = username.capitalize()
+                new_row = [username_validated]
+                SHEET.append_row(new_row)
                 if validate_username_data(username):
                     print(f"{username_validated}? Hello there, lets get started!{os.linesep}")
                     break 
                 else:
                     print("Psst...is your name made up of only letters\n")
+                    print('And yes that means no spaces too')
             except ValueError:
                 print("Huh?")          
     return(username_validated)
