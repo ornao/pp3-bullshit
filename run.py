@@ -35,7 +35,7 @@ def main():
     print("You have", len(hands[current_player]), "cards:", hands[current_player])
     print("Player 2 has", len(hands[current_player]), "cards", hands[current_player + 1])
     print("Player 3 has", len(hands[current_player]), "cards", hands[current_player + 2])
-    print(f"Discard {current_question:}")
+    print(ask_question())
 
     user_choice()
        
@@ -99,7 +99,7 @@ def game_rules():
 
 def get_username():
     """
-    get username input from the user 
+    get username input from the user and add to google sheets
     """
     while True:
             try:
@@ -108,7 +108,7 @@ def get_username():
                 new_row = [username_validated]
                 SHEET.append_row(new_row)
                 if validate_username_data(username):
-                    print(f"{username_validated}? Hello there, lets get started!{os.linesep}")
+                    print(f"{username_validated}? Hello there, let's get started!{os.linesep}")
                     break 
                 else:
                     print("Psst...is your name made up of only letters\n")
@@ -147,17 +147,33 @@ def deal_cards():
 
 # trying to get to loop through to next quextion
 def ask_question():
-    numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
-    running = True
-    idx = 0
-    while running:
-            thiselem = numbers[idx]
-            idx = (idx) % len(numbers)
-            nextelem = numbers[idx +1] 
-            break 
-    return nextelem[-1] + HEART 
+    global question
+    question = input("Type in a random card from A-K to discard:")
+    print("Remember you don't actually need to have that card in your hand, your opponents just have to believe you have it")
+    
+    # numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
+    # print(num)
+    # thiselem = numbers[num]
+    # running = True
+    # idx = 0
+    # while running:
+    #         thiselem = numbers[idx]
+    #         # idx = (idx) % len(numbers)
+    #         idx +=1
+    #         # nextelem = numbers[idx +1] 
+    #         if thiselem == numbers[0]:
+    #             break
+            
+    return question + HEART 
 
-current_question = ask_question()
+# numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
+# for i in numbers:
+#     current_question = i + HEART
+    # print(current_question)
+
+
+# for i in range(len(numbers)):
+# current_question = ask_question()
 
 def user_choice():
     "allows user to discard number 1-4 card in their hands"
@@ -186,7 +202,7 @@ def computer_call_bullshit():
     random.choice([True, False])
     if True:
         print("Player called bullshit, they think you are lying!")
-        if card_chosen == current_question:
+        if card_chosen == question + HEART:
             print("Computer was wrong, you were telling the truth!")
             discarded_cards.remove(card_chosen)
             hands[current_player + 1].append(card_chosen)
@@ -207,12 +223,15 @@ def computer_card_select():
     communal_pile += 1
     print(f"Communal pile: {communal_pile}")
     discarded_cards.append(computer_card_chosen)
-    print(f"Player has discarded card {current_question}")
+    numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
+    y = random.choice(numbers)
+    print(f"Player has discarded card {y}")
+    print('Do you think they are lying?')
 
 
 def user_call_bullshit():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
-        if card_chosen == current_question:
+        if card_chosen == question + HEART:
             print("Player was telling the truth!")
         else:
             print("Player was lying!")
