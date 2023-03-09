@@ -36,7 +36,7 @@ def main():
     print("You have", len(hands[current_player]), "cards:", hands[current_player])
     print("Player 2 has", len(hands[current_player]), "cards", hands[current_player + 1])
     print("Player 3 has", len(hands[current_player]), "cards", hands[current_player + 2])
-    print(f"Discard {current_question:}")
+    print(f"Discard {ask_question():}")
 
     user_choice()
        
@@ -149,13 +149,15 @@ def ask_question():
     running = True
     idx = 0
     while running:
-        for idx, elem in enumerate(numbers):
-            thiselem = elem
-            nextelem = numbers[(idx + 1) % len(numbers)]
-    print( nextelem[0] + HEART )
-    # question_number.append(number)
-        
+            thiselem = numbers[idx]
+            idx = (idx) % len(numbers)
+            nextelem = numbers[idx +1] 
+            break 
+    return nextelem[0] + HEART 
+
 current_question = ask_question()
+print(current_question)
+print(current_question)
 
 def user_choice():
     "allows user to discard number 1-4 card in their hands"
@@ -184,7 +186,7 @@ def computer_call_bullshit():
     random.choice([True, False])
     if True:
         print("Player called bullshit, they think you are lying!")
-        if card_chosen == current_question:
+        if card_chosen == ask_question():
             print("Computer was wrong, you were telling the truth!")
             discarded_cards.remove(card_chosen)
             hands[current_player + 1].append(card_chosen)
@@ -205,12 +207,12 @@ def computer_card_select():
     communal_pile += 1
     print(f"Communal pile: {communal_pile}")
     discarded_cards.append(computer_card_chosen)
-    print(f"Player has discarded card {current_question}")
+    print(f"Player has discarded card {ask_question()}")
 
 
 def user_call_bullshit():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
-        if card_chosen == current_question:
+        if card_chosen == ask_question():
             print("Player was telling the truth!")
         else:
             print("Player was lying!")
@@ -235,6 +237,6 @@ def user_call_bullshit():
 #     for row in rows: 
 #          print(row)
 
-# main()
+main()
 
 
