@@ -289,7 +289,7 @@ def computer3_card_select():
 def user_call_bullshit_player2():
     """player 2 function to randomly call true or false so bullshit"""
     # the \n is for heroku deployment, the input is == y
-    if input("Do you want to call bullshit? (y/n)\n") == 'y\n':
+    if input("Do you want to call bullshit? (y/n)\n") == 'y':
         if y + HEART == computer2_card_chosen:
             print("x")
             print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "was telling the truth!")
@@ -307,14 +307,14 @@ def user_call_bullshit_player2():
 def user_call_bullshit_player3():
     """player 3 function to randomly call true or false so bullshit"""
     # the \n is for heroku deployment, the input is == y
-    if input("Do you want to call bullshit? (y/n)\n") == 'y\n':
+    if input("Do you want to call bullshit? (y/n)\n") == 'y':
         if y + HEART == computer3_card_chosen:
             print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "was telling the truth!")
             hands[current_player + 2].extend(discarded_cards)
             discarded_cards.clear()
             print(discarded_cards)
         else:
-            print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "was lying!")
+            print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "was lying!")
             print(discarded_cards)
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
