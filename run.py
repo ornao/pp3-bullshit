@@ -185,8 +185,10 @@ def ask_question():
 
 def user_choice():
     "allows user to discard number 1-4 card in their hands"
-    for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
-                    print(f"{count+1}. {option}")
+    # for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
+    for count, option in enumerate(hands[current_player]):
+        print(f"{count+1}. {option}")
+
     while True:
                 try:
                     card_option = int(input("Select a card from 1-4 to discard:\n"))
@@ -274,6 +276,8 @@ def computer3_card_select():
     print('Do you think they are lying?')
 
 def user_call_bullshit_player2():
+    """player 2 function to randomly call true or false so bullshit"""
+    # the \n is for heroku deployment, the input is == y
     if input("Do you want to call bullshit? (y/n) \n") == 'y\n':
         if y + HEART == computer2_card_chosen:
             print("Player 2 was telling the truth!")
@@ -288,6 +292,8 @@ def user_call_bullshit_player2():
     
 
 def user_call_bullshit_player3():
+    """player 3 function to randomly call true or false so bullshit"""
+    # the \n is for heroku deployment, the input is == y
     if input("Do you want to call bullshit? (y/n) \n") == 'y\n':
         if y + HEART == computer3_card_chosen:
             print("Player 3 was telling the truth!")
