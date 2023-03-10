@@ -99,15 +99,15 @@ def game_rules():
     displays rules of game 
     """
     print("* This is a game of bluff. ")
-    print("* The game begins with each player receiving 5 cards")
+    print("* The game begins with each player receiving 4 cards")
     print("* The aim of the game is to be the first to get rid of all your cards")
-    print("* The game begins by asking player 1 to play the first card: Ace")
-    print("* The player can play the ace card or lie and play another card instead")
-    print("* The game then continues with the next player discarding any 2s they have")
-    print("* Then the next player discards any 3s they have and so on")
-    print("* Player can put down all multiples of the card they have")
+    print("* The game begins by asking player 1 (yes that's you) to play the first card")
+    print("* The player can play the card they have called or lie and play another card instead")
+    print("* The game then continues with the next player discarding one of their cards")
+    print("* And so on")
+    # print("* Player can put down all multiples of the card they have")
     print("* The bluff happens when the player decides to lie about what cards they have put down")
-    print("* Call bullshit if you sense your opponents bluff, but fear getting all the cards in commual pile!\n")
+    print("* Call bullshit if you sense your opponents bluff, but fear getting all the cards in communal pile!\n")
     input("Press enter to begin...\n")
 
 def get_username():
@@ -124,7 +124,7 @@ def get_username():
                     print(Fore.CYAN + f"{username_validated}? " + Style.RESET_ALL + f"Hello there, let's get started! {os.linesep}")
                     break 
                 else:
-                    print("Psst...is your name made up of only letters\n")
+                    print("Psst...is your name made up of only letters")
                     print('And yes that means no spaces too')
             except ValueError:
                 print("Huh?")          
@@ -380,6 +380,7 @@ def get_hidden_cards(num_cards):
 main()
 
 # fix issue with heart longer in value so they wont be equal
+# add other hands to while loop
 # fix issue with 10 and 7 being weird for card display
 # add typewriter font 
 # add different colors for text 
