@@ -170,10 +170,12 @@ def ask_question():
     global question
     question = input("Type in a random card from A-K to discard:\n")
     # validatation for user input
-    while input("Type in a random card from A-K to discard:\n") not in ['A','2','3','4','5','6','7','8','9','10','J','Q','K']:
+    while question not in ['A','2','3','4','5','6','7','8','9','10','J','Q','K']:
         print("When I say A-K, I mean ['A','2','3','4','5','6','7','8','9','10','J','Q','K']")
-    print("Remember you don't actually need to have that card in your hand, your opponents just have to believe you have it")
+        question = input("Type in a random card from A-K to discard:\n")
 
+    print(Style.BRIGHT + "Remember you don't actually need to have that card in your hand, your opponents just have to " + Fore.BLACK + Back.WHITE + "believe" + Style.RESET_ALL + Style.BRIGHT + " you have it")
+    
     # numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     # print(num)
     # thiselem = numbers[num]
@@ -221,7 +223,7 @@ def user_choice():
                     else: 
                         print(f"You don't have that card!")
                 except ValueError:
-                    print("Huh? I know you can count to 4 my dear")  
+                    print("Huh? I know you can count my dear")  
 
 def computer_call_bullshit():
     """computer randomly decided if true or false - so calls bullshit"""
@@ -300,7 +302,8 @@ def user_call_bullshit_player2():
     """player 2 function to randomly call true or false so bullshit"""
     # os.linsep is a workaround to the heroku input \n problem, 
     # using\n was changing my == value
-    if input("Do you want to call bullshit? (y/n)\n") == 'y':
+    bullshit_question = input("Do you want to call bullshit? (y/n)\n")
+    if bullshit_question == 'y':
         os.linesep
         if y + HEART == computer2_card_chosen:
             print("x")
@@ -315,14 +318,16 @@ def user_call_bullshit_player2():
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
     # validatation for user input
-    while input("Do you want to call bullshit? (y/n)\n") not in ["y","n"]:
+    while bullshit_question not in ["y","n"]:
         print("Surely you know where y and n are on your keyboard.")
+        bullshit_question = input("Do you want to call bullshit? (y/n)\n")
 
 def user_call_bullshit_player3():
     """player 3 function to randomly call true or false so bullshit"""
     # os.linsep is a workaround to the heroku input \n problem, 
     # using\n was changing my == value
-    if input("Do you want to call bullshit? (y/n)\n") == 'y':
+    bullshit_question = input("Do you want to call bullshit? (y/n)\n")
+    if bullshit_question == 'y':
         os.linesep
         if y + HEART == computer3_card_chosen:
             print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "was telling the truth!")
@@ -335,8 +340,9 @@ def user_call_bullshit_player3():
             hands[current_player + 2].extend(discarded_cards)
             discarded_cards.clear()
     # validatation for user input
-    while input("Do you want to call bullshit? (y/n)\n") not in ["y","n"]:
+    while bullshit_question not in ["y","n"]:
         print("Surely you know where y and n are on your keyboard.")
+        bullshit_question = input("Do you want to call bullshit? (y/n)\n")
 
 # def display_picture_cards():
 #     rows = ['', '', '', '', ''] 
@@ -360,7 +366,6 @@ def user_call_bullshit_player3():
 main()
 
 
-# add validation for input A-K
 # add capitlaise when typing in A-K
 # add typewriter font 
 # add different colors for text 
