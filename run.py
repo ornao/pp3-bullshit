@@ -33,25 +33,17 @@ def main():
 
     card_hands()
 
-    ask_question()
-    
-    user_choice()
-       
-    computer_call_bullshit()
-
-    card_hands()
-
-    computer2_card_select()
-
-    user_call_bullshit_player2()
-
-    card_hands()
-
-    computer3_card_select()
-
-    user_call_bullshit_player3()
-
-    card_hands()
+    while hands[current_player] or hands[current_player + 1] or hands[current_player + 2] > 1:
+        ask_question()
+        user_choice()
+        computer_call_bullshit()
+        card_hands()
+        computer2_card_select()
+        user_call_bullshit_player2()
+        card_hands()
+        computer3_card_select()
+        user_call_bullshit_player3()
+        card_hands()
 
 def title():
     """
