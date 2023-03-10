@@ -318,7 +318,7 @@ def user_call_bullshit_player3():
         else:
             print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "was lying!")
             print(discarded_cards)
-            hands[current_player + 1].extend(discarded_cards)
+            hands[current_player + 2].extend(discarded_cards)
             discarded_cards.clear()
      
 
