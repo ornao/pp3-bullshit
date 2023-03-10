@@ -27,6 +27,7 @@ HEART = chr(9829) # Character 9829 is '♥'.
 # CLUB = chr(9827) # Character 9827 is '♣'.
 question_number = []
 discarded_cards = []
+# get communal pile working
 communal_pile = len(discarded_cards)
 current_player = 0
 listx = []
@@ -158,8 +159,6 @@ def deal_cards():
         player3.append(card.pop())
     return player1, player2, player3
 
-
-
 def card_hands():
     """display cards number of cards in each players hand """
     print("Communal pile:", communal_pile)
@@ -172,13 +171,13 @@ def card_hands():
             print(card[i], end='')
         print()
     print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]), "cards", hands[current_player + 1])
-    cards = get_hidden_cards(4)
+    cards = get_hidden_cards(len(hands[current_player + 1]))
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
     print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]), "cards", hands[current_player + 2])
-    cards = get_hidden_cards(4)
+    cards = get_hidden_cards(len(hands[current_player + 2]))
     for i in range(5):
         for card in cards:
             print(card[i], end='')
@@ -386,4 +385,3 @@ main()
 # add different colors for text 
 # add message if game keeps looping to quit 
 # remember who wins
-# possible add cards 
