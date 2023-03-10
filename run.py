@@ -295,7 +295,8 @@ def computer3_card_select():
 
 def user_call_bullshit_player2():
     """player 2 function to randomly call true or false so bullshit"""
-    # the \n is for heroku deployment, the input is == y
+    # os.linsep is a workaround to the heroku input \n problem, 
+    # using\n was changing my == value
     if input("Do you want to call bullshit? (y/n)\n") == 'y':
         os.linesep
         if y + HEART == computer2_card_chosen:
@@ -310,11 +311,14 @@ def user_call_bullshit_player2():
             print(discarded_cards)
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
-    
+    # validatation for user input
+    while input("Do you want to call bullshit? (y/n)\n") not in ["y","n"]:
+        print("Surely you know where y and n are on your keyboard.")
 
 def user_call_bullshit_player3():
     """player 3 function to randomly call true or false so bullshit"""
-    # the \n is for heroku deployment, the input is == y
+    # os.linsep is a workaround to the heroku input \n problem, 
+    # using\n was changing my == value
     if input("Do you want to call bullshit? (y/n)\n") == 'y':
         os.linesep
         if y + HEART == computer3_card_chosen:
@@ -327,7 +331,9 @@ def user_call_bullshit_player3():
             print(discarded_cards)
             hands[current_player + 2].extend(discarded_cards)
             discarded_cards.clear()
-     
+    # validatation for user input
+    while input("Do you want to call bullshit? (y/n)\n") not in ["y","n"]:
+        print("Surely you know where y and n are on your keyboard.")
 
 # def display_picture_cards():
 #     rows = ['', '', '', '', ''] 
