@@ -169,8 +169,11 @@ def card_hands():
 def ask_question():
     global question
     question = input("Type in a random card from A-K to discard:\n")
+    # validatation for user input
+    while input("Type in a random card from A-K to discard:\n") not in ['A','2','3','4','5','6','7','8','9','10','J','Q','K']:
+        print("When I say A-K, I mean ['A','2','3','4','5','6','7','8','9','10','J','Q','K']")
     print("Remember you don't actually need to have that card in your hand, your opponents just have to believe you have it")
-    
+
     # numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     # print(num)
     # thiselem = numbers[num]
@@ -218,7 +221,7 @@ def user_choice():
                     else: 
                         print(f"You don't have that card!")
                 except ValueError:
-                    print("Huh?")  
+                    print("Huh? I know you can count to 4 my dear")  
 
 def computer_call_bullshit():
     """computer randomly decided if true or false - so calls bullshit"""
