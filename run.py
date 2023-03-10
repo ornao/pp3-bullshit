@@ -274,7 +274,7 @@ def computer3_card_select():
     print('Do you think they are lying?')
 
 def user_call_bullshit_player2():
-    if input("Do you want to call bullshit? (y/n) \n") == 'y':
+    if input("Do you want to call bullshit? (y/n) \n") == 'y\n':
         if y + HEART == computer2_card_chosen:
             print("Player 2 was telling the truth!")
             hands[current_player + 1].extend(discarded_cards)
@@ -288,7 +288,7 @@ def user_call_bullshit_player2():
     
 
 def user_call_bullshit_player3():
-    if input("Do you want to call bullshit? (y/n) \n") == 'y':
+    if input("Do you want to call bullshit? (y/n) \n") == 'y\n':
         if y + HEART == computer3_card_chosen:
             print("Player 3 was telling the truth!")
             hands[current_player + 2].extend(discarded_cards)
