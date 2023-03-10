@@ -29,6 +29,7 @@ question_number = []
 discarded_cards = []
 communal_pile = len(discarded_cards)
 current_player = 0
+listx = []
 
 def main():
     title()
@@ -165,7 +166,7 @@ def card_hands():
     global player_cards
     player_cards = hands[current_player]
     print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards", player_cards)
-    cards = get_picture_cards(4)
+    cards = get_picture_cards(player_cards, len(player_cards))
     for i in range(5):
         for card in cards:
             print(card[i], end='')
@@ -342,11 +343,24 @@ def user_call_bullshit_player3():
         print("Surely you know where y and n are on your keyboard.")
         bullshit_question = input("Do you want to call bullshit? (y/n)\n")
 
-def get_picture_cards(num_cards):
+# def get_picture_cards(num_cards):
+#     cards = []
+#     for i in range(num_cards):
+#         rows = ['', '', '', '', ''] 
+#         x = player_cards.pop()
+#         suit = HEART
+#         rows[0] += ' ___ ' 
+#         rows[1] += '|{}  |'.format(x)
+#         rows[2] += '| {} |'.format(suit)
+#         rows[3] += '|__{}|'.format(x)
+#         cards.append(rows)
+#     return cards
+
+def get_picture_cards(player_cards, num_cards):
     cards = []
     for i in range(num_cards):
+        x = player_cards[i]
         rows = ['', '', '', '', ''] 
-        x = player_cards.pop()
         suit = HEART
         rows[0] += ' ___ ' 
         rows[1] += '|{}  |'.format(x)
