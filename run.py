@@ -156,7 +156,7 @@ def card_hands():
 # trying to get to loop through to next quextion
 def ask_question():
     global question
-    question = input("Type in a random card from A-K to discard:")
+    question = input("Type in a random card from A-K to discard:\n")
     print("Remember you don't actually need to have that card in your hand, your opponents just have to believe you have it")
     
     # numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
@@ -189,7 +189,7 @@ def user_choice():
                     print(f"{count+1}. {option}")
     while True:
                 try:
-                    card_option = int(input("Select a card from 1-4 to discard: "))
+                    card_option = int(input("Select a card from 1-4 to discard:\n"))
                     if card_option in [1,2,3,4]:
                         global card_chosen
                         card_chosen = hands[current_player][card_option - 1]
@@ -274,7 +274,7 @@ def computer3_card_select():
     print('Do you think they are lying?')
 
 def user_call_bullshit_player2():
-    if input("Do you want to call bullshit? (y/n) ") == 'y':
+    if input("Do you want to call bullshit? (y/n) \n") == 'y':
         if y + HEART == computer2_card_chosen:
             print("Player 2 was telling the truth!")
             hands[current_player + 1].extend(discarded_cards)
@@ -288,7 +288,7 @@ def user_call_bullshit_player2():
     
 
 def user_call_bullshit_player3():
-    if input("Do you want to call bullshit? (y/n) ") == 'y':
+    if input("Do you want to call bullshit? (y/n) \n") == 'y':
         if y + HEART == computer3_card_chosen:
             print("Player 3 was telling the truth!")
             hands[current_player + 2].extend(discarded_cards)
