@@ -51,6 +51,8 @@ def main():
 
     user_call_bullshit_player3()
 
+    card_hands()
+
 def title():
     """
     displays title of game and name of developer
@@ -246,12 +248,13 @@ def computer2_card_select():
     x = random.choice(computer_card_option)
     global computer2_card_chosen
     computer2_card_chosen = hands[current_player + 1][x - 1]
+    print(computer2_card_chosen)
     print("Next player's turn")
-    global communal_pile
     # communal_pile += 1
-    print(f"Communal pile: {communal_pile}")
     discarded_cards.append(computer2_card_chosen)
-    hands[current_player + 1].remove(computer2_card_chosen)
+    global communal_pile
+    print(f"Communal pile: {communal_pile}")
+    # hands[current_player + 1].remove(computer2_card_chosen)
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
@@ -263,13 +266,14 @@ def computer3_card_select():
     computer_card_option = [1,2,3,4]
     x = random.choice(computer_card_option)
     global computer3_card_chosen
-    computer3_card_chosen = hands[current_player + 1][x - 1]
+    computer3_card_chosen = hands[current_player + 2][x - 1]
+    print(computer3_card_chosen)
     print("Next player's turn")
+    discarded_cards.append(computer3_card_chosen)
     global communal_pile
     communal_pile += 1
     print(f"Communal pile: {communal_pile}")
-    discarded_cards.append(computer3_card_chosen)
-    hands[current_player + 1].remove(computer2_card_chosen)
+    hands[current_player + 2].remove(computer2_card_chosen)
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
