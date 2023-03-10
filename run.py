@@ -2,6 +2,11 @@ import gspread
 from google.oauth2.service_account import Credentials
 import random
 import os
+import colorama
+from colorama import Fore, Back, Style
+
+#Initialize colorama
+colorama.init(autoreset=True)
 
 # Below code taken from Code Institute's Love Sandwiches Walkthrough Project:
 # Getting Set Up (Creating the Google Sheets API)
@@ -55,7 +60,7 @@ def title():
     print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░░╚═══██╗██╔══██║██║░░░██║░░░░░▄█████▄█▀▀ ")
     print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░▀█████  ")
     print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░▄████▄ \n")
-    print("                                                  A bluffing card game")
+    print(                                    Fore.BLUE +   "A bluffing card game")
     print("                                                Developed by Orna Reynolds")
 
 def menu_select():
@@ -329,3 +334,10 @@ def user_call_bullshit_player3():
 main()
 
 
+# add validation for input A-K
+# add capitlaise when typing in A-K
+# add typewriter font 
+# add different colors for text 
+# add message if game keeps looping to quit 
+# remember who wins
+# possible add cards 
