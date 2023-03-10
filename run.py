@@ -32,6 +32,8 @@ def main():
     hands = deal_cards()
 
     card_hands()
+
+    ask_question()
     
     user_choice()
        
@@ -151,7 +153,7 @@ def card_hands():
     print("You have", len(hands[current_player]), "cards:", hands[current_player])
     print("Player 2 has", len(hands[current_player + 1]), "cards", hands[current_player + 1])
     print("Player 3 has", len(hands[current_player + 2]), "cards", hands[current_player + 2])
-    print(ask_question())
+    # print(ask_question())
 
 # trying to get to loop through to next quextion
 def ask_question():
@@ -199,6 +201,7 @@ def user_choice():
                         print(f"Communal pile: {communal_pile}")
                         hands[current_player].remove(card_chosen)
                         discarded_cards.append(card_chosen)
+                        print(discarded_cards)
                         break
                     else: 
                         print(f"You don't have that card!")
@@ -208,23 +211,28 @@ def user_choice():
 def computer_call_bullshit():
     """computer randomly decided if true or false - so calls bullshit"""
     print("Player 2 and 3 are deciding if you are lying or not...")
-    random.choice([True, False])
-    if True:
+    z = random.choice([True, False])
+    if z is True:
         random_choice_players = [2,3]
         x = random.choice(random_choice_players)
         print(f"Player {x} called bullshit, they think you are lying!")
         if card_chosen == question + HEART:
             print("Computer was wrong, you were telling the truth!")
-            discarded_cards.remove(card_chosen)
+            # trying to get all cards in discarded to add to losers hand
             if x == 2:
-                hands[current_player + 1].append(card_chosen)
+                hands[current_player + 1].extend(discarded_cards)
+                discarded_cards.clear()
+                print(discarded_cards)
             else:
-                hands[current_player + 1].append(card_chosen)
+                hands[current_player + 2].extend(discarded_cards)
+                discarded_cards.clear()
+                print(discarded_cards)
 
         else:
             print(f"Player {x} guessed you were lying!") 
-            discarded_cards.remove(card_chosen)
-            hands[current_player].append(card_chosen)
+            hands[current_player].extend(discarded_cards)
+            discarded_cards.clear()
+            print(discarded_cards)
     else:
         print("Player 2 and 3 think you are telling the truth, no one called bullshit")
 
@@ -243,7 +251,7 @@ def computer_card_select():
     print(f"Player has discarded card {y + HEART}")
     print('Do you think they are lying?')
 
-
+# change equal value
 def user_call_bullshit():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
         if card_chosen == question + HEART:
