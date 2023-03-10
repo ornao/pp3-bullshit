@@ -157,10 +157,14 @@ def deal_cards():
         player3.append(card.pop())
     return player1, player2, player3
 
+
+
 def card_hands():
     """display cards number of cards in each players hand """
     print("Communal pile:", communal_pile)
-    print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards", hands[current_player])
+    global player_cards
+    player_cards = hands[current_player]
+    print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards", player_cards)
     cards = get_picture_cards(4)
     for i in range(5):
         for card in cards:
@@ -342,7 +346,7 @@ def get_picture_cards(num_cards):
     cards = []
     for i in range(num_cards):
         rows = ['', '', '', '', ''] 
-        x = hands[current_player].pop()
+        x = player_cards.pop()
         suit = HEART
         rows[0] += ' ___ ' 
         rows[1] += '|{}  |'.format(x)
