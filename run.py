@@ -140,7 +140,7 @@ def get_deck():
     deck = []
     # for suit in [HEART,CLUB,DIAMOND,SPADE]:
     for number in ['A','K','Q','J','2','3','4','5','6','7','8','9','10']:
-        deck.append(number+HEART)
+        deck.append(number)
 
     random.shuffle(deck)
     return deck
@@ -160,7 +160,12 @@ def deal_cards():
 def card_hands():
     """display cards number of cards in each players hand """
     print("Communal pile:", communal_pile)
-    print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards:", hands[current_player])
+    print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards:")
+    cards = get_picture_cards(4)
+    for i in range(5):
+        for card in cards:
+            print(card[i], end='')
+        print()
     print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]), "cards", hands[current_player + 1])
     print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]), "cards", hands[current_player + 2])
 
@@ -323,25 +328,29 @@ def user_call_bullshit_player3():
         print("Surely you know where y and n are on your keyboard.")
         bullshit_question = input("Do you want to call bullshit? (y/n)\n")
 
-# def display_picture_cards():
-#     rows = ['', '', '', '', ''] 
-#     x = get_random_point()
-#     rows[0] += ' ___ ' 
-#     rows[1] += '|{}  |'.format(x)
-#     rows[2] += '| {} |'.format(get_random_suit())
-#     rows[3] += '|__{}|'.format(x)
-#     for row in rows: 
-#         print(row)
+def get_picture_cards(num_cards):
+    cards = []
+    for i in range(num_cards):
+        rows = ['', '', '', '', ''] 
+        x = hands[current_player].pop()
+        suit = HEART
+        rows[0] += ' ___ ' 
+        rows[1] += '|{}  |'.format(x)
+        rows[2] += '| {} |'.format(suit)
+        rows[3] += '|__{}|'.format(x)
+        cards.append(rows)
+    return cards
 
-# def display_hidden_cards():
-#     rows = ['', '', '', '', '']
-#     rows[0] += ' ___ ' 
-#     rows[1] += '|## | '
-#     rows[2] += '|###| '
-#     rows[3] += '|_##| '
-#     for row in rows: 
-#          print(row)
-
+def get_hidden_cards():
+    cards = []
+    for i in range(num_cards):
+        rows = ['', '', '', '', ''] 
+        rows[0] += ' ___ ' 
+        rows[1] += '|## | '
+        rows[2] += '|###| '
+        rows[3] += '|_##| '
+        cards.append(rows)
+    return cards
 main()
 
 
