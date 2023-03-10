@@ -167,12 +167,14 @@ def card_hands():
 
 # trying to get to loop through to next quextion
 def ask_question():
+    """ask user what card they wpuld like to tell other players they are discarding"""
     global question
-    question = input("Type in a random card from A-K to discard:\n")
+    # add .upper() to allow for users adding correct value in lowercase
+    question = input("Type in a random card from A-K to discard:\n").upper()
     # validatation for user input
     while question not in ['A','2','3','4','5','6','7','8','9','10','J','Q','K']:
-        print("When I say A-K, I mean ['A','2','3','4','5','6','7','8','9','10','J','Q','K']")
-        question = input("Type in a random card from A-K to discard:\n")
+            print("When I say A-K, I mean ['A','2','3','4','5','6','7','8','9','10','J','Q','K']")
+            question = input("Type in a random card from A-K to discard:\n").upper()
 
     print(Style.BRIGHT + "Remember you don't actually need to have that card in your hand, your opponents just have to " + Fore.BLACK + Back.WHITE + "believe" + Style.RESET_ALL + Style.BRIGHT + " you have it")
     
