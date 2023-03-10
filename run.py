@@ -160,14 +160,24 @@ def deal_cards():
 def card_hands():
     """display cards number of cards in each players hand """
     print("Communal pile:", communal_pile)
-    print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards:")
+    print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards", hands[current_player])
     cards = get_picture_cards(4)
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
     print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]), "cards", hands[current_player + 1])
+    cards = get_hidden_cards(4)
+    for i in range(5):
+        for card in cards:
+            print(card[i], end='')
+        print()
     print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]), "cards", hands[current_player + 2])
+    cards = get_hidden_cards(4)
+    for i in range(5):
+        for card in cards:
+            print(card[i], end='')
+        print()
 
 def ask_question():
     """ask user what card they would like to tell other players they are discarding"""
@@ -341,14 +351,14 @@ def get_picture_cards(num_cards):
         cards.append(rows)
     return cards
 
-def get_hidden_cards():
+def get_hidden_cards(num_cards):
     cards = []
     for i in range(num_cards):
-        rows = ['', '', '', '', ''] 
+        rows = ['','','','',''] 
         rows[0] += ' ___ ' 
-        rows[1] += '|## | '
-        rows[2] += '|###| '
-        rows[3] += '|_##| '
+        rows[1] += '|## |'
+        rows[2] += '|###|'
+        rows[3] += '|_##|'
         cards.append(rows)
     return cards
 main()
