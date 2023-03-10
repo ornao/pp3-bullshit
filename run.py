@@ -60,7 +60,7 @@ def title():
     print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░░╚═══██╗██╔══██║██║░░░██║░░░░░▄█████▄█▀▀ ")
     print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░▀█████  ")
     print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░▄████▄ \n")
-    print(                                    Fore.BLUE +   "A bluffing card game")
+    print(Fore.BLUE +   "                                                   A bluffing card game")
     print("                                                Developed by Orna Reynolds")
 
 def menu_select():
@@ -113,7 +113,7 @@ def get_username():
                 new_row = [username_validated]
                 SHEET.append_row(new_row)
                 if validate_username_data(username):
-                    print(f"{username_validated}? Hello there, let's get started!{os.linesep}")
+                    print(Fore.CYAN + f"{username_validated}? " + Style.RESET_ALL + f"Hello there, let's get started! {os.linesep}")
                     break 
                 else:
                     print("Psst...is your name made up of only letters\n")
@@ -153,9 +153,9 @@ def deal_cards():
 def card_hands():
     """display cards number of cards in each players hand """
     print("Communal pile:", communal_pile)
-    print("You have", len(hands[current_player]), "cards:", hands[current_player])
-    print("Player 2 has", len(hands[current_player + 1]), "cards", hands[current_player + 1])
-    print("Player 3 has", len(hands[current_player + 2]), "cards", hands[current_player + 2])
+    print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards:", hands[current_player])
+    print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]), "cards", hands[current_player + 1])
+    print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]), "cards", hands[current_player + 2])
     # print(ask_question())
 
 # trying to get to loop through to next quextion
@@ -215,12 +215,15 @@ def user_choice():
 
 def computer_call_bullshit():
     """computer randomly decided if true or false - so calls bullshit"""
-    print("Player 2 and 3 are deciding if you are lying or not...")
+    print(Fore.MAGENTA + "Player 2" + Style.RESET_ALL + " and " + Fore.YELLOW + "player 3 " + Style.RESET_ALL + "are deciding if you are lying or not...")
     z = random.choice([True, False])
     if z is True:
         random_choice_players = [2,3]
         x = random.choice(random_choice_players)
-        print(f"Player {x} called bullshit, they think you are lying!")
+        if x == 2:
+            print(Fore.MAGENTA + f"Player {x} " + Style.RESET_ALL + "called bullshit, they think you are lying!")
+        else: 
+            print(Fore.YELLOW + f"Player {x} " + Style.RESET_ALL + "called bullshit, they think you are lying!")
         if card_chosen == question + HEART:
             print("Computer was wrong, you were telling the truth!")
             # trying to get all cards in discarded to add to losers hand
@@ -234,12 +237,15 @@ def computer_call_bullshit():
                 print(discarded_cards)
 
         else:
-            print(f"Player {x} guessed you were lying!") 
+            if x == 2:
+                print(Fore.MAGENTA + f"Player {x} " + Style.RESET_ALL + "guessed you were lying!")
+            else: 
+                print(Fore.YELLOW + f"Player {x} " + Style.RESET_ALL + "guessed you were lying!") 
             hands[current_player].extend(discarded_cards)
             discarded_cards.clear()
             print(discarded_cards)
     else:
-        print("Player 2 and 3 think you are telling the truth, no one called bullshit")
+        print(Fore.MAGENTA + "Player 2" + Style.RESET_ALL + " and " + Fore.YELLOW + " player 3 " + Style.RESET_ALL + "think you are telling the truth, no one called bullshit")
         print(discarded_cards)
 
 def computer2_card_select():
@@ -258,7 +264,7 @@ def computer2_card_select():
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
-    print(f"Player 2 has discarded card {y + HEART}")
+    print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + f"has discarded card {y + HEART}")
     print('Do you think they are lying?')
 
 def computer3_card_select():
@@ -277,20 +283,22 @@ def computer3_card_select():
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
-    print(f"Player 3 has discarded card {y + HEART}")
+    print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + f"has discarded card {y + HEART}")
     print('Do you think they are lying?')
 
 def user_call_bullshit_player2():
     """player 2 function to randomly call true or false so bullshit"""
     # the \n is for heroku deployment, the input is == y
-    if input("Do you want to call bullshit? (y/n) \n") == 'y\n':
+    if input("Do you want to call bullshit? (y/n)\n") == 'y\n':
         if y + HEART == computer2_card_chosen:
-            print("Player 2 was telling the truth!")
+            print("x")
+            print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "was telling the truth!")
+            print("y")
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
             print(discarded_cards)
         else:
-            print("Player 2 was lying!")
+            print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "was lying!")
             print(discarded_cards)
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
@@ -299,14 +307,14 @@ def user_call_bullshit_player2():
 def user_call_bullshit_player3():
     """player 3 function to randomly call true or false so bullshit"""
     # the \n is for heroku deployment, the input is == y
-    if input("Do you want to call bullshit? (y/n) \n") == 'y\n':
+    if input("Do you want to call bullshit? (y/n)\n") == 'y\n':
         if y + HEART == computer3_card_chosen:
-            print("Player 3 was telling the truth!")
+            print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "was telling the truth!")
             hands[current_player + 2].extend(discarded_cards)
             discarded_cards.clear()
             print(discarded_cards)
         else:
-            print("Player 3 was lying!")
+            print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "was lying!")
             print(discarded_cards)
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
