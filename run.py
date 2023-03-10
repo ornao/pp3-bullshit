@@ -21,9 +21,9 @@ HEART = chr(9829) # Character 9829 is '♥'.
 # SPADE = chr(9824) # Character 9824 is '♠'.
 # CLUB = chr(9827) # Character 9827 is '♣'.
 question_number = []
-communal_pile = 0
-current_player = 0
 discarded_cards = []
+communal_pile = len(discarded_cards)
+current_player = 0
 
 def main():
     title()
@@ -47,9 +47,9 @@ def main():
 
     card_hands()
 
-    # computer3_card_select()
+    computer3_card_select()
 
-    # user_call_bullshit()
+    user_call_bullshit_player3()
 
 def title():
     """
@@ -201,7 +201,7 @@ def user_choice():
                         card_chosen = hands[current_player][card_option - 1]
                         print(f"You have chosen card {card_chosen} to discard!")
                         global communal_pile
-                        communal_pile += 1
+                        # communal_pile += 1
                         print(f"Communal pile: {communal_pile}")
                         hands[current_player].remove(card_chosen)
                         discarded_cards.append(card_chosen)
@@ -248,7 +248,7 @@ def computer2_card_select():
     computer2_card_chosen = hands[current_player + 1][x - 1]
     print("Next player's turn")
     global communal_pile
-    communal_pile += 1
+    # communal_pile += 1
     print(f"Communal pile: {communal_pile}")
     discarded_cards.append(computer2_card_chosen)
     hands[current_player + 1].remove(computer2_card_chosen)
@@ -262,12 +262,14 @@ def computer3_card_select():
     """computer randomly decides 1-4 so what card to choose to dicard"""
     computer_card_option = [1,2,3,4]
     x = random.choice(computer_card_option)
-    computer_card_chosen = hands[current_player + 2][x - 1]
+    global computer3_card_chosen
+    computer3_card_chosen = hands[current_player + 1][x - 1]
     print("Next player's turn")
     global communal_pile
     communal_pile += 1
     print(f"Communal pile: {communal_pile}")
-    discarded_cards.append(computer_card_chosen)
+    discarded_cards.append(computer3_card_chosen)
+    hands[current_player + 1].remove(computer2_card_chosen)
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
@@ -286,12 +288,14 @@ def user_call_bullshit_player2():
 
 def user_call_bullshit_player3():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
-        if y == question + HEART:
+        if y + HEART == computer3_card_chosen:
             print("Player 3 was telling the truth!")
+            hands[current_player].extend(discarded_cards)
+            discarded_cards.clear()
         else:
             print("Player 3 was lying!")
             print(discarded_cards)
-            hands[current_player + 2].extend(discarded_cards)
+            hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
        
 
