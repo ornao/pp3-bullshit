@@ -241,6 +241,7 @@ def computer_call_bullshit():
             print(discarded_cards)
     else:
         print("Player 2 and 3 think you are telling the truth, no one called bullshit")
+        print(discarded_cards)
 
 def computer2_card_select():
     """computer randomly decides 1-4 so what card to choose to dicard"""
@@ -251,10 +252,10 @@ def computer2_card_select():
     print(computer2_card_chosen)
     print("Next player's turn")
     # communal_pile += 1
+    hands[current_player + 1].remove(computer2_card_chosen)
     discarded_cards.append(computer2_card_chosen)
     global communal_pile
     print(f"Communal pile: {communal_pile}")
-    # hands[current_player + 1].remove(computer2_card_chosen)
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
@@ -269,11 +270,11 @@ def computer3_card_select():
     computer3_card_chosen = hands[current_player + 2][x - 1]
     print(computer3_card_chosen)
     print("Next player's turn")
+    hands[current_player + 2].remove(computer3_card_chosen)
     discarded_cards.append(computer3_card_chosen)
     global communal_pile
-    communal_pile += 1
+    # communal_pile += 1
     print(f"Communal pile: {communal_pile}")
-    hands[current_player + 2].remove(computer2_card_chosen)
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
@@ -284,24 +285,29 @@ def user_call_bullshit_player2():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
         if y + HEART == computer2_card_chosen:
             print("Player 2 was telling the truth!")
+            hands[current_player + 1].extend(discarded_cards)
+            discarded_cards.clear()
+            print(discarded_cards)
         else:
             print("Player 2 was lying!")
             print(discarded_cards)
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
+    
 
 def user_call_bullshit_player3():
     if input("Do you want to call bullshit? (y/n) ") == 'y':
         if y + HEART == computer3_card_chosen:
             print("Player 3 was telling the truth!")
-            hands[current_player].extend(discarded_cards)
+            hands[current_player + 2].extend(discarded_cards)
             discarded_cards.clear()
+            print(discarded_cards)
         else:
             print("Player 3 was lying!")
             print(discarded_cards)
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
-       
+     
 
 # def display_picture_cards():
 #     rows = ['', '', '', '', ''] 
