@@ -5,7 +5,7 @@ import os
 import colorama
 from colorama import Fore, Back, Style
 
-#Initialize colorama
+# initialize colorama
 colorama.init(autoreset=True)
 
 # Below code taken from Code Institute's Love Sandwiches Walkthrough Project:
@@ -30,7 +30,6 @@ discarded_cards = []
 # get communal pile working
 communal_pile = len(discarded_cards)
 current_player = 0
-listx = []
 
 def main():
     title()
@@ -211,9 +210,9 @@ def user_choice():
                         global card_chosen
                         card_chosen = hands[current_player][card_option - 1]
                         print(f"You have chosen card {card_chosen} to discard!")
-                        global communal_pile
+                        # global communal_pile
                         # communal_pile += 1
-                        print(f"Communal pile: {communal_pile}")
+                        print(f"Communal pile: {len(discarded_cards)}")
                         hands[current_player].remove(card_chosen)
                         discarded_cards.append(card_chosen)
                         print(discarded_cards)
@@ -269,8 +268,8 @@ def computer2_card_select():
     # communal_pile += 1
     hands[current_player + 1].remove(computer2_card_chosen)
     discarded_cards.append(computer2_card_chosen)
-    global communal_pile
-    print(f"Communal pile: {communal_pile}")
+    # global communal_pile
+    print(f"Communal pile: {len(discarded_cards)}")
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
@@ -287,9 +286,9 @@ def computer3_card_select():
     print("Next player's turn")
     hands[current_player + 2].remove(computer3_card_chosen)
     discarded_cards.append(computer3_card_chosen)
-    global communal_pile
+    # global communal_pile
     # communal_pile += 1
-    print(f"Communal pile: {communal_pile}")
+    print(f"Communal pile: {len(discarded_cards)}")
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
@@ -380,7 +379,8 @@ def get_hidden_cards(num_cards):
     return cards
 main()
 
-
+# fix issue with heart longer in value so they wont be equal
+# fix issue with 10 and 7 being weird for card display
 # add typewriter font 
 # add different colors for text 
 # add message if game keeps looping to quit 
