@@ -38,17 +38,24 @@ def main():
 
     card_hands()
 
-    while hands[current_player] or hands[current_player + 1] or hands[current_player + 2] > 1:
+    while len(hands[current_player]) != 0:
         ask_question()
         user_choice()
         computer_call_bullshit()
         card_hands()
+        if len(hands[current_player]) == 0:
+            break
         computer2_card_select()
         user_call_bullshit_player2()
         card_hands()
+        if len(hands[current_player]) == 0:
+            break
         computer3_card_select()
         user_call_bullshit_player3()
         card_hands()
+        print(len(hands[current_player]))
+    
+    print("end game")
 
 def title():
     """
