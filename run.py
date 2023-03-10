@@ -163,11 +163,9 @@ def card_hands():
     print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards:", hands[current_player])
     print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]), "cards", hands[current_player + 1])
     print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]), "cards", hands[current_player + 2])
-    # print(ask_question())
 
-# trying to get to loop through to next quextion
 def ask_question():
-    """ask user what card they wpuld like to tell other players they are discarding"""
+    """ask user what card they would like to tell other players they are discarding"""
     global question
     # add .upper() to allow for users adding correct value in lowercase
     question = input("Type in a random card from A-K to discard:\n").upper()
@@ -177,30 +175,8 @@ def ask_question():
             question = input("Type in a random card from A-K to discard:\n").upper()
 
     print(Style.BRIGHT + "Remember you don't actually need to have that card in your hand, your opponents just have to " + Fore.BLACK + Back.WHITE + "believe" + Style.RESET_ALL + Style.BRIGHT + " you have it")
-    
-    # numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
-    # print(num)
-    # thiselem = numbers[num]
-    # running = True
-    # idx = 0
-    # while running:
-    #         thiselem = numbers[idx]
-    #         # idx = (idx) % len(numbers)
-    #         idx +=1
-    #         # nextelem = numbers[idx +1] 
-    #         if thiselem == numbers[0]:
-    #             break
             
     return question + HEART 
-
-# numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
-# for i in numbers:
-#     current_question = i + HEART
-    # print(current_question)
-
-
-# for i in range(len(numbers)):
-# current_question = ask_question()
 
 def user_choice():
     "allows user to discard number 1-4 card in their hands"
@@ -210,7 +186,8 @@ def user_choice():
 
     while True:
                 try:
-                    card_option = int(input("Select a card from 1-4 to discard:\n"))
+                    card_option = int(input(f"Select a card from 1-{len(hands[current_player])} to discard:"))
+                    os.linesep
                     if card_option in [1,2,3,4]:
                         global card_chosen
                         card_chosen = hands[current_player][card_option - 1]
@@ -368,7 +345,6 @@ def user_call_bullshit_player3():
 main()
 
 
-# add capitlaise when typing in A-K
 # add typewriter font 
 # add different colors for text 
 # add message if game keeps looping to quit 
