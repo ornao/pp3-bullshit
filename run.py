@@ -40,18 +40,23 @@ def main():
     hands = deal_cards()
 
     card_hands()
-
-    while any(len(hand) != 0 for hand in hands):
+    # all_hands = len(hands[current_player]) or len(hands[current_player + 1]) or len(hands[current_player + 2]) 
+    # while all_hands != 0:
+    while not any(len(hand) == 0 for hand in hands):
         ask_question()
         user_choice()
         computer_call_bullshit()
         card_hands()
-        if len(hands[current_player]) == 0:
+        # if all_hands == 0:
+        #     break
+        if any(len(hand) == 0 for hand in hands):
             break
         computer2_card_select()
         user_call_bullshit_player2()
         card_hands()
-        if len(hands[current_player]) == 0:
+        # if all_hands == 0:
+        #     break
+        if any(len(hand) == 0 for hand in hands):
             break
         computer3_card_select()
         user_call_bullshit_player3()
@@ -84,7 +89,7 @@ def menu_select():
         sleep(.1)
         sys.stdout.write(char)
         sys.stdout.flush()
-    typewriter_animation("(psst...click me if this is your first time playing)")
+    typewriter_animation("(psst...click me if this is your first time playing)\n")
     # Validatation for user input
     start_option_selected = input()
     while start_option_selected not in ["1","2"]:
@@ -292,7 +297,12 @@ def computer3_card_select():
     print(x)
     print(len(hands[current_player + 2]))
     # pick a new number if the length of the list is smaller than the random number selected
-    while len(hands[current_player + 1]) < x:
+    # while len(hands[current_player + 1]) < x:
+    #     x = random.choice(computer_card_option)
+    # break x > len(hands[current_player + 1]) 
+    while True:
+        if len(hands[current_player + 1]) >= x:
+            break
         x = random.choice(computer_card_option)
     global computer3_card_chosen
     computer3_card_chosen = hands[current_player + 2][x - 1]
