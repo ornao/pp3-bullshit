@@ -4,6 +4,8 @@ import random
 import os
 import colorama
 from colorama import Fore, Back, Style
+import sys
+from time import sleep
 
 # initialize colorama
 colorama.init(autoreset=True)
@@ -75,7 +77,7 @@ def menu_select():
     """
     User selects whether to start the game or look at the rules first, validation for 1 and 2 selection
     """
-    print("Which are you feeling?")
+    typewriter_animation("Which are you feeling?\n")
     start_options = "1) Play the game\n2) Have a deeper look at the rules first\n (psst...click me if this is your first time playing)\n"
     start_option_selected = input(start_options)
 
@@ -384,7 +386,15 @@ def get_hidden_cards(num_cards):
         rows[3] += '|_##|'
         cards.append(rows)
     return cards
+
+def typewriter_animation(words):
+    for char in words:
+        sleep(0.1)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+
 main()
+
 
 # fix issue with heart longer in value so they wont be equal
 # add other hands to while loop
