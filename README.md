@@ -99,6 +99,12 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 [Back to Table Of Contents](#table-of-contents)
 ## Bugs
+| **Bug** | **Fix** |
+| ------- | ------- |
+| 
+menu_select() bug: This function was not executing its if or else ==1,2 when incorrect value enter first followed by 1 or 2. | Fixed by setting the start_option_selected variable to input() to get the user's input and using this in loop rather than other value. See [commit ea2de49](https://github.com/ornao/pp3-bullshit/commit/ea2de49f39f90ae87ef3a2644ee9e6bde323bb87) for further details. |
+
+---
 
 
 ## Deployment

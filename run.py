@@ -41,7 +41,7 @@ def main():
 
     card_hands()
 
-    while len(hands[current_player]) != 0:
+    while any(len(hand) != 0 for hand in hands):
         ask_question()
         user_choice()
         computer_call_bullshit()
@@ -78,21 +78,21 @@ def menu_select():
     User selects whether to start the game or look at the rules first, validation for 1 and 2 selection
     """
     typewriter_animation("Which are you feeling?\n")
-    start_options = "1) Play the game\n2) Have a deeper look at the rules first\n (psst...click me if this is your first time playing)\n"
+    start_options = "1) Play the game\n2) Have a deeper look at the rules first\n" 
+    # typewriter animation that works for input
     for char in start_options:
         sleep(.1)
         sys.stdout.write(char)
         sys.stdout.flush()
-
+    typewriter_animation("(psst...click me if this is your first time playing)")
     # Validatation for user input
     start_option_selected = input()
     while start_option_selected not in ["1","2"]:
         print("Surely you know where 1 and 2 are on your keyboard.")
         start_option_selected = input()
-
+    # calls function to continue game when correct input called
     if start_option_selected == "1":
         get_username()
-
     elif start_option_selected == "2":
         game_rules()
         get_username()
@@ -174,15 +174,13 @@ def card_hands():
         for card in cards:
             print(card[i], end='')
         print()
-    print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]), "cards:")
-    # "cards", hands[current_player + 1]
+    print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]), "cards:", hands[current_player + 1])
     cards = get_hidden_cards(len(hands[current_player + 1]))
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
-    print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]), "cards:")
-    # "cards", hands[current_player + 2]
+    print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]), "cards:", hands[current_player + 2])
     cards = get_hidden_cards(len(hands[current_player + 2]))
     for i in range(5):
         for card in cards:
@@ -267,8 +265,10 @@ def computer2_card_select():
     """computer randomly decides 1-4 so what card to choose to dicard"""
     computer_card_option = [1,2,3,4]
     x = random.choice(computer_card_option)
+    print(x)
+    print(len(hands[current_player + 2]))
     # pick a new number if the length of the list is smaller than the random number selected
-    if len(hands[current_player + 1]) < x:
+    while len(hands[current_player + 1]) < x:
         x = random.choice(computer_card_option)
     global computer2_card_chosen
     computer2_card_chosen = hands[current_player + 1][x - 1]
@@ -289,8 +289,10 @@ def computer3_card_select():
     """computer randomly decides 1-4 so what card to choose to dicard"""
     computer_card_option = [1,2,3,4]
     x = random.choice(computer_card_option)
+    print(x)
+    print(len(hands[current_player + 2]))
     # pick a new number if the length of the list is smaller than the random number selected
-    if len(hands[current_player + 1]) < x:
+    while len(hands[current_player + 1]) < x:
         x = random.choice(computer_card_option)
     global computer3_card_chosen
     computer3_card_chosen = hands[current_player + 2][x - 1]
