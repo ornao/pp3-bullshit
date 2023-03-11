@@ -262,6 +262,9 @@ def computer2_card_select():
     """computer randomly decides 1-4 so what card to choose to dicard"""
     computer_card_option = [1,2,3,4]
     x = random.choice(computer_card_option)
+    # pick a new number if the length of the list is smaller than the random number selected
+    if len(hands[current_player + 1]) < x:
+        x = random.choice(computer_card_option)
     global computer2_card_chosen
     computer2_card_chosen = hands[current_player + 1][x - 1]
     # print(computer2_card_chosen)
@@ -281,6 +284,9 @@ def computer3_card_select():
     """computer randomly decides 1-4 so what card to choose to dicard"""
     computer_card_option = [1,2,3,4]
     x = random.choice(computer_card_option)
+    # pick a new number if the length of the list is smaller than the random number selected
+    if len(hands[current_player + 1]) < x:
+        x = random.choice(computer_card_option)
     global computer3_card_chosen
     computer3_card_chosen = hands[current_player + 2][x - 1]
     # print(computer3_card_chosen)
