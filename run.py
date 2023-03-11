@@ -27,9 +27,7 @@ HEART = chr(9829) # Character 9829 is '♥'.
 # DIAMOND = chr(9830) # Character 9830 is '♦'.
 # SPADE = chr(9824) # Character 9824 is '♠'.
 # CLUB = chr(9827) # Character 9827 is '♣'.
-# question_number = []
 discarded_cards = []
-# get communal pile working
 communal_pile = len(discarded_cards)
 current_player = 0
 
@@ -40,30 +38,40 @@ def main():
     hands = deal_cards()
 
     card_hands()
-    # all_hands = len(hands[current_player]) or len(hands[current_player + 1]) or len(hands[current_player + 2]) 
-    # while all_hands != 0:
+    
     while not any(len(hand) == 0 for hand in hands):
         ask_question()
         user_choice()
         computer_call_bullshit()
         card_hands()
-        # if all_hands == 0:
-        #     break
         if any(len(hand) == 0 for hand in hands):
             break
         computer2_card_select()
         user_call_bullshit_player2()
         card_hands()
-        # if all_hands == 0:
-        #     break
         if any(len(hand) == 0 for hand in hands):
             break
         computer3_card_select()
         user_call_bullshit_player3()
         card_hands()
-        # print(len(hands[current_player]))
     
-    print("end game")
+    data = SHEET.get_all_values()
+    for row in data:
+        username = row[-1]
+    if len(hands[current_player]) == 0:
+        print(f"Congratulations {username}! You won!")
+    else:
+        print(f"Hard luck {username}, you lost this game")
+    while True:
+        play_again = input("Would you like to play again? (y/n)\n")
+        if play_again == 'y':
+            print("blahhh")
+            main()
+        elif play_again == 'n':
+            print("bye bye see ya later")
+            break
+        else:
+            print("Surely you know where y and n are on your keyboard.")
 
 def title():
     """
