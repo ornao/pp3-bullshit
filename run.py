@@ -162,20 +162,21 @@ def card_hands():
     print("Communal pile:", communal_pile)
     global player_cards
     player_cards = hands[current_player]
-    print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards", player_cards)
+    print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards:")
+    # , player_cards
     cards = get_picture_cards(player_cards, len(player_cards))
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
-    print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]))
+    print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]), "cards:")
     # "cards", hands[current_player + 1]
     cards = get_hidden_cards(len(hands[current_player + 1]))
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
-    print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]))
+    print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]), "cards:")
     # "cards", hands[current_player + 2]
     cards = get_hidden_cards(len(hands[current_player + 2]))
     for i in range(5):
@@ -386,3 +387,5 @@ main()
 # add different colors for text 
 # add message if game keeps looping to quit 
 # remember who wins
+#  computer3_card_chosen = hands[current_player + 2][x - 1]
+# IndexError: list index out of range - fix this error
