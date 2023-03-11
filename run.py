@@ -83,13 +83,12 @@ def menu_select():
         sleep(.1)
         sys.stdout.write(char)
         sys.stdout.flush()
-    start_option_selected = start_options
-    
+
     # Validatation for user input
-    choice = start_option_selected
-    while choice not in ["1","2"]:
+    start_option_selected = input()
+    while start_option_selected not in ["1","2"]:
         print("Surely you know where 1 and 2 are on your keyboard.")
-        choice = input(start_options)
+        start_option_selected = input()
 
     if start_option_selected == "1":
         get_username()
