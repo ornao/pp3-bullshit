@@ -79,8 +79,12 @@ def menu_select():
     """
     typewriter_animation("Which are you feeling?\n")
     start_options = "1) Play the game\n2) Have a deeper look at the rules first\n (psst...click me if this is your first time playing)\n"
-    start_option_selected = input(start_options)
-
+    for char in start_options:
+        sleep(.1)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+    start_option_selected = start_options
+    
     # Validatation for user input
     choice = start_option_selected
     while choice not in ["1","2"]:
