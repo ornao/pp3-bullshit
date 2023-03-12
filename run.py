@@ -55,7 +55,7 @@ def main():
         user_call_bullshit_player3()
         card_hands()
     
-    data = SHEET.get_all_values()
+    data = SHEET.col_values(1)
     for row in data:
         username = row[-1]
     if len(hands[current_player]) == 0:
@@ -436,6 +436,7 @@ main()
 # add typewriter font 
 # add different colors for text 
 # add message if game keeps looping to quit 
+# cget username to display still 
 # remember who wins
 #  computer3_card_chosen = hands[current_player + 2][x - 1]
 # IndexError: list index out of range - fix this error
