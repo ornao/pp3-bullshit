@@ -179,6 +179,16 @@ Those of all ages who enjoy card games and more specifically card bluffing games
   <img src = assets/docs/screenshots/.png>
 </details>
 
+### Play again
+- Gives user option to restart game whether they win or lose
+- User stories covered: 
+  
+<details>
+    <summary>Screenshot</summary>
+
+  <img src = assets/docs/screenshots/.png>
+</details>
+
 [Back to Table Of Contents](#table-of-contents)
 
 ## Validation
@@ -241,7 +251,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
 | ------------- | ----------------------------- | ---------------------------- | ----------------- |
-| Play again | Win or lose game | Congratualations or hard luck message displays along with y/n yp play again | Works as expected |
+| Play again | Win or lose game | Congratualations or hard luck message displays along with y/n to play again | Works as expected |
 
 <details><summary>Screenshot</summary>
 <img src = assets/docs/screenshots/.png>
@@ -274,9 +284,27 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 ### Site Owner
 10. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
-11. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Cards display | Play the game | Cards updating when computer players lose or gain cards | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src = assets/docs/screenshots/.png>
+<img src = assets/docs/screenshots/.png>
+
+</details>
+
 12. I want the user's name and how many times they have won to be saved to google sheets.
+
+<details><summary>Screenshot</summary>
+<img src = assets/docs/screenshots/.png>
+<img src = assets/docs/screenshots/.png>
+
+</details>
+
 13. I want user inputs to undergo extensive validation so game execution is not affected. 
+[See validation section ](#validation)
 
 
 
