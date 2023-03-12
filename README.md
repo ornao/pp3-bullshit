@@ -65,12 +65,13 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 6. I want the option to play again once the game is over 
 7. If I play the game multiple times, I want how many times I have won to be saved
 8. I want to enter my name at start of game to personalise it 
+9. I want the communal cards pile displayed so I know how many cards the next loser of the round could get 
 
 ### Site Owner
-9. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
-10. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
-11. I want the user's name and how many times they have won to be saved to google sheets.
-12. I want user inputs to undergo extensive validation so game execution is not affected. 
+10. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
+11. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
+12. I want the user's name and how many times they have won to be saved to google sheets.
+13. I want user inputs to undergo extensive validation so game execution is not affected. 
  
 
 
@@ -144,6 +145,40 @@ Those of all ages who enjoy card games and more specifically card bluffing games
   <img src = assets/docs/screenshots/.png>
 </details>
 
+### Cards display
+- Displays all players cards
+- Shows user their number cards
+- Hides other player cards from user seeing type
+- User stories covered: 
+  
+<details>
+    <summary>Screenshot</summary>
+
+  <img src = assets/docs/screenshots/.png>
+</details>
+
+### Name prompt
+- Ask user their name
+- Relay back to user at various points throughout the games
+- User stories covered: 
+  
+<details>
+    <summary>Screenshot</summary>
+
+  <img src = assets/docs/screenshots/namedisplay.png>
+</details>
+
+### Communal cards pile counter
+- Counts number of cards user discarded in to pile
+- Pile increases or decreases as game is played
+- User stories covered: 
+  
+<details>
+    <summary>Screenshot</summary>
+
+  <img src = assets/docs/screenshots/.png>
+</details>
+
 [Back to Table Of Contents](#table-of-contents)
 
 ## Validation
@@ -190,7 +225,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
 | ------------- | ----------------------------- | ---------------------------- | ----------------- |
-| User's cards | Play the game | Cards updating when user loses or gains cards | Works as expected |
+| Cards display | Play the game | Cards updating when user loses or gains cards | Works as expected |
 
 <details><summary>Screenshot</summary>
 <img src = assets/docs/screenshots/4cards.png>
@@ -199,15 +234,49 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 </details>
 
 5. I want to receive feedback from the game about the my inputs and have the opportunity ti input them again if I am wrong.
+
+[See validation section ](#validation)
+
 6. I want the option to play again once the game is over 
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Play again | Win or lose game | Congratualations or hard luck message displays along with y/n yp play again | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src = assets/docs/screenshots/.png>
+<img src = assets/docs/screenshots/.png>
+
+</details>
+
 7. If I play the game multiple times, I want how many times I have won to be saved
 8. I want to enter my name at start of game to personalise it 
 
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Name prompt | Enter name | Repeats name back to you capitalized | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src = assets/docs/screenshots/namedisplay.png>
+
+</details>
+
+9. I want the communal cards pile displayed so I know how many cards the next loser of the round could get 
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Communal cards pile counter | Players discard cards to communal pile | Number updates dynamically depending on number of cards in pile | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src = assets/docs/screenshots/.png>
+
+</details>
+
 ### Site Owner
-9. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
-10. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
-11. I want the user's name and how many times they have won to be saved to google sheets.
-12. I want user inputs to undergo extensive validation so game execution is not affected. 
+10. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
+11. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
+12. I want the user's name and how many times they have won to be saved to google sheets.
+13. I want user inputs to undergo extensive validation so game execution is not affected. 
 
 
 
@@ -217,8 +286,8 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 | ------- | ------- |
 | menu_select() bug: This function was not executing its if or else ==1,2 when incorrect value enter first followed by 1 or 2. | Fixed by setting the start_option_selected variable to input() to get the user's input and using this in loop rather than other value. See [commit ea2de49](https://github.com/ornao/pp3-bullshit/commit/ea2de49f39f90ae87ef3a2644ee9e6bde323bb87) for further details. |
 | | |
-| menu_select() bug: This function was not executing its if or else ==1,2 when incorrect value enter first followed by 1 or 2. | Fixed by setting the start_option_selected variable to input() to get the user's input and using this in loop rather than other value. See [commit ea2de49](https://github.com/ornao/pp3-bullshit/commit/ea2de49f39f90ae87ef3a2644ee9e6bde323bb87) for further details. |
-
+| computer2_card_select(), computer3_card_select() bug: These function were throwing IndexError: list index out of range as computer3_card_chosen = hands[current_player + 2][x - 1] x value randomly chosen 1-4 was not in lower list values | Fixed by setting x to length of hands so list never out of range. See [commit 5d884ac ](https://github.com/ornao/pp3-bullshit/commit/5d884ac0c9d3ff9044129c781843c331a1a54e35) for further details (scroll to bottom of commit, readme file was added to also in this commit). |
+| | |
 ---
 
 
