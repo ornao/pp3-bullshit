@@ -98,6 +98,27 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 ## Features
 
+### Title screen 
+
+- Provides name of game in pleasant graphic
+- Gives short description of game to user has idea of what game is about immediately
+- User stories covered:
+ 
+<details>
+    <summary>Screenshot</summary>
+
+<img src = assets/docs/screenshots/titlescreen.png>
+</details>
+
+### Game rules
+- Displays clear game rules
+- Allows user to start game once they are ready
+- User stories covered: 
+  
+<details>
+    <summary>Screenshot</summary>
+</details>
+
 [Back to Table Of Contents](#table-of-contents)
 
 ## Validation

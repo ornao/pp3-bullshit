@@ -60,6 +60,17 @@ def main():
         username = row[-1]
     if len(hands[current_player]) == 0:
         print(f"Congratulations {username}! You won!")
+        num_rows = SHEET.row_count
+        print(num_rows)
+        values = SHEET.get_all_values()
+        for i in range(len(values)-1, -1, -1):
+            if any(values[i]):
+                last_row = i + 1
+                break
+        new_data = 'won'
+        next_col_index = 2
+        SHEET.update_cell(last_row, next_col_index, new_data)
+
     else:
         print(f"Hard luck {username}, you lost this game")
     while True:
