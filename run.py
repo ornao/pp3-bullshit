@@ -22,11 +22,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('bullshit').worksheet('username')
 
-# Code from Blackjack, by Al Sweigart al@inventwithpython.com
-HEART = chr(9829) # Character 9829 is '♥'.
-# DIAMOND = chr(9830) # Character 9830 is '♦'.
-# SPADE = chr(9824) # Character 9824 is '♠'.
-# CLUB = chr(9827) # Character 9827 is '♣'.
+# Character 9829 is '♥'
+HEART = chr(9829)
 discarded_cards = []
 communal_pile = len(discarded_cards)
 current_player = 0
@@ -60,8 +57,8 @@ def main():
         username = row[-1]
     if len(hands[current_player]) == 0:
         print(f"Congratulations {username}! You won!")
-        num_rows = SHEET.row_count
-        print(num_rows)
+        # num_rows = SHEET.row_count
+        # print(num_rows)
         values = SHEET.get_all_values()
         for i in range(len(values)-1, -1, -1):
             if any(values[i]):
@@ -134,7 +131,6 @@ def game_rules():
     print("* The player can play the card they have called or lie and play another card instead")
     print("* The game then continues with the next player discarding one of their cards")
     print("* And so on")
-    # print("* Player can put down all multiples of the card they have")
     print("* The bluff happens when the player decides to lie about what cards they have put down")
     print("* Call bullshit if you sense your opponents bluff, but fear getting all the cards in communal pile!\n")
     input("Press enter to begin...\n")
@@ -168,7 +164,6 @@ def validate_username_data(username):
 def get_deck():
     """get shuffled deck everytime"""
     deck = []
-    # for suit in [HEART,CLUB,DIAMOND,SPADE]:
     for number in ['A','K','Q','J','2','3','4','5','6','7','8','9','10']:
         deck.append(number)
     random.shuffle(deck)
@@ -188,28 +183,28 @@ def deal_cards():
 
 def card_hands():
     """display cards number of cards in each players hand in ascii text display """
-    print("Communal pile:", communal_pile)
+    print("Communal pile:", len(discarded_cards))
     global player_cards
     player_cards = hands[current_player]
     print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards:")
-    # , player_cards
     cards = get_picture_cards(player_cards, len(player_cards))
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
-    print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]), "cards:", hands[current_player + 1])
+    print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "has", len(hands[current_player + 1]), "cards:")
     cards = get_hidden_cards(len(hands[current_player + 1]))
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
-    print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]), "cards:", hands[current_player + 2])
+    print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "has", len(hands[current_player + 2]), "cards:")
     cards = get_hidden_cards(len(hands[current_player + 2]))
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
+
 
 def ask_question():
     """ask user what card they would like to tell other players they are discarding"""
@@ -218,14 +213,14 @@ def ask_question():
     question = input("Type in a random card from A-K to discard:\n").upper()
     # validatation for user input
     while question not in ['A','2','3','4','5','6','7','8','9','10','J','Q','K']:
-            print("When I say A-K, I mean ['A','2','3','4','5','6','7','8','9','10','J','Q','K']")
-            question = input("Type in a random card from A-K to discard:\n").upper()
+        print("When I say A-K, I mean [A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K]")
+        question = input("Type in a random card from A-K to discard:\n").upper()
     print(Style.BRIGHT + "Remember you don't actually need to have that card in your hand, your opponents just have to " + Fore.BLACK + Back.WHITE + "believe" + Style.RESET_ALL + Style.BRIGHT + " you have it")       
     return question + HEART 
 
+
 def user_choice():
     "allows user to discard number 1-4 card in their hands"
-    # for count, option in enumerate([hands[current_player][0], hands[current_player][1], hands[current_player][2], hands[current_player][3]]):
     for count, option in enumerate(hands[current_player]):
         print(f"{count+1}. {option + HEART}")
 
@@ -237,17 +232,15 @@ def user_choice():
                         global card_chosen
                         card_chosen = hands[current_player][card_option - 1] 
                         print(f"You have chosen card {card_chosen + HEART} to discard!")
-                        # global communal_pile
-                        # communal_pile += 1
                         print(f"Communal pile: {len(discarded_cards)}")
                         hands[current_player].remove(card_chosen)
                         discarded_cards.append(card_chosen)
-                        # print(discarded_cards)
                         break
                     else: 
                         print(f"You don't have that card!")
                 except ValueError:
                     print("Huh? I know you can count my dear")  
+
 
 def computer_call_bullshit():
     """computer randomly decided if true or false - so calls bullshit. 
@@ -267,12 +260,11 @@ def computer_call_bullshit():
             if x == 2:
                 hands[current_player + 1].extend(discarded_cards)
                 discarded_cards.clear()
-                # print(discarded_cards)
+               
             else:
                 hands[current_player + 2].extend(discarded_cards)
                 discarded_cards.clear()
-                # print(discarded_cards)
-
+                
         else:
             if x == 2:
                 print(Fore.MAGENTA + f"Player {x} " + Style.RESET_ALL + "guessed you were lying!")
@@ -280,29 +272,19 @@ def computer_call_bullshit():
                 print(Fore.YELLOW + f"Player {x} " + Style.RESET_ALL + "guessed you were lying!") 
             hands[current_player].extend(discarded_cards)
             discarded_cards.clear()
-            # print(discarded_cards)
+            
     else:
         print(Fore.MAGENTA + "Player 2" + Style.RESET_ALL + " and " + Fore.YELLOW + " player 3 " + Style.RESET_ALL + "think you are telling the truth, no one called bullshit")
-        # print(discarded_cards)
+        
 
 def computer2_card_select():
     """computer randomly decides 1-4 so what card to choose to dicard"""
-    # computer_card_option = [1,2,3,4]
-    # x = random.choice(computer_card_option)
     x = len(hands[current_player +1])
-    print(x)
-    print(len(hands[current_player + 1]))
-    # pick a new number if the length of the list is smaller than the random number selected
-    # while len(hands[current_player + 1]) < x:
-    #     x = random.choice(computer_card_option)
     global computer2_card_chosen
     computer2_card_chosen = hands[current_player + 1][x - 1]
-    # print(computer2_card_chosen)
     print("Next player's turn")
-    # communal_pile += 1
     hands[current_player + 1].remove(computer2_card_chosen)
     discarded_cards.append(computer2_card_chosen)
-    # global communal_pile
     print(f"Communal pile: {len(discarded_cards)}")
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
@@ -312,27 +294,12 @@ def computer2_card_select():
 
 def computer3_card_select():
     """computer randomly decides 1-4 so what card to choose to dicard"""
-    # computer_card_option = [1,2,3,4]
-    # x = random.choice(computer_card_option)
     x = len(hands[current_player + 2])
-    print(x)
-    print(len(hands[current_player + 2]))
-    # pick a new number if the length of the list is smaller than the random number selected
-    # while len(hands[current_player + 1]) < x:
-    #     x = random.choice(computer_card_option)
-    # break x > len(hands[current_player + 1]) 
-    # while True:
-    #     if len(hands[current_player + 1]) >= x:
-    #         break
-    #     x = random.choice(computer_card_option)
     global computer3_card_chosen
     computer3_card_chosen = hands[current_player + 2][x - 1]
-    # print(computer3_card_chosen)
     print("Next player's turn")
     hands[current_player + 2].remove(computer3_card_chosen)
     discarded_cards.append(computer3_card_chosen)
-    # global communal_pile
-    # communal_pile += 1
     print(f"Communal pile: {len(discarded_cards)}")
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
@@ -386,18 +353,6 @@ def user_call_bullshit_player3():
         print("Surely you know where y and n are on your keyboard.")
         bullshit_question = input("Do you want to call bullshit? (y/n)\n")
 
-# def get_picture_cards(num_cards):
-#     cards = []
-#     for i in range(num_cards):
-#         rows = ['', '', '', '', ''] 
-#         x = player_cards.pop()
-#         suit = HEART
-#         rows[0] += ' ___ ' 
-#         rows[1] += '|{}  |'.format(x)
-#         rows[2] += '| {} |'.format(suit)
-#         rows[3] += '|__{}|'.format(x)
-#         cards.append(rows)
-#     return cards
 
 def get_picture_cards(player_cards, num_cards):
     cards = []
@@ -405,6 +360,7 @@ def get_picture_cards(player_cards, num_cards):
         x = player_cards[i]
         rows = ['', '', '', '', ''] 
         suit = HEART
+        # Code from Blackjack, by Al Sweigart al@inventwithpython.com
         rows[0] += ' ___ ' 
         rows[1] += '|{}  |'.format(x)
         rows[2] += '| {} |'.format(suit)
@@ -412,16 +368,19 @@ def get_picture_cards(player_cards, num_cards):
         cards.append(rows)
     return cards
 
+
 def get_hidden_cards(num_cards):
     cards = []
     for i in range(num_cards):
         rows = ['','','','',''] 
+        # Code from Blackjack, by Al Sweigart al@inventwithpython.com
         rows[0] += ' ___ ' 
         rows[1] += '|## |'
         rows[2] += '|###|'
         rows[3] += '|_##|'
         cards.append(rows)
     return cards
+
 
 def typewriter_animation(words):
     for char in words:

@@ -6,7 +6,7 @@
 
 This is a command-line version of the bluff card game Bullshit for 3 players. Many versions of this game exist and the classic game is best played in a group of people. 
 
-The classic game generally is played with relatively no rules and players can discard cards to communal pile in any order with any amount of matching cards. My game is played where the user can only discard one card at a time. 
+The classic game generally is played with relatively no rules, all cards in deck and players can discard cards to communal pile in any order with any amount of matching cards. My game is played where the user can only discard one card at a time and only one suit in deck is used. 
 
 The objective of the game is to be the first one to get rid of all your cards. 
 
