@@ -431,12 +431,11 @@ main()
 
 
 # fix issue with heart longer in value so they wont be equal
-# add other hands to while loop
 # fix issue with 10 and 7 being weird for card display
 # add typewriter font 
 # add different colors for text 
 # add message if game keeps looping to quit 
-# cget username to display still 
 # remember who wins
+# update cell to count wins of user
 #  computer3_card_chosen = hands[current_player + 2][x - 1]
 # IndexError: list index out of range - fix this error

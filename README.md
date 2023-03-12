@@ -4,9 +4,9 @@
 
 ## About
 
-This is a command-line version of the bluff card game Bullshit for 3 players. Many versions of this game exist and the classic game is best player in a group of people. 
+This is a command-line version of the bluff card game Bullshit for 3 players. Many versions of this game exist and the classic game is best played in a group of people. 
 
-The classic game generally have no rules and players can discard cards to communal pile in any order with any amount of matching cards. To add order to game, I added a question to get rid of certain card number each turn. 
+The classic game generally is played with relatively no rules and players can discard cards to communal pile in any order with any amount of matching cards. My game is played where the user can only discard one card at a time. 
 
 The objective of the game is to be the first one to get rid of all your cards. 
 
@@ -28,6 +28,7 @@ The objective of the game is to be the first one to get rid of all your cards.
   - [Features](#features)
   - [Validation](#validation)
   - [Testing](#testing)
+    - [Manual Testing](#manual-testing)
   - [Bugs](#bugs)
   - [Deployment](#deployment)
   - [Credits](#credits)
@@ -45,7 +46,7 @@ The objective of the game is to be the first one to get rid of all your cards.
 
 - Build a game that is simple and straightforward to use.
 - Make sure players understand the goal of the game and how to achieve that 
-- Design a game that provides user input and feedback to players while they play
+- Design a game that asks for user input, validates and manipulates it and also providesnfeedback to players while they play
 
 ## User Experience
 
@@ -57,10 +58,20 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 ### Users
 1. I want the name of the game clearly displayed and have an idea how to play it from first look.
-2. I want to quickly learn how to play the game before it starts.
-2. I want to be able to read the rules of the game in depth also if I need more explanation
+2. I want to be asked if I want to start the game or read the rules first
+3. I want to be able to start the game after I have read the rules of the game
+4. I would like the cards in my hand to display as a graphic picture and for them to update when I play a card
+5. I want to receive feedback from the game about the my inputs and have the opportunity ti input them again if I am wrong.
+6. I want the option to play again once the game is over 
+7. If I play the game multiple times, I want how many times I have won to be saved
 
 ### Site Owner
+8. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
+9. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
+10. I want the user's name and how many times they have won to be saved to google sheets.
+11. I want user inputs to undergo extensive validation so game execution is not affected. 
+12. 
+
 
 [Back to Table Of Contents](#table-of-contents)
 
@@ -110,6 +121,17 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 <img src = assets/docs/screenshots/titlescreen.png>
 </details>
 
+### Menu
+- Gives user option to play the game or read the rules first
+- User stories covered: 
+  
+<details>
+    <summary>Screenshot</summary>
+
+  <img src = assets/docs/screenshots/menuselect.png>
+
+</details>
+
 ### Game rules
 - Displays clear game rules
 - Allows user to start game once they are ready
@@ -117,14 +139,55 @@ Those of all ages who enjoy card games and more specifically card bluffing games
   
 <details>
     <summary>Screenshot</summary>
+
+  <img src = assets/docs/screenshots/.png>
 </details>
 
 [Back to Table Of Contents](#table-of-contents)
 
 ## Validation
 
-
 ## Testing
+
+### Manual Testing
+
+#### Users stories
+1. I want the name of the game clearly displayed and have an idea how to play it from first look.
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Title screen | Press "Run Programme" | Users are greeted with graphic title and short explanation of game | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src = assets/docs/screenshots/titlescreen.png>
+</details>
+
+2. I want to be asked if I want to start the game or read the rules first
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Menu | Select 1 | Game begins | Works as expected |
+| Menu | Select 2 | User is presented with rules | Works as expected |
+
+<details><summary>Screenshots</summary>
+  <img src = assets/docs/screenshots/menuselect.png>
+  <img src = assets/docs/screenshots/option1.png>
+  <img src = assets/docs/screenshots/option2.png>
+</details>
+
+3. I want to be able to start the game after I have read the rules of the game
+4. I would like the cards in my hand to display as a graphic picture and for them to update when I play a card
+5. I want to receive feedback from the game about the my inputs and have the opportunity ti input them again if I am wrong.
+6. I want the option to play again once the game is over 
+7. If I play the game multiple times, I want how many times I have won to be saved
+
+#### Site Owner stories
+8. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
+9. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
+10. I want the user's name and how many times they have won to be saved to google sheets.
+11. I want user inputs to undergo extensive validation so game execution is not affected. 
+12. 
+
 
 
 [Back to Table Of Contents](#table-of-contents)
