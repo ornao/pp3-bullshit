@@ -64,13 +64,14 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 5. I want to receive feedback from the game about the my inputs and have the opportunity ti input them again if I am wrong.
 6. I want the option to play again once the game is over 
 7. If I play the game multiple times, I want how many times I have won to be saved
+8. I want to enter my name at start of game to personalise it 
 
 ### Site Owner
-8. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
-9. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
-10. I want the user's name and how many times they have won to be saved to google sheets.
-11. I want user inputs to undergo extensive validation so game execution is not affected. 
-12. 
+9. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
+10. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
+11. I want the user's name and how many times they have won to be saved to google sheets.
+12. I want user inputs to undergo extensive validation so game execution is not affected. 
+ 
 
 
 [Back to Table Of Contents](#table-of-contents)
@@ -176,17 +177,37 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 </details>
 
 3. I want to be able to start the game after I have read the rules of the game
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Game Rules | Press enter | Users is prompted to give enter name | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src = assets/docs/screenshots/enter.png>
+</details>
+
 4. I would like the cards in my hand to display as a graphic picture and for them to update when I play a card
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| User's cards | Play the game | Cards updating when user loses or gains cards | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src = assets/docs/screenshots/4cards.png>
+<img src = assets/docs/screenshots/3cards.png>
+
+</details>
+
 5. I want to receive feedback from the game about the my inputs and have the opportunity ti input them again if I am wrong.
 6. I want the option to play again once the game is over 
 7. If I play the game multiple times, I want how many times I have won to be saved
+8. I want to enter my name at start of game to personalise it 
 
-#### Site Owner stories
-8. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
-9. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
-10. I want the user's name and how many times they have won to be saved to google sheets.
-11. I want user inputs to undergo extensive validation so game execution is not affected. 
-12. 
+### Site Owner
+9. I want the back of the computer's cards to display as a graphic and for them to update when hand is updated. Seeing the front of the cards would ruin the game for the user because they would know if the computer was lying
+10. I want the user to have the option to play the game again without having to exit. This is to enhance user experience.
+11. I want the user's name and how many times they have won to be saved to google sheets.
+12. I want user inputs to undergo extensive validation so game execution is not affected. 
 
 
 
@@ -194,8 +215,9 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 ## Bugs
 | **Bug** | **Fix** |
 | ------- | ------- |
-| 
-menu_select() bug: This function was not executing its if or else ==1,2 when incorrect value enter first followed by 1 or 2. | Fixed by setting the start_option_selected variable to input() to get the user's input and using this in loop rather than other value. See [commit ea2de49](https://github.com/ornao/pp3-bullshit/commit/ea2de49f39f90ae87ef3a2644ee9e6bde323bb87) for further details. |
+| menu_select() bug: This function was not executing its if or else ==1,2 when incorrect value enter first followed by 1 or 2. | Fixed by setting the start_option_selected variable to input() to get the user's input and using this in loop rather than other value. See [commit ea2de49](https://github.com/ornao/pp3-bullshit/commit/ea2de49f39f90ae87ef3a2644ee9e6bde323bb87) for further details. |
+| | |
+| menu_select() bug: This function was not executing its if or else ==1,2 when incorrect value enter first followed by 1 or 2. | Fixed by setting the start_option_selected variable to input() to get the user's input and using this in loop rather than other value. See [commit ea2de49](https://github.com/ornao/pp3-bullshit/commit/ea2de49f39f90ae87ef3a2644ee9e6bde323bb87) for further details. |
 
 ---
 
