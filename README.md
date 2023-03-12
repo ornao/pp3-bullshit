@@ -73,17 +73,26 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 ### Languages
 
+- Python
 
 ### Frameworks & Tools
 
+- Git was used for version control
+- [GitHub](https://github.com/) was used as a remote repository to store project code
+- [Google Sheets](https://www.google.co.uk/sheets/about/) were used to store player usernames
 
 ### Libraries
 
 #### Python Libraries
 
+- os - used to add a seperate line to terminal underneath text
+- random - used to shuffle deck, control computer choices of card selection and calling bullshit
+- sys & sleep - used to create a typing effect within the games rules
 
 #### Third Party Libraries
 
+- [colorama](https://pypi.org/project/colorama/) - used this library to add color to the terminal to differenciate players
+- gspread - used to add and manipulate data in my Google spreadsheet and to interact with Google APIs
 
 [Back to Table Of Contents](#table-of-contents)
 
