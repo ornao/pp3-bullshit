@@ -285,11 +285,11 @@ def computer2_card_select():
     print("Next player's turn")
     hands[current_player + 1].remove(computer2_card_chosen)
     discarded_cards.append(computer2_card_chosen)
-    print(f"Communal pile: {len(discarded_cards)}")
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
     print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + f"has discarded card {y + HEART}")
+    print(f"Communal pile: {len(discarded_cards)}")
     print('Do you think they are lying?')
 
 def computer3_card_select():
@@ -300,11 +300,11 @@ def computer3_card_select():
     print("Next player's turn")
     hands[current_player + 2].remove(computer3_card_chosen)
     discarded_cards.append(computer3_card_chosen)
-    print(f"Communal pile: {len(discarded_cards)}")
     numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
     global y
     y = random.choice(numbers)
     print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + f"has discarded card {y + HEART}")
+    print(f"Communal pile: {len(discarded_cards)}")
     print('Do you think they are lying?')
 
 def user_call_bullshit_player2():
@@ -315,15 +315,11 @@ def user_call_bullshit_player2():
     if bullshit_question == 'y':
         os.linesep
         if y + HEART == computer2_card_chosen:
-            print("x")
             print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "was telling the truth!")
-            print("y")
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
-            # print(discarded_cards)
         else:
             print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + "was lying!")
-            # print(discarded_cards)
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
     # validatation for user input
@@ -342,10 +338,8 @@ def user_call_bullshit_player3():
             print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "was telling the truth!")
             hands[current_player + 2].extend(discarded_cards)
             discarded_cards.clear()
-            # print(discarded_cards)
         else:
             print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "was lying!")
-            # print(discarded_cards)
             hands[current_player + 2].extend(discarded_cards)
             discarded_cards.clear()
     # validatation for user input
@@ -398,5 +392,3 @@ main()
 # add message if game keeps looping to quit 
 # remember who wins
 # update cell to count wins of user
-#  computer3_card_chosen = hands[current_player + 2][x - 1]
-# IndexError: list index out of range - fix this error
