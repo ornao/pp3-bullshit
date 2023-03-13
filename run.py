@@ -28,58 +28,6 @@ discarded_cards = []
 # communal_pile = len(discarded_cards)
 current_player = 0
 
-def main():
-    title()
-    menu_select()
-    global hands
-    hands = deal_cards()
-
-    card_hands()
-    
-    while not any(len(hand) == 0 for hand in hands):
-        ask_question()
-        user_choice()
-        computer_call_bullshit()
-        card_hands()
-        if any(len(hand) == 0 for hand in hands):
-            break
-        computer2_card_select()
-        user_call_bullshit_player2()
-        card_hands()
-        if any(len(hand) == 0 for hand in hands):
-            break
-        computer3_card_select()
-        user_call_bullshit_player3()
-        card_hands()
-    
-    data = SHEET.col_values(1)
-    for row in data:
-        username = row[-1]
-    if len(hands[current_player]) == 0:
-        print(f"Congratulations {username}! You won!")
-        # num_rows = SHEET.row_count
-        # print(num_rows)
-        values = SHEET.get_all_values()
-        for i in range(len(values)-1, -1, -1):
-            if any(values[i]):
-                last_row = i + 1
-                break
-        new_data = 0
-        next_col_index = 2
-        SHEET.update_cell(last_row, next_col_index, new_data + 1)
-
-    else:
-        print(f"Hard luck {username}, you lost this game")
-    while True:
-        play_again = input("Would you like to play again? (y/n)\n")
-        if play_again == 'y':
-            print("blahhh")
-            main()
-        elif play_again == 'n':
-            print("bye bye see ya later")
-            break
-        else:
-            print("Surely you know where y and n are on your keyboard.")
 
 def title():
     """
@@ -120,6 +68,13 @@ def menu_select():
             
     return start_option_selected
 
+def typewriter_animation(words):
+    for char in words:
+        sleep(0.1)
+        sys.stdout.write(char)
+        sys.stdout.flush() 
+
+
 def game_rules():
     """
     displays rules of game 
@@ -141,6 +96,7 @@ def game_rules():
     print("but fear getting all the cards in communal pile!\n")
     input("Press enter to begin...\n")
 
+
 def get_username():
     """
     get username input from the user and add to google sheets
@@ -149,8 +105,7 @@ def get_username():
             try:
                 username = input("Now...what is your name?\n")
                 username_validated = username.capitalize()
-                new_row = [username_validated]
-                SHEET.append_row(new_row)
+                SHEET.append_row([username_validated, 0, 0])
                 if validate_username_data(username):
                     print(Fore.CYAN + f"{username_validated}?")
                     print("Hello there, let's get started!")
@@ -169,6 +124,68 @@ def validate_username_data(username):
     validate username so that can only accept alphabetical letters 
     """
     return username.isalpha()
+
+
+title()
+menu_select()
+
+
+def main():
+    global hands
+    hands = deal_cards()
+
+    card_hands()
+    
+    while not any(len(hand) == 0 for hand in hands):
+        ask_question()
+        user_choice()
+        computer_call_bullshit()
+        card_hands()
+        if any(len(hand) == 0 for hand in hands):
+            break
+        computer2_card_select()
+        user_call_bullshit_player2()
+        card_hands()
+        if any(len(hand) == 0 for hand in hands):
+            break
+        computer3_card_select()
+        user_call_bullshit_player3()
+        card_hands()
+    
+    data = SHEET.col_values(1)
+    for row in data:
+        username = row[-1]
+    if len(hands[current_player]) == 0:
+        print(f"Congratulations {username}! You won!")
+        values = SHEET.get_all_values()
+        for i in range(len(values)-1, -1, -1):
+            if any(values[i]):
+                last_row = i + 1
+                break
+        new_data = 0
+        next_col_index = 2
+        SHEET.update_cell(last_row, next_col_index, new_data + 1)
+        SHEET.update_cell(last_row, next_col_index + 1, new_data + 1)
+
+    else:
+        print(f"Hard luck {username}, you lost this game")
+    while True:
+        play_again = input("Would you like to play again? (y/n)\n").lower()
+        if play_again == 'y':
+            discarded_cards.clear()
+            main()
+        elif play_again == 'n':
+            print("Sad to see you go!")
+            data = SHEET.col_values(2)
+            for row in data:
+                wins = row[-1]
+            data = SHEET.col_values(3)
+            for row in data:
+                games = row[-1]
+            print(f"You won {wins} out of {games} games played!")
+            break
+        else:
+            print(Fore.RED + "Surely you know where y and n are on your keyboard.")
 
 
 def get_deck():
@@ -238,21 +255,21 @@ def user_choice():
         print(f"{count+1}. {option + HEART}")
 
     while True:
-                try:
-                    card_option = int(input(f"Select a card from 1-{len(hands[current_player])} to discard:"))
-                    os.linesep
-                    if card_option in [1,2,3,4]:
-                        global card_chosen
-                        card_chosen = hands[current_player][card_option - 1] 
-                        print(f"You have chosen card {card_chosen + HEART} to discard!")
-                        print(Fore.GREEN + "Communal pile:", len(discarded_cards))
-                        hands[current_player].remove(card_chosen)
-                        discarded_cards.append(card_chosen)
-                        break
-                    else: 
-                        print(Fore.RED + "You don't have that card!")
-                except ValueError:
-                    print(Fore.RED + "Huh? I know you can count my dear")  
+        try:
+            card_option = int(input(f"Select a card from 1-{len(hands[current_player])} to discard:"))
+            os.linesep
+            if card_option in [1, 2, 3, 4]:
+                global card_chosen
+                card_chosen = hands[current_player][card_option - 1] 
+                print(f"You have chosen card {card_chosen + HEART} to discard!")
+                print(Fore.GREEN + "Communal pile:", len(discarded_cards))
+                hands[current_player].remove(card_chosen)
+                discarded_cards.append(card_chosen)
+                break
+            else:
+                print(Fore.RED + "You don't have that card!")
+        except ValueError:
+            print(Fore.RED + "Huh? I know you can count my dear")  
 
 
 def computer_call_bullshit():
@@ -390,19 +407,12 @@ def get_hidden_cards(num_cards):
     return cards
 
 
-def typewriter_animation(words):
-    for char in words:
-        sleep(0.1)
-        sys.stdout.write(char)
-        sys.stdout.flush()
-
 main()
 
 
 # fix issue with heart longer in value so they wont be equal
 # fix issue with 10 and 7 being weird for card display
 # add typewriter font 
-# add different colors to communal pile
 # add message if game keeps looping to quit 
 # remember who wins
 # update cell to count wins of user
