@@ -102,20 +102,21 @@ def get_username():
     get username input from the user and add to google sheets
     """
     while True:
-            try:
-                username = input("Now...what is your name?\n")
-                username_validated = username.capitalize()
-                SHEET.append_row([username_validated, 0, 0])
-                if validate_username_data(username):
-                    print(Fore.CYAN + f"{username_validated}?")
-                    print("Hello there, let's get started!")
-                    os.linesep
-                    break 
-                else:
-                    print(Fore.RED + "Psst...is your name made up of only letters")
-                    print(Fore.RED + 'And yes that means no spaces too')
-            except ValueError:
-                print("Huh?")          
+        try:
+            username = input("Now...what is your name?\n")
+            username_validated = username.capitalize()
+            data_placeholder = 0
+            SHEET.append_row([username_validated, data_placeholder, data_placeholder])
+            if validate_username_data(username):
+                print(Fore.CYAN + f"{username_validated}?")
+                print("Hello there, let's get started!")
+                os.linesep
+                break 
+            else:
+                print(Fore.RED + "Psst...is your name made up of only letters")
+                print(Fore.RED + 'And yes that means no spaces too')
+        except ValueError:
+            print("Huh?")          
     return username_validated
 
 
@@ -151,8 +152,9 @@ def main():
         computer3_card_select()
         user_call_bullshit_player3()
         card_hands()
-    
+
     data = SHEET.col_values(1)
+    username = ""
     for row in data:
         username = row[-1]
     if len(hands[current_player]) == 0:
@@ -162,26 +164,40 @@ def main():
             if any(values[i]):
                 last_row = i + 1
                 break
-        new_data = 0
+        new_win = SHEET.cell(last_row, 2).value
+        new_win = int(new_win) + 1
         next_col_index = 2
-        SHEET.update_cell(last_row, next_col_index, new_data + 1)
-        SHEET.update_cell(last_row, next_col_index + 1, new_data + 1)
+        SHEET.update_cell(last_row, next_col_index, new_win)
+        new_game = SHEET.cell(last_row, 3).value
+        new_game = int(new_game) + 1
+        SHEET.update_cell(last_row, next_col_index + 1, new_game)
 
     else:
         print(f"Hard luck {username}, you lost this game")
+        values = SHEET.get_all_values()
+        for i in range(len(values)-1, -1, -1):
+            if any(values[i]):
+                last_row = i + 1
+                break
+        new_game = SHEET.cell(last_row, 3).value
+        new_game = int(new_game) + 1
+        next_col_index = 2
+        SHEET.update_cell(last_row, next_col_index + 1, new_game)
+
     while True:
         play_again = input("Would you like to play again? (y/n)\n").lower()
         if play_again == 'y':
+            SHEET.update_cell(last_row, next_col_index + 1, new_game)
             discarded_cards.clear()
             main()
         elif play_again == 'n':
             print("Sad to see you go!")
-            data = SHEET.col_values(2)
-            for row in data:
-                wins = row[-1]
-            data = SHEET.col_values(3)
-            for row in data:
-                games = row[-1]
+            # data = SHEET.col_values(2)
+            # for row in data:
+            wins = SHEET.cell(last_row, 2).value
+            # data = SHEET.col_values(3)
+            # for row in data:
+            games = SHEET.cell(last_row, 3).value
             print(f"You won {wins} out of {games} games played!")
             break
         else:
