@@ -25,7 +25,7 @@ SHEET = GSPREAD_CLIENT.open('bullshit').worksheet('username')
 # Character 9829 is '♥'
 HEART = chr(9829)
 discarded_cards = []
-communal_pile = len(discarded_cards)
+# communal_pile = len(discarded_cards)
 current_player = 0
 
 def main():
@@ -64,9 +64,9 @@ def main():
             if any(values[i]):
                 last_row = i + 1
                 break
-        new_data = 'won'
+        new_data = 0
         next_col_index = 2
-        SHEET.update_cell(last_row, next_col_index, new_data)
+        SHEET.update_cell(last_row, next_col_index, new_data + 1)
 
     else:
         print(f"Hard luck {username}, you lost this game")
@@ -126,13 +126,19 @@ def game_rules():
     """
     print("* This is a game of bluff. ")
     print("* The game begins with each player receiving 4 cards")
-    print("* The aim of the game is to be the first to get rid of all your cards")
-    print("* The game begins by asking player 1 (yes that's you) to play the first card")
-    print("* The player can play the card they have called or lie and play another card instead")
-    print("* The game then continues with the next player discarding one of their cards")
+    print(
+        "* The aim of the game is to be the first to get rid of all your cards")
+    print(
+        "* The game begins by asking player 1 (yes that's you) to play the first card")
+    print(
+        "* The player can play the card they have called or lie and play another card instead")
+    print(
+        "* The game then continues with the next player discarding one of their cards")
     print("* And so on")
-    print("* The bluff happens when the player decides to lie about what cards they have put down")
-    print("* Call bullshit if you sense your opponents bluff, but fear getting all the cards in communal pile!\n")
+    print(
+        "* The bluff happens when the player decides to lie about what cards they have put down")
+    print("* Call bullshit if you sense your opponents bluff...")
+    print("but fear getting all the cards in communal pile!\n")
     input("Press enter to begin...\n")
 
 def get_username():
@@ -146,20 +152,24 @@ def get_username():
                 new_row = [username_validated]
                 SHEET.append_row(new_row)
                 if validate_username_data(username):
-                    print(Fore.CYAN + f"{username_validated}? " + Style.RESET_ALL + f"Hello there, let's get started! {os.linesep}")
+                    print(Fore.CYAN + f"{username_validated}?")
+                    print("Hello there, let's get started!")
+                    os.linesep
                     break 
                 else:
-                    print("Psst...is your name made up of only letters")
-                    print('And yes that means no spaces too')
+                    print(Fore.RED + "Psst...is your name made up of only letters")
+                    print(Fore.RED + 'And yes that means no spaces too')
             except ValueError:
                 print("Huh?")          
     return username_validated
+
 
 def validate_username_data(username):
     """ 
     validate username so that can only accept alphabetical letters 
     """
     return username.isalpha()
+
 
 def get_deck():
     """get shuffled deck everytime"""
@@ -168,6 +178,7 @@ def get_deck():
         deck.append(number)
     random.shuffle(deck)
     return deck
+
 
 def deal_cards():
     """return 3 seperate unique hands to players"""
@@ -181,9 +192,11 @@ def deal_cards():
         player3.append(card.pop())
     return player1, player2, player3
 
+
 def card_hands():
-    """display cards number of cards in each players hand in ascii text display """
-    print("Communal pile:", len(discarded_cards))
+    """display cards number of cards in 
+    each players hand in ascii text display """
+    print(Fore.GREEN + "Communal pile:", len(discarded_cards))
     global player_cards
     player_cards = hands[current_player]
     print(Fore.CYAN + "You " + Style.RESET_ALL + "have", len(hands[current_player]), "cards:")
@@ -213,7 +226,7 @@ def ask_question():
     question = input("Type in a random card from A-K to discard:\n").upper()
     # validatation for user input
     while question not in ['A','2','3','4','5','6','7','8','9','10','J','Q','K']:
-        print("When I say A-K, I mean [A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K]")
+        print(Fore.RED + "When I say A-K, I mean [A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K]")
         question = input("Type in a random card from A-K to discard:\n").upper()
     print(Style.BRIGHT + "Remember you don't actually need to have that card in your hand, your opponents just have to " + Fore.BLACK + Back.WHITE + "believe" + Style.RESET_ALL + Style.BRIGHT + " you have it")       
     return question + HEART 
@@ -232,19 +245,20 @@ def user_choice():
                         global card_chosen
                         card_chosen = hands[current_player][card_option - 1] 
                         print(f"You have chosen card {card_chosen + HEART} to discard!")
-                        print(f"Communal pile: {len(discarded_cards)}")
+                        print(Fore.GREEN + "Communal pile:", len(discarded_cards))
                         hands[current_player].remove(card_chosen)
                         discarded_cards.append(card_chosen)
                         break
                     else: 
-                        print(f"You don't have that card!")
+                        print(Fore.RED + "You don't have that card!")
                 except ValueError:
-                    print("Huh? I know you can count my dear")  
+                    print(Fore.RED + "Huh? I know you can count my dear")  
 
 
 def computer_call_bullshit():
     """computer randomly decided if true or false - so calls bullshit. 
-    cards in discarded pile are then added to person who called bullshit incorrectly"""
+    cards in discarded pile are then added to person
+    who called bullshit incorrectly"""
     print(Fore.MAGENTA + "Player 2" + Style.RESET_ALL + " and " + Fore.YELLOW + "player 3 " + Style.RESET_ALL + "are deciding if you are lying or not...")
     z = random.choice([True, False])
     if z is True:
@@ -289,7 +303,7 @@ def computer2_card_select():
     global y
     y = random.choice(numbers)
     print(Fore.MAGENTA + "Player 2 " + Style.RESET_ALL + f"has discarded card {y + HEART}")
-    print(f"Communal pile: {len(discarded_cards)}")
+    print(Fore.GREEN + "Communal pile:", len(discarded_cards))
     print('Do you think they are lying?')
 
 def computer3_card_select():
@@ -304,14 +318,14 @@ def computer3_card_select():
     global y
     y = random.choice(numbers)
     print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + f"has discarded card {y + HEART}")
-    print(f"Communal pile: {len(discarded_cards)}")
+    print(Fore.GREEN + "Communal pile:", len(discarded_cards))
     print('Do you think they are lying?')
 
 def user_call_bullshit_player2():
     """player 2 function to randomly call true or false so bullshit"""
     # os.linsep is a workaround to the heroku input \n problem, 
     # using\n was changing my == value
-    bullshit_question = input("Do you want to call bullshit? (y/n)\n")
+    bullshit_question = input(Style.BRIGHT + "Do you want to call bullshit? (y/n)\n")
     if bullshit_question == 'y':
         os.linesep
         if y + HEART == computer2_card_chosen:
@@ -324,14 +338,14 @@ def user_call_bullshit_player2():
             discarded_cards.clear()
     # validatation for user input
     while bullshit_question not in ["y","n"]:
-        print("Surely you know where y and n are on your keyboard.")
-        bullshit_question = input("Do you want to call bullshit? (y/n)\n")
+        print(Fore.RED + "Surely you know where y and n are on your keyboard.")
+        bullshit_question = input(Style.BRIGHT + "Do you want to call bullshit? (y/n)\n")
 
 def user_call_bullshit_player3():
     """player 3 function to randomly call true or false so bullshit"""
     # os.linsep is a workaround to the heroku input \n problem, 
     # using\n was changing my == value
-    bullshit_question = input("Do you want to call bullshit? (y/n)\n")
+    bullshit_question = input(Style.BRIGHT + "Do you want to call bullshit? (y/n)\n")
     if bullshit_question == 'y':
         os.linesep
         if y + HEART == computer3_card_chosen:
@@ -344,8 +358,8 @@ def user_call_bullshit_player3():
             discarded_cards.clear()
     # validatation for user input
     while bullshit_question not in ["y","n"]:
-        print("Surely you know where y and n are on your keyboard.")
-        bullshit_question = input("Do you want to call bullshit? (y/n)\n")
+        print(Fore.RED + "Surely you know where y and n are on your keyboard.")
+        bullshit_question = input(Style.BRIGHT + "Do you want to call bullshit? (y/n)\n")
 
 
 def get_picture_cards(player_cards, num_cards):
@@ -388,7 +402,7 @@ main()
 # fix issue with heart longer in value so they wont be equal
 # fix issue with 10 and 7 being weird for card display
 # add typewriter font 
-# add different colors for text 
+# add different colors to communal pile
 # add message if game keeps looping to quit 
 # remember who wins
 # update cell to count wins of user
