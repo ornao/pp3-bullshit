@@ -153,17 +153,14 @@ def main():
         user_call_bullshit_player3()
         card_hands()
 
-    data = SHEET.col_values(1)
-    username = ""
-    for row in data:
-        username = row[-1]
+    values = SHEET.get_all_values()
+    for i in range(len(values)-1, -1, -1):
+        if any(values[i]):
+            last_row = i + 1
+            break
+    username = SHEET.cell(last_row, 1).value
     if len(hands[current_player]) == 0:
         print(f"Congratulations {username}! You won!")
-        values = SHEET.get_all_values()
-        for i in range(len(values)-1, -1, -1):
-            if any(values[i]):
-                last_row = i + 1
-                break
         new_win = SHEET.cell(last_row, 2).value
         new_win = int(new_win) + 1
         next_col_index = 2
@@ -174,11 +171,11 @@ def main():
 
     else:
         print(f"Hard luck {username}, you lost this game")
-        values = SHEET.get_all_values()
-        for i in range(len(values)-1, -1, -1):
-            if any(values[i]):
-                last_row = i + 1
-                break
+        # values = SHEET.get_all_values()
+        # for i in range(len(values)-1, -1, -1):
+        #     if any(values[i]):
+        #         last_row = i + 1
+        #         break1
         new_game = SHEET.cell(last_row, 3).value
         new_game = int(new_game) + 1
         next_col_index = 2
@@ -199,7 +196,7 @@ def main():
             # for row in data:
             games = SHEET.cell(last_row, 3).value
             print(f"You won {wins} out of {games} games played!")
-            break
+            return
         else:
             print(Fore.RED + "Surely you know where y and n are on your keyboard.")
 
