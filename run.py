@@ -31,16 +31,16 @@ current_player = 0
 
 def title():
     """
-    displays title of game and name of developer
+    displays title of game, short synopsis and name of developer
     """
-    typer(Fore.BLUE + "A bluffing card game\n")
+    typer("A bluffing card game\n")
     print("██████╗░██╗░░░██╗██╗░░░░░██╗░░░░░░██████╗██╗░░██╗██╗████████╗░░░")
     print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░██╔════╝██║░░██║██║╚══██╔══╝░░░")
     print("██████╦╝██║░░░██║██║░░░░░██║░░░░░╚█████╗░███████║██║░░░██║░░░░░░")
     print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░░╚═══██╗██╔══██║██║░░░██║░░░░░░")
     print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░░")
     print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░\n")
-    typer(Fore.BLUE + "Developed by Orna Reynolds")
+    typer("Developed by Orna Reynolds\n")
 
 
 def menu_select():
@@ -72,6 +72,7 @@ def menu_select():
 
 
 def typer(words):
+    """produces type-writer anumiantion of text in terminal"""
     for char in words:
         sleep(0.1)
         sys.stdout.write(char)
@@ -80,15 +81,15 @@ def typer(words):
 
 def game_rules():
     """
-    displays rules of game
+    displays rules of game in type-writer animation form
     """
-    typer("* This is a game of bluff. ")
-    typer("* The game begins with each player receiving 4 cards")
-    typer("* The aim is to be the first to get rid of all your cards")
-    typer("* To begin a player calls a card to discard")
-    typer("* Player 1 then discards their card")
-    typer("* Are they lying to you?")
-    typer("* Call bullshit if you sense the player's bluff...")
+    typer("* This is a game of bluff./n")
+    typer("* The game begins with each player receiving 4 cards\n")
+    typer("* The aim is to be the first to get rid of all your cards\n")
+    typer("* To begin a player calls a card to discard\n")
+    typer("* Player 1 then discards their card\n")
+    typer("* Are they lying to you?\n")
+    typer("* Call bullshit if you sense the player's bluff.../n")
     typer("but fear getting all the cards in communal pile!\n")
     input("Press enter to begin...\n")
 
@@ -107,8 +108,7 @@ def get_username():
                 )
             if validate_username_data(username):
                 print(Fore.CYAN + f"{username_validated}?")
-                print("Hello there, let's get started!")
-                os.linesep
+                print(f"Hello there, let's get started!{os.linesep}")
                 break
             else:
                 print(Fore.RED + "Psst...is your name made up of only letters")
@@ -130,10 +130,15 @@ menu_select()
 
 
 def main():
+    """
+    contains the main functions for the game to run
+    """
     global hands
     hands = deal_cards()
 
     card_hands()
+    # main game loop that breaks when a player
+    # has 0 cards in tehir hand
     while not any(len(hand) == 0 for hand in hands):
         ask_question()
         user_choice()
@@ -149,13 +154,14 @@ def main():
         computer3_card_select()
         user_call_bullshit_player3()
         card_hands()
-
+    # pulll username and add games won, games played to google sheets
     values = SHEET.get_all_values()
     for i in range(len(values)-1, -1, -1):
         if any(values[i]):
             last_row = i + 1
             break
     username = SHEET.cell(last_row, 1).value
+    # add games won and games played if user won
     if len(hands[current_player]) == 0:
         print(f"Congratulations {username}! You won!")
         new_win = SHEET.cell(last_row, 2).value
@@ -165,14 +171,17 @@ def main():
         new_game = SHEET.cell(last_row, 3).value
         new_game = int(new_game) + 1
         SHEET.update_cell(last_row, next_col_index + 1, new_game)
-
+    # only add games played if user lost
     else:
         print(f"Hard luck {username}, you lost this game")
         new_game = SHEET.cell(last_row, 3).value
         new_game = int(new_game) + 1
         next_col_index = 2
         SHEET.update_cell(last_row, next_col_index + 1, new_game)
-
+    # loop to ask player to play again, loop ends when 'n' typed
+    # prints end statement of how many wins
+    # vs games played to user when exiting
+    # included validation of user input
     while True:
         play_again = input("Would you like to play again? (y/n)\n").lower()
         if play_again == 'y':
@@ -224,6 +233,7 @@ def card_hands():
     print(
         Fore.CYAN + "You " + Style.RESET_ALL +
         "have", len(hands[current_player]), "cards:")
+    # ascii text display for user cards
     cards = get_picture_cards(player_cards, len(player_cards))
     for i in range(5):
         for card in cards:
@@ -233,6 +243,7 @@ def card_hands():
         Fore.MAGENTA + "Player 2 " + Style.RESET_ALL +
         "has", len(hands[current_player + 1]), "cards:")
     cards = get_hidden_cards(len(hands[current_player + 1]))
+    # ascii text display for computer cards
     for i in range(5):
         for card in cards:
             print(card[i], end='')
@@ -253,7 +264,6 @@ def ask_question():
     tell other players they are discarding
     """
     global question
-    # add .upper() to allow for users adding correct value in lowercase
     question = input("Type in a random card from A-K to discard:\n").upper()
     # validatation for user input
     while question not in [
@@ -283,8 +293,7 @@ def user_choice():
             card_option = int(
                 input(
                     "Select a card from" +
-                    f"1-{len(hands[current_player])} to discard:"))
-            os.linesep
+                    f"1-{len(hands[current_player])} to discard:{os.linesep}"))
             if card_option in [1, 2, 3, 4]:
                 global card_chosen
                 card_chosen = hands[current_player][card_option - 1]
@@ -373,7 +382,7 @@ def computer2_card_select():
 
 
 def computer3_card_select():
-    """computer randomly decides 1-4 so what card to choose to dicard"""
+    """computer randomly decides 1-4 so what card to choose to discard"""
     x = len(hands[current_player + 2])
     global computer3_card_chosen
     computer3_card_chosen = hands[current_player + 2][x - 1]
@@ -383,6 +392,9 @@ def computer3_card_select():
     numbers = [
          'A', 'K', 'Q', 'J', '2', '3', '4', '5', '6', '7', '8', '9', '10'
          ]
+    # computer call random number from list above to discard
+    # future feauture: can make game more competitive by insert if/else
+    # statemnt that either pick random number or card from hand
     global y
     y = random.choice(numbers)
     print(
@@ -397,7 +409,7 @@ def user_call_bullshit_player2():
     # os.linsep is a workaround to the heroku input \n problem,
     # using\n was changing my == value
     bullshit_question = input(
-        Style.BRIGHT + "Do you want to call bullshit? (y/n)\n")
+        Style.BRIGHT + "Do you want to call bullshit? (y/n)\n").lower()
     if bullshit_question == 'y':
         os.linesep
         if y + HEART == computer2_card_chosen:
@@ -416,7 +428,7 @@ def user_call_bullshit_player2():
     while bullshit_question not in ["y", "n"]:
         print(Fore.RED + "Surely you know where y and n are on your keyboard.")
         bullshit_question = input(
-            Style.BRIGHT + "Do you want to call bullshit? (y/n)\n")
+            Style.BRIGHT + "Do you want to call bullshit? (y/n)\n").lower()
 
 
 def user_call_bullshit_player3():
@@ -441,10 +453,13 @@ def user_call_bullshit_player3():
     while bullshit_question not in ["y", "n"]:
         print(Fore.RED + "Surely you know where y and n are on your keyboard.")
         bullshit_question = input(
-            Style.BRIGHT + "Do you want to call bullshit? (y/n)\n")
+            Style.BRIGHT + "Do you want to call bullshit? (y/n)\n").lower()
 
 
 def get_picture_cards(player_cards, num_cards):
+    """ 
+    displays cards in picture form
+    """
     cards = []
     for i in range(num_cards):
         x = player_cards[i]
@@ -460,6 +475,9 @@ def get_picture_cards(player_cards, num_cards):
 
 
 def get_hidden_cards(num_cards):
+    """
+    displays cards in hidden picture form
+    """
     cards = []
     for i in range(num_cards):
         rows = ['', '', '', '', '']
@@ -478,3 +496,4 @@ main()
 # fix issue with heart longer in value so they wont be equal
 # fix issue with 10 and 7 being weird for card display
 # add typewriter font
+# add data model expalnation
