@@ -33,14 +33,14 @@ def title():
     """
     displays title of game, short synopsis and name of developer
     """
-    typer("A bluffing card game\n")
-    print("██████╗░██╗░░░██╗██╗░░░░░██╗░░░░░░██████╗██╗░░██╗██╗████████╗░░░")
-    print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░██╔════╝██║░░██║██║╚══██╔══╝░░░")
-    print("██████╦╝██║░░░██║██║░░░░░██║░░░░░╚█████╗░███████║██║░░░██║░░░░░░")
-    print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░░╚═══██╗██╔══██║██║░░░██║░░░░░░")
-    print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░░")
-    print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░\n")
-    typer("Developed by Orna Reynolds\n")
+    print("██████╗░██╗░░░██╗██╗░░░░░██╗░░░░░░██████╗██╗░░██╗██╗████████╗░░░░░░░░░███ ")
+    print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░██╔════╝██║░░██║██║╚══██╔══╝░░░░░░░░░███ ")
+    print("██████╦╝██║░░░██║██║░░░░░██║░░░░░╚█████╗░███████║██║░░░██║░░░░░░░░░░░░███  ")
+    print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░░╚═══██╗██╔══██║██║░░░██║░░░░░▄█████▄█▀▀ ")
+    print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░▀█████  ")
+    print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░▄████▄ \n")
+    print(Fore.BLUE + "                        A bluffing card game")
+    print(Fore.BLUE + "                     Developed by Orna Reynolds\n")
 
 
 def menu_select():
@@ -79,19 +79,26 @@ def typer(words):
         sys.stdout.flush()
 
 
+# taken from slack overflow post
+def clear_terminal():
+    """clears terminal of all text"""
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
 def game_rules():
     """
     displays rules of game in type-writer animation form
     """
-    typer("* This is a game of bluff./n")
+    typer(f"* This is a game of bluff{os.linesep}")
     typer("* The game begins with each player receiving 4 cards\n")
     typer("* The aim is to be the first to get rid of all your cards\n")
     typer("* To begin a player calls a card to discard\n")
     typer("* Player 1 then discards their card\n")
     typer("* Are they lying to you?\n")
-    typer("* Call bullshit if you sense the player's bluff.../n")
-    typer("but fear getting all the cards in communal pile!\n")
+    typer(f"* Call bullshit if you sense the player's bluff...{os.linesep}")
+    typer(f"but fear getting all the cards in communal pile!{os.linesep}")
     input("Press enter to begin...\n")
+    clear_terminal()
 
 
 def get_username():
@@ -108,7 +115,7 @@ def get_username():
                 )
             if validate_username_data(username):
                 print(Fore.CYAN + f"{username_validated}?")
-                print(f"Hello there, let's get started!{os.linesep}")
+                typer(f"Hello there, let's get started!{os.linesep}")
                 break
             else:
                 print(Fore.RED + "Psst...is your name made up of only letters")
@@ -293,11 +300,11 @@ def user_choice():
             card_option = int(
                 input(
                     "Select a card from" +
-                    f"1-{len(hands[current_player])} to discard:{os.linesep}"))
+                    f" 1-{len(hands[current_player])} to discard:{os.linesep}"))
             if card_option in [1, 2, 3, 4]:
                 global card_chosen
                 card_chosen = hands[current_player][card_option - 1]
-                print(
+                typer(
                     f"You have chosen card {card_chosen + HEART} to discard!")
                 print(Fore.GREEN + "Communal pile:", len(discarded_cards))
                 hands[current_player].remove(card_chosen)
@@ -313,7 +320,7 @@ def computer_call_bullshit():
     """computer randomly decided if true or false - so calls bullshit.
     cards in discarded pile are then added to person
     who called bullshit incorrectly"""
-    print(
+    prin(
         Fore.MAGENTA + "Player 2" + Style.RESET_ALL +
         " and " + Fore.YELLOW + "player 3 " + Style.RESET_ALL +
         "are deciding if you are lying or not...")
