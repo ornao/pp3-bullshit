@@ -1,6 +1,7 @@
 import os
 import random
 import sys
+import time
 from time import sleep
 import gspread
 from google.oauth2.service_account import Credentials
@@ -39,16 +40,18 @@ def title():
     print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░░╚═══██╗██╔══██║██║░░░██║░░░░░▄█████▄█▀▀ ")
     print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░▀█████  ")
     print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░▄████▄ \n")
+    time.sleep(1)
     print(Fore.BLUE + "                        A bluffing card game")
+    time.sleep(1)
     print(Fore.BLUE + "                     Developed by Orna Reynolds\n")
-
+    time.sleep(1)
 
 def menu_select():
     """
     User selects whether to start the game or look at the rules first,
     validation for 1 and 2 selection
     """
-    typer("Which are you feeling?\n")
+    typer("Which option are you feeling?\n")
     start_options = (
         "1) Play the game\n2) Have a deeper look at the rules first\n")
     # typewriter animation that works for input
@@ -60,7 +63,7 @@ def menu_select():
     # Validatation for user input
     start_option_selected = input()
     while start_option_selected not in ["1", "2"]:
-        print("Surely you know where 1 and 2 are on your keyboard.")
+        print(Fore.RED + "Surely you know where 1 and 2 are on your keyboard.")
         start_option_selected = input()
     # calls function to continue game when correct input called
     if start_option_selected == "1":
@@ -93,10 +96,10 @@ def game_rules():
     typer("* The game begins with each player receiving 4 cards\n")
     typer("* The aim is to be the first to get rid of all your cards\n")
     typer("* To begin a player calls a card to discard\n")
-    typer("* Player 1 then discards their card\n")
+    typer("* This player then discards their card\n")
     typer("* Are they lying to you?\n")
     typer(f"* Call bullshit if you sense the player's bluff...{os.linesep}")
-    typer(f"but fear getting all the cards in communal pile!{os.linesep}")
+    typer(f"* But fear getting all the cards in communal pile!{os.linesep}")
     input("Press enter to begin...\n")
     clear_terminal()
 
@@ -119,9 +122,11 @@ def get_username():
                 break
             else:
                 print(Fore.RED + "Psst...is your name made up of only letters")
+                time.sleep(0.5)
                 print(Fore.RED + 'And yes that means no spaces too')
+                time.sleep(1)
         except ValueError:
-            print("Huh?")
+            print(Fore.RED + "Huh?")
     return username_validated
 
 
@@ -235,34 +240,41 @@ def card_hands():
     """display cards number of cards in
     each players hand in ascii text display """
     print(Fore.GREEN + "Communal pile:", len(discarded_cards))
+    time.sleep(1)
     global player_cards
     player_cards = hands[current_player]
     print(
         Fore.CYAN + "You " + Style.RESET_ALL +
         "have", len(hands[current_player]), "cards:")
+    time.sleep(1)
     # ascii text display for user cards
     cards = get_picture_cards(player_cards, len(player_cards))
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
+    time.sleep(1)
     print(
         Fore.MAGENTA + "Player 2 " + Style.RESET_ALL +
         "has", len(hands[current_player + 1]), "cards:")
     cards = get_hidden_cards(len(hands[current_player + 1]))
+    time.sleep(1)
     # ascii text display for computer cards
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
+    time.sleep(1)
     print(
         Fore.YELLOW + "Player 3 " + Style.RESET_ALL +
         "has", len(hands[current_player + 2]), "cards:")
     cards = get_hidden_cards(len(hands[current_player + 2]))
+    time.sleep(1)
     for i in range(5):
         for card in cards:
             print(card[i], end='')
         print()
+    time.sleep(1)
 
 
 def ask_question():
@@ -271,7 +283,16 @@ def ask_question():
     tell other players they are discarding
     """
     global question
-    question = input("Type in a random card from A-K to discard:\n").upper()
+    typer("Type in a random card from A-K to discard:\n")
+    question = input().upper()
+    # pull username from google sheet to personalise code
+    values = SHEET.get_all_values()
+    for i in range(len(values)-1, -1, -1):
+        if any(values[i]):
+            last_row = i + 1
+            break
+    username = SHEET.cell(last_row, 1).value
+    username_col = Fore.CYAN + username
     # validatation for user input
     while question not in [
          'A', 'K', 'Q', 'J', '2', '3', '4', '5', '6', '7', '8', '9', '10'
@@ -279,8 +300,11 @@ def ask_question():
         print(
             Fore.RED +
             "When I say A-K, I mean [A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K]")
-        question = input(
-            "Type in a random card from A-K to discard:\n").upper()
+        time.sleep(1)
+        typer("Type in a random card from A-K to discard:\n")
+        question = input().upper()
+    typer(f"{username_col} will discard {question + HEART}!{os.linesep}")
+    time.sleep(1)
     print(
         Style.BRIGHT +
         "Remember you don't actually need to have that card in your hand," +
