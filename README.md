@@ -73,14 +73,17 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 12. I want the user's name and how many times they have won to be saved to google sheets.
 13. I want user inputs to undergo extensive validation so game execution is not affected. 
  
-
-
 [Back to Table Of Contents](#table-of-contents)
 
 ## Technical Design
 
 ### Flowchart
+This was the flowchart designed at the beginning of project before I started coding. As you can see my project has quite a few changes to that project idea, but the basic logic of the game is similar. 
+<details>
+    <summary>Screenshot</summary>
 
+<img src = assets/docs/screenshots/flowchart.png>
+</details>
 
 ## Technologies Used
 
@@ -93,6 +96,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 - Git was used for version control
 - [GitHub](https://github.com/) was used as a remote repository to store project code
 - [Google Sheets](https://www.google.co.uk/sheets/about/) were used to store player usernames
+- [Lucid Chart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign=_chart_en_tier1_mixed_search_brand_exact_&km_CPC_CampaignId=1490375427&km_CPC_AdGroupID=55688909257&km_CPC_Keyword=lucid%20chart&km_CPC_MatchType=e&km_CPC_ExtensionID=&km_CPC_Network=g&km_CPC_AdPosition=&km_CPC_Creative=354596043016&km_CPC_TargetID=kwd-55720648523&km_CPC_Country=1007850&km_CPC_Device=c&km_CPC_placement=&km_CPC_target=&gclid=Cj0KCQjwk7ugBhDIARIsAGuvgPbCGA2MUcueloqHuDe1oMvskybzEc836Jy6lB9U0OumSki-7Nx1Zx4aAgWdEALw_wcB) was used to create flowchart diagram in beginning
 
 ### Libraries
 
@@ -104,7 +108,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 #### Third Party Libraries
 
-- [colorama](https://pypi.org/project/colorama/) - used this library to add color to the terminal to differenciate players
+- [colorama](https://pypi.org/project/colorama/) - used this library to add color to the terminal to differentiate players
 - gspread - used to add and manipulate data in my Google spreadsheet and to interact with Google APIs
 
 [Back to Table Of Contents](#table-of-contents)
@@ -115,7 +119,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 - Provides name of game in pleasant graphic
 - Gives short description of game to user has idea of what game is about immediately
-- User stories covered:
+- User stories covered: 1
  
 <details>
     <summary>Screenshot</summary>
@@ -125,7 +129,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 ### Menu
 - Gives user option to play the game or read the rules first
-- User stories covered: 
+- User stories covered: 2, 3
   
 <details>
     <summary>Screenshot</summary>
@@ -137,7 +141,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 ### Game rules
 - Displays clear game rules
 - Allows user to start game once they are ready
-- User stories covered: 
+- User stories covered: 3
   
 <details>
     <summary>Screenshot</summary>
@@ -149,7 +153,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 - Displays all players cards
 - Shows user their number cards
 - Hides other player cards from user seeing type
-- User stories covered: 
+- User stories covered: 4, 10
   
 <details>
     <summary>Screenshot</summary>
@@ -160,7 +164,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 ### Name prompt
 - Ask user their name
 - Relay back to user at various points throughout the games
-- User stories covered: 
+- User stories covered: 8, 12
   
 <details>
     <summary>Screenshot</summary>
@@ -171,7 +175,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 ### Communal cards pile counter
 - Counts number of cards user discarded in to pile
 - Pile increases or decreases as game is played
-- User stories covered: 
+- User stories covered: 9
   
 <details>
     <summary>Screenshot</summary>
@@ -181,7 +185,7 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 ### Play again
 - Gives user option to restart game whether they win or lose
-- User stories covered: 
+- User stories covered: 7
   
 <details>
     <summary>Screenshot</summary>
@@ -192,6 +196,12 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 [Back to Table Of Contents](#table-of-contents)
 
 ## Validation
+My code was validated through [CI Python Linter](https://pep8ci.herokuapp.com) with no errors
+<details>
+    <summary>Screenshot</summary>
+
+<img src = assets/docs/screenshots/validation.png>
+</details>
 
 ## Testing
 
@@ -385,10 +395,9 @@ Those of all ages who enjoy card games and more specifically card bluffing games
 
 ## Credits
 
-### Images
-
-
 ### Code
-
+- Slack Overflow posts (examples)
+- Code Institute's Love sandwiches to connect google sheets api for user data manipulation 
+- [The Big Book of Small Python Projects](https://inventwithpython.com/bigbookpython/) by Al Sweigart, in particular #4 BLACKJACK and #9 CARROT IN A BOX
 
 ## Acknowledgements

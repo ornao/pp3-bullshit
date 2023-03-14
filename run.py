@@ -1,11 +1,12 @@
-import gspread
-from google.oauth2.service_account import Credentials
-import random
 import os
-import colorama
-from colorama import Fore, Back, Style
+import random
 import sys
 from time import sleep
+import gspread
+from google.oauth2.service_account import Credentials
+import colorama
+from colorama import Fore, Back, Style
+
 
 # initialize colorama
 colorama.init(autoreset=True)
@@ -25,7 +26,6 @@ SHEET = GSPREAD_CLIENT.open('bullshit').worksheet('username')
 # Character 9829 is '♥'
 HEART = chr(9829)
 discarded_cards = []
-# communal_pile = len(discarded_cards)
 current_player = 0
 
 
@@ -33,14 +33,14 @@ def title():
     """
     displays title of game and name of developer
     """
-    print(Fore.BLUE + " A bluffing card game")
+    typer(Fore.BLUE + "A bluffing card game\n")
     print("██████╗░██╗░░░██╗██╗░░░░░██╗░░░░░░██████╗██╗░░██╗██╗████████╗░░░")
     print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░██╔════╝██║░░██║██║╚══██╔══╝░░░")
     print("██████╦╝██║░░░██║██║░░░░░██║░░░░░╚█████╗░███████║██║░░░██║░░░░░░")
     print("██╔══██╗██║░░░██║██║░░░░░██║░░░░░░╚═══██╗██╔══██║██║░░░██║░░░░░░")
     print("██████╦╝╚██████╔╝███████╗███████╗██████╔╝██║░░██║██║░░░██║░░░░░░")
-    print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░")
-    print(Fore.BLUE + "Developed by Orna Reynolds")
+    print("╚═════╝░░╚═════╝░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝░░░░░░\n")
+    typer(Fore.BLUE + "Developed by Orna Reynolds")
 
 
 def menu_select():
@@ -49,8 +49,8 @@ def menu_select():
     validation for 1 and 2 selection
     """
     typer("Which are you feeling?\n")
-    start_options =
-    "1) Play the game\n2) Have a deeper look at the rules first\n"
+    start_options = (
+        "1) Play the game\n2) Have a deeper look at the rules first\n")
     # typewriter animation that works for input
     for char in start_options:
         sleep(.1)
@@ -424,7 +424,7 @@ def user_call_bullshit_player3():
     # os.linsep is a workaround to the heroku input \n problem,
     # using\n was changing my == value
     bullshit_question = input(
-        tyle.BRIGHT + "Do you want to call bullshit? (y/n)\n")
+        Style.BRIGHT + "Do you want to call bullshit? (y/n)\n")
     if bullshit_question == 'y':
         os.linesep
         if y + HEART == computer3_card_chosen:
