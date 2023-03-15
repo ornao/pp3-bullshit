@@ -354,11 +354,12 @@ title() function toilet displaying was kept even though lines were longer than 7
 | menu_select() bug: This function was not executing its if or else ==1,2 when incorrect value enter first followed by 1 or 2. | Fixed by setting the start_option_selected variable to input() to get the user's input and using this in loop rather than other value. See [commit ea2de49](https://github.com/ornao/pp3-bullshit/commit/ea2de49f39f90ae87ef3a2644ee9e6bde323bb87) for further details. |
 | | |
 | computer2_card_select(), computer3_card_select() bug: These function were throwing IndexError: list index out of range as computer3_card_chosen = hands[current_player + 2][x - 1] x value randomly chosen 1-4 was not in lower list values | Fixed by setting x to length of hands so list never out of range. See [commit 5d884ac ](https://github.com/ornao/pp3-bullshit/commit/5d884ac0c9d3ff9044129c781843c331a1a54e35) for further details (scroll to bottom of commit, readme file was added to also in this commit). |
-| | |
+| | |q
 ---
 
 ### Bugs to be fixed
 - Issue with display of 10 card pushing other cards display askew, did not fix urgentluy as did not affect the user's ability to understand and play the game 
+- Valid data failing validation check if user inputting data before question finished asking, can add specific errors message in future to outline to user to be more patient 
 ### Future features 
 - Possible leader board that pulls data from google sheet to compare. For this to work may need more robust username credentials so player with same name do not get their scores jumbled together. 
 - More competitive game with computers beiing more likely to be telling the truth when they discard a card so the user finds it harder to win if they call bullshit
