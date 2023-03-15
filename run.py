@@ -373,7 +373,7 @@ def computer_call_bullshit():
                 "called bullshit, they think you are lying!")
             time.sleep(1)
         if card_chosen == question:
-            print("Computer was wrong, you were telling the truth!")
+            print("Player was wrong, you were telling the truth!")
             time.sleep(1)
             # add all cards in discarded to add to
             # losers hand (person who called bullshit)

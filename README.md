@@ -1,5 +1,7 @@
 **Developer: Orna Reynolds**
 
+<img src = assets/docs/screenshots/bull.png>
+
 💻 [Visit live website](https://pp3-bullshit.herokuapp.com/)
 
 ## About
@@ -37,17 +39,19 @@ The objective of the game is to be the first one to get rid of all your cards.
 
 ## Project Goals
 
+I want to challenge myself to code a card game I like playing in real life that may not be the easiest to adapt to play against a computer. 
+
 ### User Goals
 
 - Enjoy a fun and straightforward card game 
 - Have the option to view over the rules of the game or play game straightaway. 
-- Possiblility log into an existing account that keeps track of results.
+- Remember my name, how many times i have played the game and won
 
 ### Site Owner Goals
 
 - Build a game that is simple and straightforward to use.
 - Make sure players understand the goal of the game and how to achieve that 
-- Design a game that asks for user input, validates and manipulates it and also providesnfeedback to players while they play
+- Design a game that asks for user input, validates and manipulates it and also provides feedback to players while they play
 
 ## User Experience
 
@@ -219,6 +223,8 @@ My code was validated through [CI Python Linter](https://pep8ci.herokuapp.com) w
 
 <img src = assets/docs/screenshots/validation.png>
 </details>
+
+title() function toilet displaying was kept even though lines were longer than 79 characters. I could have removed as per screen of code validation above but i felt it added personality to the game and help me potray that light-hearted feeling to the user.
 
 ## Testing
 
@@ -441,4 +447,7 @@ My code was validated through [CI Python Linter](https://pep8ci.herokuapp.com) w
 
 ## Acknowledgements
 - I'd like to thank my mentor Martina for her helpful advice and kind words of encouragment and my boyfriend Ciaran for patiently playing my game again and again helping me find errors"
+
+## Final thoughts
+This was my favourite of the portfolio projects to complete so far. While I found implementing and adapting the card game I know and play through coding difficult, I really enjoyed the problem-solving and out of the box thinking I used to get this game to the finish line. I found logically designing the game from start to finish and adding elements to enhance the user experience and robustness of validation extremely rewarding as I could see the improvement in what I was creating. While I feel there are functions that could be optimised to make the code more verstaile, I am excited to keep learning and soon be able to get my code to this place.
 
