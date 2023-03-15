@@ -119,6 +119,7 @@ def get_username():
             if validate_username_data(username):
                 print(Fore.CYAN + f"{username_validated}?")
                 typer(f"Hello there, let's get started!{os.linesep}")
+                clear_terminal()
                 break
             else:
                 print(Fore.RED + "Psst...is your name made up of only letters")
@@ -292,25 +293,30 @@ def ask_question():
             last_row = i + 1
             break
     username = SHEET.cell(last_row, 1).value
-    username_col = Fore.CYAN + username
     # validatation for user input
     while question not in [
          'A', 'K', 'Q', 'J', '2', '3', '4', '5', '6', '7', '8', '9', '10'
          ]:
         print(
             Fore.RED +
-            "When I say A-K, I mean [A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K]")
+            "When I say A-K, I mean [A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K]" +
+            Style.RESET_ALL)
         time.sleep(1)
         typer("Type in a random card from A-K to discard:\n")
         question = input().upper()
-    typer(f"{username_col} will discard {question + HEART}!{os.linesep}")
+    print(
+        Fore.CYAN + f"{username}" +
+        Style.RESET_ALL + f" will discard {question + HEART}!{os.linesep}")
     time.sleep(1)
     print(
         Style.BRIGHT +
-        "Remember you don't actually need to have that card in your hand," +
-        "your opponents just have to " +
-        Fore.BLACK + Back.WHITE + "believe" +
-        Style.RESET_ALL + Style.BRIGHT + " you have it")
+        "Remember you don't actually need to have that card in your hand,")
+    print(Style.BRIGHT + "your opponents just have to ")
+    print(
+        Fore.BLACK + Back.WHITE + "believe" + 
+        Style.RESET_ALL + 
+        Style.BRIGHT + " you have it")
+    time.sleep(1)
     return question + HEART
 
 
@@ -318,7 +324,7 @@ def user_choice():
     "allows user to discard number 1-4 card in their hands"
     for count, option in enumerate(hands[current_player]):
         print(f"{count+1}. {option + HEART}")
-
+    time.sleep(1)
     while True:
         try:
             card_option = int(
@@ -329,25 +335,29 @@ def user_choice():
                 global card_chosen
                 card_chosen = hands[current_player][card_option - 1]
                 typer(
-                    f"You have chosen card {card_chosen + HEART} to discard!")
-                print(Fore.GREEN + "Communal pile:", len(discarded_cards))
+                    f"You have chosen card {card_chosen + HEART} to discard!{os.linesep}")
                 hands[current_player].remove(card_chosen)
                 discarded_cards.append(card_chosen)
+                print(Fore.GREEN + "Communal pile:", len(discarded_cards))
+                time.sleep(1)
                 break
             else:
-                print(Fore.RED + "You don't have that card!")
+                print(Fore.RED + "You don't have that option!")
+                time.sleep(1)
         except ValueError:
             print(Fore.RED + "Huh? I know you can count my dear")
+            time.sleep(1)
 
 
 def computer_call_bullshit():
     """computer randomly decided if true or false - so calls bullshit.
     cards in discarded pile are then added to person
     who called bullshit incorrectly"""
-    prin(
+    print(
         Fore.MAGENTA + "Player 2" + Style.RESET_ALL +
         " and " + Fore.YELLOW + "player 3 " + Style.RESET_ALL +
         "are deciding if you are lying or not...")
+    time.sleep(1)
     z = random.choice([True, False])
     if z is True:
         random_choice_players = [2, 3]
@@ -356,12 +366,15 @@ def computer_call_bullshit():
             print(
                 Fore.MAGENTA + f"Player {x} " +
                 Style.RESET_ALL + "called bullshit, they think you are lying!")
+            time.sleep(1)
         else:
             print(
                 Fore.YELLOW + f"Player {x} " + Style.RESET_ALL +
                 "called bullshit, they think you are lying!")
+            time.sleep(1)
         if card_chosen == question:
             print("Computer was wrong, you were telling the truth!")
+            time.sleep(1)
             # add all cards in discarded to add to
             # losers hand (person who called bullshit)
             if x == 2:
@@ -375,10 +388,12 @@ def computer_call_bullshit():
                 print(
                     Fore.MAGENTA + f"Player {x} " + Style.RESET_ALL +
                     "guessed you were lying!")
+                time.sleep(1)
             else:
                 print(
                     Fore.YELLOW + f"Player {x} " +
                     Style.RESET_ALL + "guessed you were lying!")
+                time.sleep(1)
             hands[current_player].extend(discarded_cards)
             discarded_cards.clear()
     else:
@@ -387,6 +402,7 @@ def computer_call_bullshit():
             Style.RESET_ALL + " and " + Fore.YELLOW +
             " player 3 " + Style.RESET_ALL +
             "think you are telling the truth, no one called bullshit")
+        time.sleep(1)
 
 
 def computer2_card_select():
@@ -394,7 +410,7 @@ def computer2_card_select():
     x = len(hands[current_player + 1])
     global computer2_card_chosen
     computer2_card_chosen = hands[current_player + 1][x - 1]
-    print("Next player's turn")
+    typer("Next player's turn\n")
     hands[current_player + 1].remove(computer2_card_chosen)
     discarded_cards.append(computer2_card_chosen)
     numbers = [
@@ -406,10 +422,12 @@ def computer2_card_select():
         Fore.MAGENTA + "Player 2 " +
         Style.RESET_ALL +
         f"has discarded card {y + HEART}")
+    time.sleep(1)
     print(
         Fore.GREEN +
         "Communal pile:", len(discarded_cards))
-    print('Do you think they are lying?')
+    time.sleep(1)
+    typer('Do you think they are lying?\n')
 
 
 def computer3_card_select():
@@ -417,7 +435,8 @@ def computer3_card_select():
     x = len(hands[current_player + 2])
     global computer3_card_chosen
     computer3_card_chosen = hands[current_player + 2][x - 1]
-    print("Next player's turn")
+    typer("Next player's turn\n")
+    time.sleep(1)
     hands[current_player + 2].remove(computer3_card_chosen)
     discarded_cards.append(computer3_card_chosen)
     numbers = [
@@ -431,8 +450,11 @@ def computer3_card_select():
     print(
         Fore.YELLOW + "Player 3 " +
         Style.RESET_ALL + f"has discarded card {y + HEART}")
+    time.sleep(1)
     print(Fore.GREEN + "Communal pile:", len(discarded_cards))
-    print('Do you think they are lying?')
+    time.sleep(1)
+    typer('Do you think they are lying?\n')
+    time.sleep(1)
 
 
 def user_call_bullshit_player2():
@@ -447,17 +469,20 @@ def user_call_bullshit_player2():
             print(
                 Fore.MAGENTA + "Player 2 " +
                 Style.RESET_ALL + "was telling the truth!")
+            time.sleep(1)
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
         else:
             print(
                 Fore.MAGENTA + "Player 2 " +
                 Style.RESET_ALL + "was lying!")
+            time.sleep(1)
             hands[current_player + 1].extend(discarded_cards)
             discarded_cards.clear()
     # validatation for user input
     while bullshit_question not in ["y", "n"]:
         print(Fore.RED + "Surely you know where y and n are on your keyboard.")
+        time.sleep(1)
         bullshit_question = input(
             Style.BRIGHT + "Do you want to call bullshit? (y/n)\n").lower()
 
@@ -474,15 +499,18 @@ def user_call_bullshit_player3():
             print(
                 Fore.YELLOW + "Player 3 " + Style.RESET_ALL +
                 "was telling the truth!")
+            time.sleep(1)
             hands[current_player + 2].extend(discarded_cards)
             discarded_cards.clear()
         else:
             print(Fore.YELLOW + "Player 3 " + Style.RESET_ALL + "was lying!")
+            time.sleep(1)
             hands[current_player + 2].extend(discarded_cards)
             discarded_cards.clear()
     # validatation for user input
     while bullshit_question not in ["y", "n"]:
         print(Fore.RED + "Surely you know where y and n are on your keyboard.")
+        time.sleep(1)
         bullshit_question = input(
             Style.BRIGHT + "Do you want to call bullshit? (y/n)\n").lower()
 
