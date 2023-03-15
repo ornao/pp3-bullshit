@@ -21,6 +21,7 @@ The objective of the game is to be the first one to get rid of all your cards.
       - [Site Owner](#site-owner)
   - [Technical Design](#technical-design)
     - [Flowchart](#flowchart)
+    - [Data Model](#data-model)
   - [Technologies Used](#technologies-used)
     - [Languages](#languages)
     - [Frameworks & Tools](#frameworks--tools)
@@ -85,6 +86,20 @@ This was the flowchart designed at the beginning of project before I started cod
 <img src = assets/docs/screenshots/flowchart.png>
 </details>
 
+### Data Model
+The code is contained in 1 file for this project: run.py. I found writing the different functions in one file helpful for this project as my game followed a set pathway which I could easily follow through my code and access to make changes. In future however I would like to separate python files to make the code more decentralized making the code more accessible for other people to digest, and thus coming in line with industry standards for python. 
+
+I collect 3 pieces of data from the user, both directly and indirectly. 
+- username (name) through input of user, this value underwent validatation that only alphabetic number names could be included and name given was capitalized as a personal preefernce of mine 
+- number of games played through how many times the player replayed the game, google sheet specific cell was updated each new game to collect this data 
+- number of wins through how many times the user had zero hands first and the game loop was stopped, google sheet specific cell was updated each win to collect this data
+
+<details>
+    <summary>Screenshot</summary>
+
+<img src = assets/docs/screenshots/google.png>
+</details>
+
 ## Technologies Used
 
 ### Languages
@@ -105,6 +120,7 @@ This was the flowchart designed at the beginning of project before I started cod
 - os - used to add a seperate line to terminal underneath text
 - random - used to shuffle deck, control computer choices of card selection and calling bullshit
 - sys & sleep - used to create a typing effect within the games rules
+- time - create pause between lines of text
 
 #### Third Party Libraries
 
@@ -158,7 +174,7 @@ This was the flowchart designed at the beginning of project before I started cod
 <details>
     <summary>Screenshot</summary>
 
-  <img src = assets/docs/screenshots/.png>
+  <img src = assets/docs/screenshots/cardsdisplay.png>
 </details>
 
 ### Name prompt
@@ -180,7 +196,7 @@ This was the flowchart designed at the beginning of project before I started cod
 <details>
     <summary>Screenshot</summary>
 
-  <img src = assets/docs/screenshots/.png>
+  <img src = assets/docs/screenshots/communalpile.png>
 </details>
 
 ### Play again
@@ -314,11 +330,17 @@ My code was validated through [CI Python Linter](https://pep8ci.herokuapp.com) w
 </details>
 
 13. I want user inputs to undergo extensive validation so game execution is not affected. 
-[See validation section ](#validation)
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Any user input | Make invalid entry for question| Error message and loop to reask orginal question | Works as expected |
 
-
+<details><summary>Screenshot</summary>
+<img src = assets/docs/screenshots/val1.png>
+<img src = assets/docs/screenshots/val2.png>
+</details>
 
 [Back to Table Of Contents](#table-of-contents)
+
 ## Bugs
 | **Bug** | **Fix** |
 | ------- | ------- |
@@ -327,6 +349,14 @@ My code was validated through [CI Python Linter](https://pep8ci.herokuapp.com) w
 | computer2_card_select(), computer3_card_select() bug: These function were throwing IndexError: list index out of range as computer3_card_chosen = hands[current_player + 2][x - 1] x value randomly chosen 1-4 was not in lower list values | Fixed by setting x to length of hands so list never out of range. See [commit 5d884ac ](https://github.com/ornao/pp3-bullshit/commit/5d884ac0c9d3ff9044129c781843c331a1a54e35) for further details (scroll to bottom of commit, readme file was added to also in this commit). |
 | | |
 ---
+
+### Bugs to be fixed
+- Issue with display of 10 card pushing other cards display askew, did not fix urgentluy as did not affect the user's ability to understand and play the game 
+### Future features 
+- Possible leader board that pulls data from google sheet to compare. For this to work may need more robust username credentials so player with same name do not get their scores jumbled together. 
+- More competitive game with computers beiing more likely to be telling the truth when they discard a card so the user finds it harder to win if they call bullshit
+- This game can be easily be beat if the user tells the truth when discarding and never calls bullshit. A future feature could include togglinng what user goes first to prevent non-interaction of the user with elements in the game
+
 
 
 ## Deployment
@@ -396,8 +426,18 @@ My code was validated through [CI Python Linter](https://pep8ci.herokuapp.com) w
 ## Credits
 
 ### Code
-- Slack Overflow posts (examples)
+- Slack Overflow posts 
+  - [Typing effect in Python](https://stackoverflow.com/questions/20302331/typing-effect-in-python)
+  - [Card dealing](https://stackoverflow.com/questions/58793237/creating-a-function-that-returns-a-list-of-5-cards-drawn-from-a-shuffled-deck-wi)
+- [How to Use Colorama in Python](https://linuxhint.com/colorama-python/)
+- [W3 Schools](https://www.w3schools.com/python/default.asp)
+- [Typewriter effect on inputs (python)](https://www.sololearn.com/Discuss/1949011/typewriter-effect-on-inputs-python)
 - Code Institute's Love sandwiches to connect google sheets api for user data manipulation 
+- [Increment and Decrement operators in Python](https://pythonguides.com/increment-and-decrement-operators-in-python/)
 - [The Big Book of Small Python Projects](https://inventwithpython.com/bigbookpython/) by Al Sweigart, in particular #4 BLACKJACK and #9 CARROT IN A BOX
+- [Creating a Deck of Cards in Python](https://www.youtube.com/watch?v=jHjsG2lhUSI)
+- [String Validators in Python](https://betterprogramming.pub/string-validators-in-python-84aca562fd25)
 
 ## Acknowledgements
+- I'd like to thank my mentor Martina for her helpful advice and kind words of encouragment and my boyfriend Ciaran for patiently playing my game again and again helping me find errors"
+

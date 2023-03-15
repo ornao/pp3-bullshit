@@ -550,9 +550,3 @@ def get_hidden_cards(num_cards):
 
 
 main()
-
-
-# fix issue with heart longer in value so they wont be equal
-# fix issue with 10 and 7 being weird for card display
-# add typewriter font
-# add data model expalnation
