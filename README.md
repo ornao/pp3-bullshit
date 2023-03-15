@@ -162,7 +162,7 @@ I collect 3 pieces of data from the user, both directly and indirectly.
 <details>
     <summary>Screenshot</summary>
 
-  <img src = assets/docs/screenshots/.png>
+  <img src = assets/docs/screenshots/gamerules.png>
 </details>
 
 ### Cards display
@@ -206,7 +206,8 @@ I collect 3 pieces of data from the user, both directly and indirectly.
 <details>
     <summary>Screenshot</summary>
 
-  <img src = assets/docs/screenshots/.png>
+  <img src = assets/docs/screenshots/playagainy.png>
+  <img src = assets/docs/screenshots/playagainn.png>
 </details>
 
 [Back to Table Of Contents](#table-of-contents)
@@ -280,8 +281,8 @@ My code was validated through [CI Python Linter](https://pep8ci.herokuapp.com) w
 | Play again | Win or lose game | Congratualations or hard luck message displays along with y/n to play again | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src = assets/docs/screenshots/.png>
-<img src = assets/docs/screenshots/.png>
+<img src = assets/docs/screenshots/playagainy.png>
+<img src = assets/docs/screenshots/playagainn.png>
 
 </details>
 
@@ -304,7 +305,7 @@ My code was validated through [CI Python Linter](https://pep8ci.herokuapp.com) w
 | Communal cards pile counter | Players discard cards to communal pile | Number updates dynamically depending on number of cards in pile | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src = assets/docs/screenshots/.png>
+<img src = assets/docs/screenshots/communalpile.png>
 
 </details>
 
@@ -316,16 +317,16 @@ My code was validated through [CI Python Linter](https://pep8ci.herokuapp.com) w
 | Cards display | Play the game | Cards updating when computer players lose or gain cards | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src = assets/docs/screenshots/.png>
-<img src = assets/docs/screenshots/.png>
+<img src = assets/docs/screenshots/computercards1.png>
+<img src = assets/docs/screenshots/computercards2.png>
 
 </details>
 
 12. I want the user's name and how many times they have won to be saved to google sheets.
 
 <details><summary>Screenshot</summary>
-<img src = assets/docs/screenshots/.png>
-<img src = assets/docs/screenshots/.png>
+<img src = assets/docs/screenshots/google1.png>
+<img src = assets/docs/screenshots/playagainn.png>
 
 </details>
 
@@ -408,17 +409,17 @@ My code was validated through [CI Python Linter](https://pep8ci.herokuapp.com) w
 
 10. From the deploy methods displayed select GitHub
 <details><summary>Screenshot</summary>
-<img src="assets/docs/screenshots/deploymen11.png">
+<img src="assets/docs/screenshots/deployment11.png">
 </details>
 
 11. Search for repo name and click connect to link the two up
 <details><summary>Screenshot</summary>
-<img src="assets/docs/screenshots/deploymen12.png">
+<img src="assets/docs/screenshots/deployment12.png">
 </details>
 
 12. Deploy from branch and follow link to deployed site after it loads
 <details><summary>Screenshot</summary>
-<img src="assets/docs/screenshots/deploymen13.png">
+<img src="assets/docs/screenshots/deployment13.png">
 </details>
 
 [Back to Table Of Contents](#table-of-contents)
